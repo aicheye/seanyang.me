@@ -1,27 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <style>
-      html {
+      html,
+      body {
         width: 100%;
+        height: 100%;
+        margin: 0;
         touch-action: pan-x pan-y;
         font-family: "Courier New", monospace;
         font-optical-sizing: auto;
         font-weight: 600;
         font-style: normal;
-        font-size: 20px;
-        position: absolute; 
+        font-size: x-large;
+        position: absolute;
         text-align: center;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
         -webkit-touch-callout: none;
         -webkit-user-select: none;
         -khtml-user-select: none;
         -moz-user-select: none;
         -ms-user-select: none;
         user-select: none;
+      }
+      body {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+      div {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      footer {
+        text-align: center;
+        padding: 1rem 0;
+        font-size: small;
+      }
+      a {
+        margin: auto 0.2rem;
       }
       a:link {
         color: black;
@@ -37,15 +56,17 @@
       }
     </style>
     <title>Sean Yang</title>
-    <link rel="icon" type="image/x-icon" href="favicon.png">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Personal website.">
+    <link rel="icon" type="image/x-icon" href="favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Personal website." />
   </head>
-<body>
-
-Under Construction.
-<a href="https://github.com/aicheye" aria-label="GitHub"><i class="fa fa-github" style="font-size:23px"></i></a>
-<a href="https://www.linkedin.com/in/sean-yang-851511296/" aria-label="LinkedIn"><i class="fa fa-linkedin" style="font-size:24px"></i></a>
-
-</body>
-</html> 
+  <body>
+    <div>
+      Under Construction.
+      <a href="https://github.com/aicheye" aria-label="GitHub"><i class="fa fa-github"></i></a>
+      <a href="https://www.linkedin.com/in/sean-yang-851511296/" aria-label="LinkedIn"><i class="fa fa-linkedin"></i></a>
+      <a href="mailto:contact@seanyang.me" aria-label="Email"><i class="fa fa-envelope"></i></a>
+    </div>
+    <footer>Copyright © 2025 Sean Yang</footer>
+  </body>
+</html>
