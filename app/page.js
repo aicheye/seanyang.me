@@ -113,7 +113,7 @@ export default function Home() {
         className="flex flex-col items-center justify-center min-h-screen py-24 gap-8 opacity-0 transition-all duration-700 relative"
       >
         <div
-          className={`relative lg:w-[50vh] lg:h-[50vh] md:w-[40vh] md:h-[40vh] w-[90vw] h-[90vw] bg-gray-200 dark:bg-gray-800 rounded-lg overflow-hidden flex items-center justify-center transition-transform duration-1000`}
+          className={`relative lg:w-[50vh] lg:h-[50vh] md:w-[40vh] md:h-[40vh] w-[90vw] h-[90vw] bg-gray-800 rounded-lg overflow-hidden flex items-center justify-center transition-transform duration-1000`}
           style={{
             boxShadow: "0 8px 32px rgba(0,0,0,0.08)",
             transform: zoomed ? "scale(1)" : "scale(0.7)",
@@ -121,7 +121,7 @@ export default function Home() {
         >
           <Image src="/hero.png" alt="Profile" fill style={{ objectFit: "cover" }} />
         </div>
-        <div className="max-w-3xl text-center lg:text-2xl md:text-2xl text-xl text-gray-700 dark:text-gray-300 ml-8 mr-8">
+        <div className="max-w-3xl text-center lg:text-2xl md:text-2xl text-xl text-gray-300 ml-8 mr-8">
           <p style={{ fontWeight: "800" }}>Hello, World!</p>
           <em>Coder, sustainable urbanist, and advocate for economic justice. Building a socially responsible career in software development.</em>
         </div>
@@ -141,15 +141,15 @@ export default function Home() {
         <h2 className="lg:text-3xl md:text-3xl text-2xl font-semibold lg:mb-12 md:mb-12 mb-8 text-center">Projects</h2>
         <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-items-center">
           {portfolio.map((project, idx) => (
-            <a key={project.title} href={project.github} target="_blank" rel="noopener noreferrer" ref={(el) => (sectionRefs.current[2 + idx] = el)} className="portfolio-card block bg-gray-100 dark:bg-gray-900 rounded-xl shadow-md p-4 w-full lg:h-[400px] md:h-[400px] h-[400px] hover:scale-[1.03] hover:shadow-lg opacity-0 transition-all duration-700">
+            <a key={project.title} href={project.github} target="_blank" rel="noopener noreferrer" ref={(el) => (sectionRefs.current[2 + idx] = el)} className="portfolio-card block bg-gray-900 rounded-xl shadow-md p-4 w-full lg:h-[400px] md:h-[400px] h-[400px] hover:scale-[1.03] hover:shadow-lg opacity-0 transition-all duration-700">
               <div className="flex flex-col h-full">
-                <div className="relative w-full h-full mb-4 rounded-lg bg-gray-200 dark:bg-gray-800">
+                <div className="relative w-full h-full mb-4 rounded-lg bg-gray-800">
                   <Image src={project.thumbnail} alt={project.title + " thumbnail"} fill style={{ objectFit: "contain" }} />
                 </div>
                 <div className="flex flex-col h-auto">
                   <h3 className="text-xl font-bold mb-1">{project.title}</h3>
-                  <p className="text-gray-600 dark:text-gray-400 mb-3 text-md">{project.description}</p>
-                  <span className="text-blue-600 dark:text-blue-400 font-medium text-md">View on GitHub →</span>
+                  <p className="text-gray-400 mb-3 text-md">{project.description}</p>
+                  <span className="text-blue-400 font-medium text-md">View on GitHub →</span>
                 </div>
               </div>
             </a>
@@ -187,7 +187,7 @@ export default function Home() {
             </a>
           </div>
         </div>
-        <div className="text-sm text-gray-500 dark:text-gray-400">
+        <div className="text-sm text-gray-400">
           © {new Date().getFullYear()} Sean Yang{" "}
           <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener noreferrer">
             (CC BY-NC-SA 4.0)
