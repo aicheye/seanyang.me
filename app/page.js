@@ -123,7 +123,7 @@ export default function Home() {
             <Image src="/hero.png" alt="Profile" fill style={{ objectFit: "cover" }} />
           </div>
         </a>
-        <div className="max-w-3xl text-center lg:text-2xl md:text-2xl text-xl text-gray-300 ml-8 mr-8">
+        <div className="max-w-3xl text-center lg:text-2xl md:text-2xl text-lg text-gray-300 ml-8 mr-8">
           <p style={{ fontWeight: "800" }}>Hello, World!</p>
           <em>Coder, sustainable urbanist, and advocate for economic justice. Building a socially responsible career in software development.</em>
         </div>
