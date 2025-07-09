@@ -181,7 +181,7 @@ export default function Home() {
               <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="text-sm" />
             </a>
             <span>·</span>
-            <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="underline lg:text-lg md:text-lg text-md flex items-center gap-2">
+            <a href="https://github.com/aicheye/seanyang.me" target="_blank" rel="noopener noreferrer" className="underline lg:text-lg md:text-lg text-md flex items-center gap-2">
               Source
               <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="text-sm" />
             </a>
