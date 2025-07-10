@@ -114,7 +114,7 @@ export default function Home() {
       >
         <a href="https://open.spotify.com/playlist/2B34ID9SWdE8WcEeh4q4mX?si=e5349b09043945e7&pt=6cd3613594f08576fc57bd88efb48f18" target="_blank" rel="noopener noreferrer" className="block transition-transform duration-300 hover:scale-103">
           <div
-            className={`relative lg:w-[50vh] lg:h-[50vh] md:w-[40vh] md:h-[40vh] w-[90vw] h-[90vw] bg-gray-800 rounded-lg overflow-hidden flex items-center justify-center transition-transform duration-1000`}
+            className={`relative lg:w-[50vh] lg:h-[50vh] md:w-[40vh] md:h-[40vh] w-[70vw] h-[70vw] bg-gray-800 rounded-lg overflow-hidden flex items-center justify-center transition-transform duration-1000`}
             style={{
               boxShadow: "0 8px 32px rgba(0,0,0,0.08)",
               transform: zoomed ? "scale(1)" : "scale(0.7)",
@@ -149,7 +149,7 @@ export default function Home() {
                   <Image src={project.thumbnail} alt={project.title + " thumbnail"} fill style={{ objectFit: "contain" }} />
                 </div>
                 <div className="flex flex-col h-auto">
-                  <h3 className="text-xl font-bold mb-1">{project.title}</h3>
+                  <h3 className="lg:text-xl md:text-xl text-lg font-bold mb-1">{project.title}</h3>
                   <p className="text-gray-400 mb-3 text-md">{project.description}</p>
                   <span className="text-blue-400 font-medium text-md">View on GitHub →</span>
                 </div>
