@@ -5,11 +5,11 @@ import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
+import portfolio from "../public/portfolio/portfolio";
 import "./animations.css";
 import Background from "./components/Background.jsx";
 import ThemeButton from "./components/ThemeButton.jsx";
 import Tooltip from "./components/Tooltip";
-import portfolio from "./portfolio";
 
 function useScrollAnimation() {
   const refs = useRef([]);
@@ -191,7 +191,7 @@ export default function Home() {
         <h2 className={`lg:text-3xl md:text-3xl text-2xl font-bold lg:mb-12 md:mb-12 mb-8 text-center ${isLightMode ? "text-gray-900" : "text-neutral-200"}`}>Projects</h2>
         <div className="flex flex-wrap gap-6 justify-center">
           {portfolio.map((project, idx) => (
-            <a key={project.title} href={project.github} target="_blank" rel="noopener noreferrer" ref={(el) => (sectionRefs.current[2 + idx] = el)} className={`min-w-sm max-w-2xl w-auto rounded-xl shadow-md p-4 lg:h-[400px] md:h-[400px] h-[400px] hover:scale-[1.03] hover:shadow-lg opacity-0 transition-all duration-700 ${isLightMode ? "bg-neutral-50" : "bg-neutral-900"}`}>
+            <a key={project.title} href={project.github} target="_blank" rel="noopener noreferrer" ref={(el) => (sectionRefs.current[2 + idx] = el)} className={`min-w-xs max-w-2xl w-auto rounded-xl shadow-md p-4 lg:h-[400px] md:h-[400px] h-[400px] hover:scale-[1.03] hover:shadow-lg opacity-0 transition-all duration-700 ${isLightMode ? "bg-neutral-50" : "bg-neutral-900"}`}>
               <div className="flex flex-col h-full">
                 <div className={`relative w-full h-full mb-4 rounded-lg ${isLightMode ? "bg-neutral-300" : "bg-neutral-800"}`}>
                   <Image src={project.thumbnail} alt={project.title + " thumbnail"} fill style={{ objectFit: "contain" }} />
@@ -227,17 +227,10 @@ export default function Home() {
             </a>
           </div>
           <span className="hidden lg:block md:block">·</span>
-          <div className="flex lg:gap-4 md:gap-4 gap-2">
-            <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="underline lg:text-lg md:text-lg text-md flex items-center gap-2">
-              Resume
-              <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="text-sm" />
-            </a>
-            <span>·</span>
-            <a href="https://github.com/aicheye/seanyang.me" target="_blank" rel="noopener noreferrer" className="underline lg:text-lg md:text-lg text-md flex items-center gap-2">
-              Source
-              <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="text-sm" />
-            </a>
-          </div>
+          <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="underline lg:text-lg md:text-lg text-md flex items-center gap-2">
+            View Resumé
+            <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="text-sm" />
+          </a>
         </div>
         <div className={`text-sm ${isLightMode ? "text-neutral-600" : "text-neutral-400"}`}>
           © {new Date().getFullYear()} Sean Yang{" "}
