@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/d19e7432-8155-4355-adb9-b2dc7621f984/deploy-status)](https://app.netlify.com/projects/graceful-puffpuff-983cf3/deploys)
+
 # seanyang.me - Personal Portfolio Website
 
 A modern, responsive personal portfolio website built with Next.js 15, featuring an animated background, light/dark mode toggle, interactive tooltips, and smooth scroll animations.
