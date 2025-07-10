@@ -1,4 +1,4 @@
-import useThemeStore from "../components/ThemeState";
+import useThemeStore from "../stores/ThemeStore";
 import "./globals.css";
 
 export const metadata = {

@@ -4,13 +4,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import Background from "../components/Background.jsx";
+import Blurb from "../components/Blurb.jsx";
 import ContactButton from "../components/ContactButton.jsx";
 import Footer from "../components/Footer.jsx";
 import ThemeButton from "../components/ThemeButton.jsx";
-import useThemeStore from "../components/ThemeState.jsx";
 import Tooltip from "../components/Tooltip.jsx";
 import TopButton from "../components/TopButton.jsx";
 import portfolio from "../data/portfolio";
+import useThemeStore from "../stores/ThemeStore.jsx";
 import "../styles/animations.css";
 
 function useScrollAnimation() {
@@ -50,7 +51,7 @@ export default function Landing() {
   const sectionRefs = useScrollAnimation();
   const [zoomed, setZoomed] = useState(false);
   const [atTop, setAtTop] = useState(true);
-  const { isLightMode, setIsLightMode } = useThemeStore();
+  const isLightMode = useThemeStore((state) => state.isLightMode);
   const [tooltipVisible, setTooltipVisible] = useState(false);
   const [tooltipText, setTooltipText] = useState("");
   const heroRef = useRef(null);
@@ -122,23 +123,11 @@ export default function Landing() {
           </div>
         </a>
         <div className="max-w-3xl text-center lg:text-2xl md:text-2xl text-md ml-8 mr-8" style={{ color: "var(--page-text)" }}>
-          <p style={{ fontWeight: 800 }}>Hello, World!</p>
-          <p>
-            Coder,{" "}
-            <a href="https://en.wikipedia.org/wiki/Sustainable_urbanism" target="_blank" rel="noopener noreferrer" onMouseEnter={() => handleMouseEnter("🌿 Read more")} onMouseLeave={handleMouseLeave}>
-              sustainable urbanist
-            </a>
-            , and advocate for{" "}
-            <a href="https://en.wikipedia.org/wiki/Democratic_socialism" target="_blank" rel="noopener noreferrer" onMouseEnter={() => handleMouseEnter("🌹 Read more")} onMouseLeave={handleMouseLeave}>
-              economic justice
-            </a>{" "}
-            studying Software Engineering
-            <a href="https://se-webring.xyz/" target="_blank" rel="noopener noreferrer" aria-label="SE Webring">
-              {isLightMode ? <img src="/webring_logo_b.svg" alt="SE Webring" className="inline lg:w-9 lg:h-9 md:w-9 md:h-9 w-7 h-7 pb-1 ml-1 mr-1.5" /> : <img src="/webring_logo_w.svg" alt="SE Webring" className="inline lg:w-9 lg:h-9 md:w-9 md:h-9 w-7 h-7 pb-1 ml-1 mr-1.5" />}
-            </a>
-            at the University of Waterloo.
-            {/*<Link href="/about">{" [...]"}</Link>*/}
-          </p>
+          <p className="typed-[Hello,_World!] typed-caret" style={{ fontWeight: 800 }}></p>
+          <div>
+            <Blurb />
+            <Link href="/about">{" [...]"}</Link>
+          </div>
         </div>
 
         {/* Scroll Down Indicator */}
@@ -147,7 +136,7 @@ export default function Landing() {
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="opacity-80 drop-shadow-lg" style={{ color: "var(--scroll-indicator)" }}>
               <polyline points="6 9 12 15 18 9" />
             </svg>
-            <span className="mt-1 text-sm" style={{ color: "var(--subtext)" }}>
+            <span className="mt-1 text-sm" style={{ color: "var(--page-subtext)" }}>
               Scroll to see projects
             </span>
           </Link>
@@ -155,7 +144,7 @@ export default function Landing() {
       </section>
       {/* Portfolio Section */}
       <section id="projects" ref={(el) => (sectionRefs.current[1] = el)} className="pt-20 px-8 sm:px-16 md:px-32 lg:px-48 opacity-0 transition-all duration-700 lg:mb-[10vh] z-10">
-        <h2 className="lg:text-3xl md:text-3xl text-2xl font-bold lg:mb-12 md:mb-12 mb-8 text-center" style={{ color: "var(--heading-text)" }}>
+        <h2 className="lg:text-3xl md:text-3xl text-2xl font-bold lg:mb-12 md:mb-12 mb-8 text-center" style={{ color: "var(--page-text)" }}>
           Projects
         </h2>
         <div className="flex flex-wrap gap-6 justify-center">
@@ -169,7 +158,7 @@ export default function Landing() {
                   <h3 className="lg:text-xl md:text-xl text-lg mb-1" style={{ fontWeight: 800, color: "var(--page-text)" }}>
                     {project.title}
                   </h3>
-                  <p className="mb-3 text-md" style={{ color: "var(--subtext)" }}>
+                  <p className="mb-3 text-md" style={{ color: "var(--page-subtext)" }}>
                     {project.description}
                   </p>
                   <span className="font-medium text-md" style={{ color: "var(--accent-color)" }}>

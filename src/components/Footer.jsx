@@ -47,7 +47,7 @@ export default function Footer() {
             <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="text-sm" />
           </a>
         </div>
-        <div className="text-sm" style={{ color: "var(--muted-text)" }}>
+        <div className="text-sm" style={{ color: "var(--footer-text)" }}>
           © {new Date().getFullYear()} Sean Yang{" "}
           <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener noreferrer">
             (CC BY-NC-SA 4.0)

@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import useThemeStore from "../stores/ThemeStore";
 import "./Background.css";
-import useThemeStore from "./ThemeState";
 
 export default function Background() {
   const [bgPos, setBgPos] = useState("0px 0px");

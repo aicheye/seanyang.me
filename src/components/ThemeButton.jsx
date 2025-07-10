@@ -4,7 +4,7 @@ import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import useThemeStore from "./ThemeState";
+import useThemeStore from "../stores/ThemeStore";
 
 config.autoAddCss = false;
 
