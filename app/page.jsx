@@ -132,7 +132,7 @@ export default function Home() {
       >
         <a href="https://open.spotify.com/playlist/2B34ID9SWdE8WcEeh4q4mX" target="_blank" rel="noopener noreferrer" className="block transition-transform duration-300 hover:scale-103" onMouseEnter={() => handleMouseEnter("🎵 My go-to playlist")} onMouseLeave={handleMouseLeave}>
           <div
-            className="relative lg:w-[50vh] lg:h-[50vh] md:w-[50vh] md:h-[50vh] w-[80vw] h-[80vw] rounded-lg overflow-hidden flex items-center justify-center transition-transform duration-1000"
+            className="relative lg:w-[50vh] lg:h-[50vh] md:w-[50vh] md:h-[50vh] w-[90vw] h-[90vw] rounded-lg overflow-hidden flex items-center justify-center transition-transform duration-1000"
             style={{
               backgroundColor: "var(--hero-image-bg)",
               boxShadow: "0 8px 32px rgba(0,0,0,0.08)",
