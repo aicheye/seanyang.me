@@ -1,4 +1,23 @@
-export default function Tooltip({ isLightMode, tooltipVisible, tooltipPosition, text }) {
+import { useEffect, useState } from "react";
+
+export default function Tooltip({ tooltipVisible, text }) {
+  const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
+
+  const handleMouseMove = (e) => {
+    setTooltipPosition({
+      x: e.clientX + 7,
+      y: e.clientY - 30,
+    });
+  };
+
+  useEffect(() => {
+    if (!tooltipVisible) return;
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, [tooltipVisible]);
+
   return (
     tooltipVisible && (
       <>

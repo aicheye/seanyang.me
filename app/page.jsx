@@ -6,6 +6,7 @@ import React, { useEffect, useRef, useState } from "react";
 import portfolio from "../public/portfolio/portfolio";
 import "./animations.css";
 import Background from "./components/Background.jsx";
+import ContactButton from "./components/ContactButton.jsx";
 import Footer from "./components/Footer.jsx";
 import ThemeButton from "./components/ThemeButton.jsx";
 import Tooltip from "./components/Tooltip.jsx";
@@ -49,7 +50,6 @@ export default function Home() {
   const [hasScrolled, setHasScrolled] = useState(false);
   const [isLightMode, setIsLightMode] = useState(false);
   const [tooltipVisible, setTooltipVisible] = useState(false);
-  const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
   const [tooltipText, setTooltipText] = useState("");
   const heroRef = useRef(null);
 
@@ -57,35 +57,13 @@ export default function Home() {
     setTimeout(() => setZoomed(true), 100); // slight delay for effect
   }, []);
 
-  const handleMouseEnterSpot = () => {
-    setTooltipText("🎵 My go-to playlist");
-    setTooltipVisible(true);
-  };
-
-  const handleMouseEnterUrban = () => {
-    setTooltipText("🏙️ Read more");
-    setTooltipVisible(true);
-  };
-
-  const handleMouseEnterSocialism = () => {
-    setTooltipText("🌹 Read more");
-    setTooltipVisible(true);
-  };
-
-  const handleMouseEnterLoo = () => {
-    setTooltipText("🪿💛💛");
+  const handleMouseEnter = (text) => {
+    setTooltipText(text);
     setTooltipVisible(true);
   };
 
   const handleMouseLeave = () => {
     setTooltipVisible(false);
-  };
-
-  const handleMouseMove = (e) => {
-    setTooltipPosition({
-      x: e.clientX + 7,
-      y: e.clientY - 30,
-    });
   };
 
   useEffect(() => {
@@ -139,6 +117,9 @@ export default function Home() {
         color: "var(--page-text)",
       }}
     >
+      <ThemeButton isLightMode={isLightMode} setIsLightMode={setIsLightMode} />
+      <ContactButton />
+
       <Background isLightMode={isLightMode} />
 
       {/* Hero Section */}
@@ -147,11 +128,11 @@ export default function Home() {
           sectionRefs.current[0] = el;
           heroRef.current = el;
         }}
-        className="flex flex-col items-center lg:justify-center md:justify-center min-h-screen py-24 gap-8 opacity-0 transition-all duration-700 relative"
+        className="flex flex-col items-center lg:justify-center md:justify-center min-h-screen py-18 gap-8 opacity-0 transition-all duration-700 relative"
       >
-        <a href="https://open.spotify.com/playlist/2B34ID9SWdE8WcEeh4q4mX" target="_blank" rel="noopener noreferrer" className="block transition-transform duration-300 hover:scale-103" onMouseEnter={handleMouseEnterSpot} onMouseLeave={handleMouseLeave} onMouseMove={handleMouseMove}>
+        <a href="https://open.spotify.com/playlist/2B34ID9SWdE8WcEeh4q4mX" target="_blank" rel="noopener noreferrer" className="block transition-transform duration-300 hover:scale-103" onMouseEnter={() => handleMouseEnter("🎵 My go-to playlist")} onMouseLeave={handleMouseLeave}>
           <div
-            className="relative lg:w-[50vh] lg:h-[50vh] md:w-[50vh] md:h-[50vh] w-[90vw] h-[90vw] rounded-lg overflow-hidden flex items-center justify-center transition-transform duration-1000"
+            className="relative lg:w-[50vh] lg:h-[50vh] md:w-[50vh] md:h-[50vh] w-[80vw] h-[80vw] rounded-lg overflow-hidden flex items-center justify-center transition-transform duration-1000"
             style={{
               backgroundColor: "var(--hero-image-bg)",
               boxShadow: "0 8px 32px rgba(0,0,0,0.08)",
@@ -161,26 +142,22 @@ export default function Home() {
             <Image src="/hero.png" alt="Profile" fill style={{ objectFit: "cover" }} sizes="(max-width: 768px) 90vw, 50vh" priority={true} />
           </div>
         </a>
-        <div className="max-w-3xl text-center lg:text-2xl md:text-2xl text-lg ml-8 mr-8" style={{ color: "var(--page-text)" }}>
+        <div className="max-w-3xl text-center lg:text-2xl md:text-2xl text-md ml-8 mr-8" style={{ color: "var(--page-text)" }}>
           <p style={{ fontWeight: 800 }}>Hello, World!</p>
           <p>
             Coder,{" "}
-            <a href="https://en.wikipedia.org/wiki/Sustainable_urbanism" target="_blank" rel="noopener noreferrer" onMouseEnter={handleMouseEnterUrban} onMouseLeave={handleMouseLeave} onMouseMove={handleMouseMove}>
+            <a href="https://en.wikipedia.org/wiki/Sustainable_urbanism" target="_blank" rel="noopener noreferrer" onMouseEnter={() => handleMouseEnter("🌿 Read more")} onMouseLeave={handleMouseLeave}>
               sustainable urbanist
             </a>
             , and advocate for{" "}
-            <a href="https://en.wikipedia.org/wiki/Democratic_socialism" target="_blank" rel="noopener noreferrer" onMouseEnter={handleMouseEnterSocialism} onMouseLeave={handleMouseLeave} onMouseMove={handleMouseMove}>
+            <a href="https://en.wikipedia.org/wiki/Democratic_socialism" target="_blank" rel="noopener noreferrer" onMouseEnter={() => handleMouseEnter("🌹 Read more")} onMouseLeave={handleMouseLeave}>
               economic justice
             </a>{" "}
             studying Software Engineering
             <a href="https://se-webring.xyz/" target="_blank" rel="noopener noreferrer" aria-label="SE Webring">
               {isLightMode ? <img src="/webring_logo_b.svg" alt="SE Webring" className="inline lg:w-10 lg:h-10 md:w-10 md:h-10 w-8 h-8 pb-1 ml-1 mr-1.5" /> : <img src="/webring_logo_w.svg" alt="SE Webring" className="inline lg:w-10 lg:h-10 md:w-10 md:h-10 w-8 h-8 pb-1 ml-1 mr-1.5" />}
             </a>
-            at the{" "}
-            <span onMouseEnter={handleMouseEnterLoo} onMouseLeave={handleMouseLeave} onMouseMove={handleMouseMove}>
-              University of Waterloo
-            </span>
-            .
+            at the University of Waterloo.
           </p>
         </div>
 
@@ -228,9 +205,7 @@ export default function Home() {
 
       <Footer />
 
-      <Tooltip isLightMode={isLightMode} tooltipVisible={tooltipVisible} tooltipPosition={tooltipPosition} text={tooltipText} />
-
-      <ThemeButton isLightMode={isLightMode} setIsLightMode={setIsLightMode} />
+      <Tooltip tooltipVisible={tooltipVisible} text={tooltipText} />
     </div>
   );
 }

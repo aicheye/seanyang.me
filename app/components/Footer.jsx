@@ -3,18 +3,32 @@
 import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useState } from "react";
+import Tooltip from "./Tooltip";
 
 export default function Footer() {
+  const [tooltipVisible, setTooltipVisible] = useState(false);
+  const [tooltipText, setTooltipText] = useState("");
+
+  const handleMouseEnter = (text) => {
+    setTooltipText(text);
+    setTooltipVisible(true);
+  };
+
+  const handleMouseLeave = () => {
+    setTooltipVisible(false);
+  };
+
   return (
     <>
       <footer className="mt-auto py-8 flex flex-col items-center gap-2 z-10">
-        <div className="flex lg:flex-row md:flex-row flex-col lg:gap-4 md:gap-4 gap-2 items-center mb-4" style={{ color: "var(--page-text)" }}>
+        <div id="contact" className="flex lg:flex-row md:flex-row flex-col lg:gap-4 md:gap-4 gap-2 items-center mb-4" style={{ color: "var(--page-text)" }}>
           <div className="flex lg:gap-4 md:gap-4 gap-2 items-center">
             <span className="lg:text-3xl md:text-3xl text-2xl flex gap-2 lg:gap-4 md:gap-4 items-center">
-              <a href="https://github.com/aicheye/" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
+              <a href="https://github.com/aicheye/" aria-label="GitHub" target="_blank" rel="noopener noreferrer" onMouseEnter={() => handleMouseEnter("github.com/aicheye")} onMouseLeave={handleMouseLeave}>
                 <FontAwesomeIcon icon={faGithub} />
               </a>
-              <a href="https://www.linkedin.com/in/syang07/" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+              <a href="https://www.linkedin.com/in/syang07/" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer" onMouseEnter={() => handleMouseEnter("linkedin.com/in/syang07")} onMouseLeave={handleMouseLeave}>
                 <FontAwesomeIcon icon={faLinkedin} />
               </a>
             </span>
@@ -36,6 +50,8 @@ export default function Footer() {
           </a>
         </div>
       </footer>
+
+      <Tooltip tooltipVisible={tooltipVisible} text={tooltipText} />
     </>
   );
 }

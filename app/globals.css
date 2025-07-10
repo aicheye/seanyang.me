@@ -13,10 +13,11 @@
   --tooltip-bg: rgb(38, 38, 38);
   --tooltip-text: rgb(255, 255, 255);
   --tooltip-border: rgb(64, 64, 64);
-  --theme-button-bg: rgb(255, 255, 255);
-  --theme-button-text: rgb(38, 38, 38);
-  --theme-button-hover: rgb(245, 245, 245);
+
+  --button-bg: rgb(255, 255, 255);
+  --button-hover: rgb(212, 212, 212);
   --theme-button-icon: rgb(38, 38, 38);
+  --contact-button-icon: rgb(38, 38, 38);
 
   --page-bg: rgb(10, 10, 10);
   --page-text: rgb(229, 229, 229);
@@ -49,10 +50,11 @@
   --tooltip-bg: rgb(255, 255, 255);
   --tooltip-text: rgb(38, 38, 38);
   --tooltip-border: rgb(229, 229, 229);
-  --theme-button-bg: rgb(38, 38, 38);
-  --theme-button-text: rgb(251, 191, 36);
-  --theme-button-hover: rgb(64, 64, 64);
-  --theme-button-icon: rgb(251, 191, 36);
+
+  --button-bg: rgb(38, 38, 38);
+  --button-hover: rgb(82, 82, 82);
+  --theme-button-icon: rgb(255, 255, 255);
+  --contact-button-icon: rgb(255, 255, 255);
 
   --page-bg: rgb(229, 229, 229);
   --page-text: rgb(23, 23, 23);
