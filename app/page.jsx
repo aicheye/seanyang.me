@@ -1,15 +1,14 @@
 "use client";
 
-import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
-import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
+import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 import portfolio from "../public/portfolio/portfolio";
 import "./animations.css";
 import Background from "./components/Background.jsx";
+import Footer from "./components/Footer.jsx";
 import ThemeButton from "./components/ThemeButton.jsx";
-import Tooltip from "./components/Tooltip";
+import Tooltip from "./components/Tooltip.jsx";
 
 function useScrollAnimation() {
   const refs = useRef([]);
@@ -116,25 +115,30 @@ export default function Home() {
   }, [isLightMode]);
 
   React.useEffect(() => {
-    setIsLightMode(window.matchMedia("(prefers-color-scheme: light)").matches);
-    const mediaQueryList = window != null && window.matchMedia("(prefers-color-scheme: light)");
-    mediaQueryList.addEventListener("change", handleThemeChange);
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: light)");
+    setIsLightMode(mediaQuery.matches);
+
+    const handleThemeChange = (event) => {
+      setIsLightMode(event.matches);
+    };
+
+    mediaQuery.addEventListener("change", handleThemeChange);
+    return () => mediaQuery.removeEventListener("change", handleThemeChange);
   }, []);
 
-  const handleThemeChange = (event) => {
-    if (event.matches) {
-      setIsLightMode(true);
-      document.documentElement.style.setProperty("--bg-color", "bg-neutral-950");
-      document.documentElement.style.setProperty("--fg-color", "text-neutral-200");
-    } else {
-      setIsLightMode(false);
-      document.documentElement.style.setProperty("--bg-color", "bg-neutral-200");
-      document.documentElement.style.setProperty("--fg-color", "text-neutral-900");
-    }
-  };
+  // Update data-theme attribute when theme changes
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", isLightMode ? "light" : "dark");
+  }, [isLightMode]);
 
   return (
-    <div className={`relative flex flex-col min-h-screen overflow-hidden transition-colors duration-500 ${isLightMode ? "bg-neutral-200 text-neutral-900" : "bg-neutral-950 text-neutral-200"}`}>
+    <div
+      className="relative flex flex-col min-h-screen overflow-hidden transition-colors duration-500"
+      style={{
+        backgroundColor: "var(--page-bg)",
+        color: "var(--page-text)",
+      }}
+    >
       <Background isLightMode={isLightMode} />
 
       {/* Hero Section */}
@@ -147,8 +151,9 @@ export default function Home() {
       >
         <a href="https://open.spotify.com/playlist/2B34ID9SWdE8WcEeh4q4mX" target="_blank" rel="noopener noreferrer" className="block transition-transform duration-300 hover:scale-103" onMouseEnter={handleMouseEnterSpot} onMouseLeave={handleMouseLeave} onMouseMove={handleMouseMove}>
           <div
-            className={`relative lg:w-[50vh] lg:h-[50vh] md:w-[50vh] md:h-[50vh] w-[90vw] h-[90vw] bg-neutral-800 rounded-lg overflow-hidden flex items-center justify-center transition-transform duration-1000`}
+            className="relative lg:w-[50vh] lg:h-[50vh] md:w-[50vh] md:h-[50vh] w-[90vw] h-[90vw] rounded-lg overflow-hidden flex items-center justify-center transition-transform duration-1000"
             style={{
+              backgroundColor: "var(--hero-image-bg)",
               boxShadow: "0 8px 32px rgba(0,0,0,0.08)",
               transform: zoomed ? "scale(1)" : "scale(0.7)",
             }}
@@ -156,7 +161,7 @@ export default function Home() {
             <Image src="/hero.png" alt="Profile" fill style={{ objectFit: "cover" }} sizes="(max-width: 768px) 90vw, 50vh" priority={true} />
           </div>
         </a>
-        <div className={`max-w-3xl text-center lg:text-2xl md:text-2xl text-lg ml-8 mr-8 ${isLightMode ? "text-neutral-900" : "text-neutral-200"}`}>
+        <div className="max-w-3xl text-center lg:text-2xl md:text-2xl text-lg ml-8 mr-8" style={{ color: "var(--page-text)" }}>
           <p style={{ fontWeight: 800 }}>Hello, World!</p>
           <p>
             Coder,{" "}
@@ -181,31 +186,39 @@ export default function Home() {
 
         {/* Scroll Down Indicator */}
         {!hasScrolled && (
-          <div className="absolute left-1/2 -translate-x-1/2 bottom-8 flex flex-col items-center animate-bounce z-10 select-none pointer-events-none">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`opacity-80 drop-shadow-lg ${isLightMode ? "text-neutral-800" : "text-white"}`}>
+          <Link href="#projects" className="absolute left-1/2 -translate-x-1/2 bottom-8 flex flex-col items-center animate-bounce z-10 select-none">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="opacity-80 drop-shadow-lg" style={{ color: "var(--scroll-indicator)" }}>
               <polyline points="6 9 12 15 18 9" />
             </svg>
-            <span className={`mt-1 text-sm ${isLightMode ? "text-neutral-600" : "text-neutral-300"}`}>Scroll to see projects</span>
-          </div>
+            <span className="mt-1 text-sm" style={{ color: "var(--subtext)" }}>
+              Scroll to see projects
+            </span>
+          </Link>
         )}
       </section>
 
       {/* Portfolio Section */}
-      <section ref={(el) => (sectionRefs.current[1] = el)} className="py-10 px-8 sm:px-16 md:px-32 lg:px-48 opacity-0 transition-all duration-700 lg:mb-[10vh] z-10">
-        <h2 className={`lg:text-3xl md:text-3xl text-2xl font-bold lg:mb-12 md:mb-12 mb-8 text-center ${isLightMode ? "text-gray-900" : "text-neutral-200"}`}>Projects</h2>
+      <section id="projects" ref={(el) => (sectionRefs.current[1] = el)} className="pt-20 px-8 sm:px-16 md:px-32 lg:px-48 opacity-0 transition-all duration-700 lg:mb-[10vh] z-10">
+        <h2 className="lg:text-3xl md:text-3xl text-2xl font-bold lg:mb-12 md:mb-12 mb-8 text-center" style={{ color: "var(--heading-text)" }}>
+          Projects
+        </h2>
         <div className="flex flex-wrap gap-6 justify-center">
           {portfolio.map((project, idx) => (
-            <a key={project.title} href={project.github} target="_blank" rel="noopener noreferrer" ref={(el) => (sectionRefs.current[2 + idx] = el)} className={`min-w-xs max-w-2xl w-auto rounded-xl shadow-md p-4 lg:h-[400px] md:h-[400px] h-[400px] hover:scale-[1.03] hover:shadow-lg opacity-0 transition-all duration-700 ${isLightMode ? "bg-neutral-50" : "bg-neutral-900"}`}>
+            <a key={project.title} href={project.github} target="_blank" rel="noopener noreferrer" ref={(el) => (sectionRefs.current[2 + idx] = el)} className="min-w-xs max-w-2xl w-auto rounded-xl shadow-md p-4 lg:h-[400px] md:h-[400px] h-[400px] hover:scale-[1.03] hover:shadow-lg opacity-0 transition-all duration-700" style={{ backgroundColor: "var(--card-bg)" }}>
               <div className="flex flex-col h-full">
-                <div className={`relative w-full h-full mb-4 rounded-lg ${isLightMode ? "bg-neutral-300" : "bg-neutral-800"}`}>
+                <div className="relative w-full h-full mb-4 rounded-lg" style={{ backgroundColor: "var(--card-image-bg)" }}>
                   <Image src={project.thumbnail} alt={project.title + " thumbnail"} fill style={{ objectFit: "contain" }} sizes="(max-width: 768px) calc(100vw - 64px), (max-width: 1024px) calc(50vw - 64px), 400px" />
                 </div>
                 <div className="flex flex-col h-auto">
-                  <h3 className={`lg:text-xl md:text-xl text-lg mb-1 ${isLightMode ? "text-neutral-900" : "text-neutral-200"}`} style={{ fontWeight: 800 }}>
+                  <h3 className="lg:text-xl md:text-xl text-lg mb-1" style={{ fontWeight: 800, color: "var(--page-text)" }}>
                     {project.title}
                   </h3>
-                  <p className={`mb-3 text-md ${isLightMode ? "text-neutral-600" : "text-neutral-400"}`}>{project.description}</p>
-                  <span className="text-blue-400 font-medium text-md">View on GitHub →</span>
+                  <p className="mb-3 text-md" style={{ color: "var(--subtext)" }}>
+                    {project.description}
+                  </p>
+                  <span className="font-medium text-md" style={{ color: "var(--accent-color)" }}>
+                    View on GitHub →
+                  </span>
                 </div>
               </div>
             </a>
@@ -213,36 +226,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer ref={(el) => (sectionRefs.current[portfolio.length + 2] = el)} className="mt-auto py-8 flex flex-col items-center gap-2 opacity-0 transition-all duration-700 z-10">
-        <div className={`flex lg:flex-row md:flex-row flex-col lg:gap-4 md:gap-4 gap-2 items-center mb-4 ${isLightMode ? "text-neutral-900" : "text-neutral-200"}`}>
-          <div className="flex lg:gap-4 md:gap-4 gap-2 items-center">
-            <span className="lg:text-3xl md:text-3xl text-2xl flex gap-2 lg:gap-4 md:gap-4 items-center">
-              <a href="https://github.com/aicheye/" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
-                <FontAwesomeIcon icon={faGithub} />
-              </a>
-              <a href="https://www.linkedin.com/in/syang07/" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
-                <FontAwesomeIcon icon={faLinkedin} />
-              </a>
-            </span>
-            <span>·</span>
-            <a href="mailto:contact@seanyang.me" aria-label="Email" className="lg:text-lg md:text-lg text-md underline" target="_blank" rel="noopener noreferrer">
-              contact@seanyang.me
-            </a>
-          </div>
-          <span className="hidden lg:block md:block">·</span>
-          <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="underline lg:text-lg md:text-lg text-md flex items-center gap-2">
-            View Resumé
-            <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="text-sm" />
-          </a>
-        </div>
-        <div className={`text-sm ${isLightMode ? "text-neutral-600" : "text-neutral-400"}`}>
-          © {new Date().getFullYear()} Sean Yang{" "}
-          <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener noreferrer">
-            (CC BY-NC-SA 4.0)
-          </a>
-        </div>
-      </footer>
+      <Footer />
 
       <Tooltip isLightMode={isLightMode} tooltipVisible={tooltipVisible} tooltipPosition={tooltipPosition} text={tooltipText} />
 

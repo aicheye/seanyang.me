@@ -18,7 +18,7 @@ const portfolio = [
     thumbnail: "/portfolio/community-centre.png",
   },
   {
-    title: "Portfolio Website",
+    title: "seanyang.me",
     description: "This website. Built with Next.js, Tailwind CSS, and React. Responsive, animated, and interactive.",
     github: "https://github.com/aicheye/seanyang.me",
     thumbnail: "/portfolio/portfolio.png",

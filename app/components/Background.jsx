@@ -16,6 +16,11 @@ export default function Background({ isLightMode = false }) {
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
+  // Update the data-theme attribute when theme changes
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", isLightMode ? "light" : "dark");
+  }, [isLightMode]);
+
   return (
     <>
       {/* Animated Dot Background */}
@@ -32,42 +37,47 @@ export default function Background({ isLightMode = false }) {
       {/* Animated Freeform Gradient Blobs */}
       <div className="pointer-events-none fixed inset-0 z-0">
         <div
-          className={`absolute w-[50vw] h-[50vw] rounded-full blur-3xl ${isLightMode ? "bg-purple-300 opacity-40" : "bg-purple-500 opacity-3"}`}
+          className="absolute w-[50vw] h-[50vw] rounded-full blur-3xl"
           style={{
             top: "-10vw",
             left: "-10vw",
+            backgroundColor: "var(--blob-purple)",
             animation: "blob1 60s ease-in-out infinite",
           }}
         />
         <div
-          className={`absolute w-[40vw] h-[40vw] rounded-full blur-3xl ${isLightMode ? "bg-blue-300 opacity-40" : "bg-blue-500 opacity-3"}`}
+          className="absolute w-[40vw] h-[40vw] rounded-full blur-3xl"
           style={{
             bottom: "-8vw",
             right: "-8vw",
+            backgroundColor: "var(--blob-blue)",
             animation: "blob2 40s ease-in-out infinite",
           }}
         />
         <div
-          className={`absolute w-[38vw] h-[38vw] rounded-full blur-3xl ${isLightMode ? "bg-cyan-300 opacity-40" : "bg-cyan-500 opacity-3"}`}
+          className="absolute w-[38vw] h-[38vw] rounded-full blur-3xl"
           style={{
             top: "0vh",
             left: "60vw",
+            backgroundColor: "var(--blob-cyan)",
             animation: "blob3 80s ease-in-out infinite",
           }}
         />
         <div
-          className={`absolute w-[42vw] h-[42vw] rounded-full blur-3xl ${isLightMode ? "bg-orange-300 opacity-40" : "bg-orange-500 opacity-3"}`}
+          className="absolute w-[42vw] h-[42vw] rounded-full blur-3xl"
           style={{
             top: "60vh",
             left: "10vw",
+            backgroundColor: "var(--blob-orange)",
             animation: "blob4 60s ease-in-out infinite",
           }}
         />
         <div
-          className={`absolute w-[36vw] h-[36vw] rounded-full blur-3xl ${isLightMode ? "bg-red-300 opacity-40" : "bg-red-500 opacity-3"}`}
+          className="absolute w-[36vw] h-[36vw] rounded-full blur-3xl"
           style={{
             bottom: "10vh",
             right: "30vw",
+            backgroundColor: "var(--blob-red)",
             animation: "blob5 70s ease-in-out infinite",
           }}
         />
