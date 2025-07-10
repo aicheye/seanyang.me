@@ -6,8 +6,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
 import "./animations.css";
-import Background from "./components/Background";
-import ThemeButton from "./components/ThemeButton";
+import Background from "./components/Background.jsx";
+import ThemeButton from "./components/ThemeButton.jsx";
 import Tooltip from "./components/Tooltip";
 import portfolio from "./portfolio";
 
@@ -163,7 +163,11 @@ export default function Home() {
             <a href="https://en.wikipedia.org/wiki/Democratic_socialism" target="_blank" rel="noopener noreferrer" onMouseEnter={handleMouseEnterSocialism} onMouseLeave={handleMouseLeave} onMouseMove={handleMouseMove}>
               economic justice
             </a>{" "}
-            studying Software Engineering at the{" "}
+            studying Software Engineering
+            <a href="https://se-webring.xyz/" target="_blank" rel="noopener noreferrer" aria-label="SE Webring">
+              {isLightMode ? <img src="/webring_logo_b.svg" alt="SE Webring" className="inline lg:w-10 lg:h-10 md:w-10 md:h-10 w-8 h-8 pb-1 ml-1 mr-1.5" /> : <img src="/webring_logo_w.svg" alt="SE Webring" className="inline lg:w-10 lg:h-10 md:w-10 md:h-10 w-8 h-8 pb-1 ml-1 mr-1.5" />}
+            </a>
+            at the{" "}
             <span onMouseEnter={handleMouseEnterLoo} onMouseLeave={handleMouseLeave} onMouseMove={handleMouseMove}>
               University of Waterloo
             </span>
@@ -185,9 +189,9 @@ export default function Home() {
       {/* Portfolio Section */}
       <section ref={(el) => (sectionRefs.current[1] = el)} className="py-10 px-8 sm:px-16 md:px-32 lg:px-48 opacity-0 transition-all duration-700 lg:mb-[10vh] z-10">
         <h2 className={`lg:text-3xl md:text-3xl text-2xl font-bold lg:mb-12 md:mb-12 mb-8 text-center ${isLightMode ? "text-gray-900" : "text-neutral-200"}`}>Projects</h2>
-        <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-items-center">
+        <div className="flex flex-wrap gap-6 justify-center">
           {portfolio.map((project, idx) => (
-            <a key={project.title} href={project.github} target="_blank" rel="noopener noreferrer" ref={(el) => (sectionRefs.current[2 + idx] = el)} className={`portfolio-card block rounded-xl shadow-md p-4 w-full lg:h-[400px] md:h-[400px] h-[400px] hover:scale-[1.03] hover:shadow-lg opacity-0 transition-all duration-700 ${isLightMode ? "bg-neutral-50" : "bg-neutral-900"}`}>
+            <a key={project.title} href={project.github} target="_blank" rel="noopener noreferrer" ref={(el) => (sectionRefs.current[2 + idx] = el)} className={`min-w-sm max-w-2xl w-auto rounded-xl shadow-md p-4 lg:h-[400px] md:h-[400px] h-[400px] hover:scale-[1.03] hover:shadow-lg opacity-0 transition-all duration-700 ${isLightMode ? "bg-neutral-50" : "bg-neutral-900"}`}>
               <div className="flex flex-col h-full">
                 <div className={`relative w-full h-full mb-4 rounded-lg ${isLightMode ? "bg-neutral-300" : "bg-neutral-800"}`}>
                   <Image src={project.thumbnail} alt={project.title + " thumbnail"} fill style={{ objectFit: "contain" }} />
@@ -215,9 +219,6 @@ export default function Home() {
               </a>
               <a href="https://www.linkedin.com/in/syang07/" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
                 <FontAwesomeIcon icon={faLinkedin} />
-              </a>
-              <a href="https://se-webring.xyz/" target="_blank" rel="noopener noreferrer" aria-label="SE Webring" className="lg:w-10 lg:h-10 md:w-10 md:h-10 w-8 h-8">
-                {isLightMode ? <img src="/webring_logo_b.svg" alt="SE Webring" /> : <img src="/webring_logo_w.svg" alt="SE Webring" />}
               </a>
             </span>
             <span>·</span>
