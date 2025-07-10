@@ -124,8 +124,12 @@ export default function Home() {
   const handleThemeChange = (event) => {
     if (event.matches) {
       setIsLightMode(true);
+      document.documentElement.style.setProperty("--bg-color", "bg-neutral-950");
+      document.documentElement.style.setProperty("--fg-color", "text-neutral-200");
     } else {
       setIsLightMode(false);
+      document.documentElement.style.setProperty("--bg-color", "bg-neutral-200");
+      document.documentElement.style.setProperty("--fg-color", "text-neutral-900");
     }
   };
 
@@ -143,13 +147,13 @@ export default function Home() {
       >
         <a href="https://open.spotify.com/playlist/2B34ID9SWdE8WcEeh4q4mX" target="_blank" rel="noopener noreferrer" className="block transition-transform duration-300 hover:scale-103" onMouseEnter={handleMouseEnterSpot} onMouseLeave={handleMouseLeave} onMouseMove={handleMouseMove}>
           <div
-            className={`relative lg:w-[50vh] lg:h-[50vh] md:w-[40vh] md:h-[40vh] w-[90vw] h-[90vw] bg-neutral-800 rounded-lg overflow-hidden flex items-center justify-center transition-transform duration-1000`}
+            className={`relative lg:w-[50vh] lg:h-[50vh] md:w-[50vh] md:h-[50vh] w-[90vw] h-[90vw] bg-neutral-800 rounded-lg overflow-hidden flex items-center justify-center transition-transform duration-1000`}
             style={{
               boxShadow: "0 8px 32px rgba(0,0,0,0.08)",
               transform: zoomed ? "scale(1)" : "scale(0.7)",
             }}
           >
-            <Image src="/hero.png" alt="Profile" fill style={{ objectFit: "cover" }} />
+            <Image src="/hero.png" alt="Profile" fill style={{ objectFit: "cover" }} sizes="(max-width: 768px) 90vw, 50vh" priority={true} />
           </div>
         </a>
         <div className={`max-w-3xl text-center lg:text-2xl md:text-2xl text-lg ml-8 mr-8 ${isLightMode ? "text-neutral-900" : "text-neutral-200"}`}>
@@ -194,7 +198,7 @@ export default function Home() {
             <a key={project.title} href={project.github} target="_blank" rel="noopener noreferrer" ref={(el) => (sectionRefs.current[2 + idx] = el)} className={`min-w-xs max-w-2xl w-auto rounded-xl shadow-md p-4 lg:h-[400px] md:h-[400px] h-[400px] hover:scale-[1.03] hover:shadow-lg opacity-0 transition-all duration-700 ${isLightMode ? "bg-neutral-50" : "bg-neutral-900"}`}>
               <div className="flex flex-col h-full">
                 <div className={`relative w-full h-full mb-4 rounded-lg ${isLightMode ? "bg-neutral-300" : "bg-neutral-800"}`}>
-                  <Image src={project.thumbnail} alt={project.title + " thumbnail"} fill style={{ objectFit: "contain" }} />
+                  <Image src={project.thumbnail} alt={project.title + " thumbnail"} fill style={{ objectFit: "contain" }} sizes="(max-width: 768px) calc(100vw - 64px), (max-width: 1024px) calc(50vw - 64px), 400px" />
                 </div>
                 <div className="flex flex-col h-auto">
                   <h3 className={`lg:text-xl md:text-xl text-lg mb-1 ${isLightMode ? "text-neutral-900" : "text-neutral-200"}`} style={{ fontWeight: 800 }}>

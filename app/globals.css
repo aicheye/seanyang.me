@@ -2,6 +2,10 @@
 @import "tailwindcss";
 
 :root {
+  --bg-color: bg-neutral-950;
+  --fg-color: text-neutral-200;
+  background-color: var(--bg-color);
+  color: var(--fg-color);
   font-family: "JetBrains Mono", "Courier New", monospace;
   font-optical-sizing: auto;
   font-weight: 400;
