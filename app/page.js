@@ -114,7 +114,7 @@ export default function Home() {
       >
         <a href="https://open.spotify.com/playlist/2B34ID9SWdE8WcEeh4q4mX?si=e5349b09043945e7&pt=6cd3613594f08576fc57bd88efb48f18" target="_blank" rel="noopener noreferrer" className="block transition-transform duration-300 hover:scale-103">
           <div
-            className={`relative lg:w-[50vh] lg:h-[50vh] md:w-[40vh] md:h-[40vh] w-[70vw] h-[70vw] bg-gray-800 rounded-lg overflow-hidden flex items-center justify-center transition-transform duration-1000`}
+            className={`relative lg:w-[50vh] lg:h-[50vh] md:w-[40vh] md:h-[40vh] w-[90vw] h-[90vw] bg-gray-800 rounded-lg overflow-hidden flex items-center justify-center transition-transform duration-1000`}
             style={{
               boxShadow: "0 8px 32px rgba(0,0,0,0.08)",
               transform: zoomed ? "scale(1)" : "scale(0.7)",
