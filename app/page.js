@@ -163,12 +163,15 @@ export default function Home() {
       <footer ref={(el) => (sectionRefs.current[portfolio.length + 2] = el)} className="mt-auto py-8 flex flex-col items-center gap-2 opacity-0 transition-all duration-700">
         <div className="flex lg:flex-row md:flex-row flex-col lg:gap-4 md:gap-4 gap-2 items-center mb-4">
           <div className="flex lg:gap-4 md:gap-4 gap-2 items-center">
-            <span className="lg:text-3xl md:text-3xl text-2xl flex gap-2 lg:gap-4 md:gap-4">
+            <span className="lg:text-3xl md:text-3xl text-2xl flex gap-2 lg:gap-4 md:gap-4 items-center">
               <a href="https://github.com/aicheye/" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
                 <FontAwesomeIcon icon={faGithub} />
               </a>
               <a href="https://www.linkedin.com/in/syang07/" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
                 <FontAwesomeIcon icon={faLinkedin} />
+              </a>
+              <a href="https://se-webring.xyz/" target="_blank" rel="noopener noreferrer" aria-label="SE Webring" className="w-10 h-10">
+                <img src="https://raw.githubusercontent.com/simcard0000/se-webring/aeb059c54765e77b6be9d0660248a2df82adcf64/assets/logo/logo_w.svg" alt="SE Webring" />
               </a>
             </span>
             <span>·</span>
