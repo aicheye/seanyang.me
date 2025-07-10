@@ -1,5 +1,9 @@
+import { config } from "@fortawesome/fontawesome-svg-core";
+import "@fortawesome/fontawesome-svg-core/styles.css";
 import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+config.autoAddCss = false;
 
 export default function ThemeButton({ isLightMode, setIsLightMode }) {
   return (

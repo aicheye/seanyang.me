@@ -10,6 +10,7 @@ import ContactButton from "./components/ContactButton.jsx";
 import Footer from "./components/Footer.jsx";
 import ThemeButton from "./components/ThemeButton.jsx";
 import Tooltip from "./components/Tooltip.jsx";
+import TopButton from "./components/TopButton.jsx";
 
 function useScrollAnimation() {
   const refs = useRef([]);
@@ -47,7 +48,7 @@ function useScrollAnimation() {
 export default function Home() {
   const sectionRefs = useScrollAnimation();
   const [zoomed, setZoomed] = useState(false);
-  const [hasScrolled, setHasScrolled] = useState(false);
+  const [atTop, setAtTop] = useState(true);
   const [isLightMode, setIsLightMode] = useState(false);
   const [tooltipVisible, setTooltipVisible] = useState(false);
   const [tooltipText, setTooltipText] = useState("");
@@ -68,13 +69,12 @@ export default function Home() {
 
   useEffect(() => {
     const checkScroll = () => {
-      if (!heroRef.current) return;
-      const rect = heroRef.current.getBoundingClientRect();
-      if (rect.top < 0) setHasScrolled(true);
+      if (window.scrollY > 0) setAtTop(false);
     };
     checkScroll(); // Run on mount
     const handleScroll = () => {
-      setHasScrolled(true);
+      if (window.scrollY > 0) setAtTop(false);
+      else setAtTop(true);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -117,17 +117,17 @@ export default function Home() {
         color: "var(--page-text)",
       }}
     >
+      {!atTop && <TopButton />}
       <ThemeButton isLightMode={isLightMode} setIsLightMode={setIsLightMode} />
       <ContactButton />
-
       <Background isLightMode={isLightMode} />
-
       {/* Hero Section */}
       <section
         ref={(el) => {
           sectionRefs.current[0] = el;
           heroRef.current = el;
         }}
+        id="top"
         className="flex flex-col items-center lg:justify-center md:justify-center min-h-screen py-18 gap-8 opacity-0 transition-all duration-700 relative"
       >
         <a href="https://open.spotify.com/playlist/2B34ID9SWdE8WcEeh4q4mX" target="_blank" rel="noopener noreferrer" className="block transition-transform duration-300 hover:scale-103" onMouseEnter={() => handleMouseEnter("🎵 My go-to playlist")} onMouseLeave={handleMouseLeave}>
@@ -155,14 +155,14 @@ export default function Home() {
             </a>{" "}
             studying Software Engineering
             <a href="https://se-webring.xyz/" target="_blank" rel="noopener noreferrer" aria-label="SE Webring">
-              {isLightMode ? <img src="/webring_logo_b.svg" alt="SE Webring" className="inline lg:w-10 lg:h-10 md:w-10 md:h-10 w-8 h-8 pb-1 ml-1 mr-1.5" /> : <img src="/webring_logo_w.svg" alt="SE Webring" className="inline lg:w-10 lg:h-10 md:w-10 md:h-10 w-8 h-8 pb-1 ml-1 mr-1.5" />}
+              {isLightMode ? <img src="/webring_logo_b.svg" alt="SE Webring" className="inline lg:w-9 lg:h-9 md:w-9 md:h-9 w-7 h-7 pb-1 ml-1 mr-1.5" /> : <img src="/webring_logo_w.svg" alt="SE Webring" className="inline lg:w-9 lg:h-9 md:w-9 md:h-9 w-7 h-7 pb-1 ml-1 mr-1.5" />}
             </a>
             at the University of Waterloo.
           </p>
         </div>
 
         {/* Scroll Down Indicator */}
-        {!hasScrolled && (
+        {atTop && (
           <Link href="#projects" className="absolute left-1/2 -translate-x-1/2 bottom-8 flex flex-col items-center animate-bounce z-10 select-none">
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="opacity-80 drop-shadow-lg" style={{ color: "var(--scroll-indicator)" }}>
               <polyline points="6 9 12 15 18 9" />
@@ -173,7 +173,6 @@ export default function Home() {
           </Link>
         )}
       </section>
-
       {/* Portfolio Section */}
       <section id="projects" ref={(el) => (sectionRefs.current[1] = el)} className="pt-20 px-8 sm:px-16 md:px-32 lg:px-48 opacity-0 transition-all duration-700 lg:mb-[10vh] z-10">
         <h2 className="lg:text-3xl md:text-3xl text-2xl font-bold lg:mb-12 md:mb-12 mb-8 text-center" style={{ color: "var(--heading-text)" }}>
@@ -202,9 +201,7 @@ export default function Home() {
           ))}
         </div>
       </section>
-
       <Footer />
-
       <Tooltip tooltipVisible={tooltipVisible} text={tooltipText} />
     </div>
   );
