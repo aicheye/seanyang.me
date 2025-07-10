@@ -31,7 +31,7 @@ export default function About() {
                   Hometown: <span className="font-bold typed-caret typed-[Toronto]"></span>
                 </p>
                 <p>
-                  Favourite Games: <span className="font-bold typed-caret">Cities Skyilines II, Minecraft, Overwatch</span>
+                  Favourite Games: <span className="font-bold typed-caret">Cities Skylines II, Minecraft, Overwatch</span>
                 </p>
                 <p>
                   Favourite Artists: <span className="font-bold typed-caret"> beabadoobee, Laufey, keshi, starfall</span>
