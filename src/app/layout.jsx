@@ -1,3 +1,4 @@
+import useThemeStore from "../components/ThemeState";
 import "./globals.css";
 
 export const metadata = {
@@ -12,7 +13,7 @@ export const viewport = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className="antialiased scroll-smooth">
+    <html lang="en" className="antialiased scroll-smooth" data-theme={useThemeStore.getState().isLightMode ? "light" : "dark"}>
       <body>{children}</body>
     </html>
   );

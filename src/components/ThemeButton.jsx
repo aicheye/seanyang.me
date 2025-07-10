@@ -1,11 +1,16 @@
+"use client";
+
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import useThemeStore from "./ThemeState";
 
 config.autoAddCss = false;
 
-export default function ThemeButton({ isLightMode, setIsLightMode }) {
+export default function ThemeButton() {
+  const { isLightMode, setIsLightMode } = useThemeStore();
+
   return (
     <>
       <button

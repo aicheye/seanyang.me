@@ -2,9 +2,12 @@
 
 import { useEffect, useState } from "react";
 import "./Background.css";
+import useThemeStore from "./ThemeState";
 
-export default function Background({ isLightMode = false }) {
+export default function Background() {
   const [bgPos, setBgPos] = useState("0px 0px");
+
+  const isLightMode = useThemeStore((state) => state.isLightMode);
 
   useEffect(() => {
     const handleMouseMove = (e) => {
@@ -16,15 +19,10 @@ export default function Background({ isLightMode = false }) {
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
-  // Update the data-theme attribute when theme changes
-  useEffect(() => {
-    document.documentElement.setAttribute("data-theme", isLightMode ? "light" : "dark");
-  }, [isLightMode]);
-
   return (
     <>
       {/* Animated Dot Background */}
-      <div className="pointer-events-none fixed inset-0 z-0">
+      <div className="pointer-events-none fixed inset-0 z-[-1]">
         <div
           className="w-full h-full opacity-50"
           style={{
@@ -35,7 +33,7 @@ export default function Background({ isLightMode = false }) {
         />
       </div>
       {/* Animated Freeform Gradient Blobs */}
-      <div className="pointer-events-none fixed inset-0 z-0">
+      <div className="pointer-events-none fixed inset-0 z-[-1]">
         <div
           className="absolute w-[50vw] h-[50vw] rounded-full blur-3xl"
           style={{

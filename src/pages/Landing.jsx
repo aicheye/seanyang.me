@@ -2,15 +2,16 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import React, { useEffect, useRef, useState } from "react";
-import portfolio from "../public/portfolio/portfolio";
-import "./animations.css";
-import Background from "./components/Background.jsx";
-import ContactButton from "./components/ContactButton.jsx";
-import Footer from "./components/Footer.jsx";
-import ThemeButton from "./components/ThemeButton.jsx";
-import Tooltip from "./components/Tooltip.jsx";
-import TopButton from "./components/TopButton.jsx";
+import { useEffect, useRef, useState } from "react";
+import Background from "../components/Background.jsx";
+import ContactButton from "../components/ContactButton.jsx";
+import Footer from "../components/Footer.jsx";
+import ThemeButton from "../components/ThemeButton.jsx";
+import useThemeStore from "../components/ThemeState.jsx";
+import Tooltip from "../components/Tooltip.jsx";
+import TopButton from "../components/TopButton.jsx";
+import portfolio from "../data/portfolio";
+import "../styles/animations.css";
 
 function useScrollAnimation() {
   const refs = useRef([]);
@@ -45,11 +46,11 @@ function useScrollAnimation() {
   return refs;
 }
 
-export default function Home() {
+export default function Landing() {
   const sectionRefs = useScrollAnimation();
   const [zoomed, setZoomed] = useState(false);
   const [atTop, setAtTop] = useState(true);
-  const [isLightMode, setIsLightMode] = useState(false);
+  const { isLightMode, setIsLightMode } = useThemeStore();
   const [tooltipVisible, setTooltipVisible] = useState(false);
   const [tooltipText, setTooltipText] = useState("");
   const heroRef = useRef(null);
@@ -92,35 +93,12 @@ export default function Home() {
     preserveAnimations();
   }, [isLightMode]);
 
-  React.useEffect(() => {
-    const mediaQuery = window.matchMedia("(prefers-color-scheme: light)");
-    setIsLightMode(mediaQuery.matches);
-
-    const handleThemeChange = (event) => {
-      setIsLightMode(event.matches);
-    };
-
-    mediaQuery.addEventListener("change", handleThemeChange);
-    return () => mediaQuery.removeEventListener("change", handleThemeChange);
-  }, []);
-
-  // Update data-theme attribute when theme changes
-  useEffect(() => {
-    document.documentElement.setAttribute("data-theme", isLightMode ? "light" : "dark");
-  }, [isLightMode]);
-
   return (
-    <div
-      className="relative flex flex-col min-h-screen overflow-hidden transition-colors duration-500"
-      style={{
-        backgroundColor: "var(--page-bg)",
-        color: "var(--page-text)",
-      }}
-    >
+    <div className="relative flex flex-col min-h-screen overflow-hidden transition-colors duration-500">
       {!atTop && <TopButton />}
-      <ThemeButton isLightMode={isLightMode} setIsLightMode={setIsLightMode} />
+      <ThemeButton />
       <ContactButton />
-      <Background isLightMode={isLightMode} />
+      <Background />
       {/* Hero Section */}
       <section
         ref={(el) => {
@@ -159,6 +137,7 @@ export default function Home() {
               {isLightMode ? <img src="/webring_logo_b.svg" alt="SE Webring" className="inline lg:w-9 lg:h-9 md:w-9 md:h-9 w-7 h-7 pb-1 ml-1 mr-1.5" /> : <img src="/webring_logo_w.svg" alt="SE Webring" className="inline lg:w-9 lg:h-9 md:w-9 md:h-9 w-7 h-7 pb-1 ml-1 mr-1.5" />}
             </a>
             at the University of Waterloo.
+            {/*<Link href="/about">{" [...]"}</Link>*/}
           </p>
         </div>
 
