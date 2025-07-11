@@ -141,11 +141,11 @@ export default function Landing() {
           heroRef.current = el;
         }}
         id="top"
-        className="flex flex-col items-center lg:justify-center md:justify-center min-h-screen py-18 gap-8 opacity-0 transition-all duration-700 relative"
+        className="flex flex-col items-center sm:justify-center min-h-screen py-18 gap-8 opacity-0 transition-all duration-700 relative"
       >
         <a href="https://open.spotify.com/playlist/2B34ID9SWdE8WcEeh4q4mX" target="_blank" rel="noopener noreferrer" className="inline-block transition-transform duration-300" onMouseEnter={() => handleMouseEnter("🎵 My go-to playlist")} onMouseLeave={handleMouseLeaveHero} onMouseMove={onMouseMove}>
           <div
-            className="relative flex-shrink-0 lg:w-[50vh] lg:h-[50vh] md:w-[50vh] md:h-[50vh] w-[90vw] h-[90vw] rounded-lg overflow-hidden flex items-center justify-center"
+            className="relative flex-shrink-0 sm:w-[50vh] sm:h-[50vh] w-[90vw] h-[90vw] rounded-lg overflow-hidden flex items-center justify-center"
             style={{
               backgroundColor: "var(--hero-image-bg)",
               boxShadow: "0 8px 32px rgba(0,0,0,0.08)",
@@ -157,8 +157,8 @@ export default function Landing() {
             <Image src="/hero.png" alt="Profile" fill style={{ objectFit: "cover" }} sizes="(max-width: 768px) 90vw, 50vh" priority={true} />
           </div>
         </a>
-        <div className="max-w-3xl text-center lg:text-2xl md:text-2xl text-md ml-8 mr-8" style={{ color: "var(--page-text)" }}>
-          <p className="typed-[Hello,_World!] typed-caret" style={{ fontWeight: 800 }}></p>
+        <div className="max-w-3xl text-center sm:text-2xl text-lg ml-8 mr-8" style={{ color: "var(--page-text)" }}>
+          <h1 className="typed-[Hello,_World!] typed-caret" style={{ fontWeight: 800 }}></h1>
           <div>
             <Blurb />
             <span>
@@ -184,22 +184,23 @@ export default function Landing() {
           </Link>
         )}
       </section>
+
       {/* Portfolio Section */}
-      <section id="projects" ref={(el) => (sectionRefs.current[1] = el)} className="pt-20 px-8 sm:px-16 md:px-32 lg:px-48 opacity-0 transition-all duration-700 lg:mb-[10vh] z-10">
-        <h2 className="lg:text-3xl md:text-3xl text-2xl font-bold lg:mb-12 md:mb-12 mb-8 text-center" style={{ color: "var(--page-text)" }}>
+      <section id="projects" ref={(el) => (sectionRefs.current[1] = el)} className="pt-20 px-8 md:px-32 lg:px-48 opacity-0 transition-all duration-700 lg:mb-[10vh]">
+        <h1 className="sm:text-3xl text-2xl sm:mb-12 mb-8 text-center" style={{ color: "var(--page-text)" }}>
           Projects
-        </h2>
+        </h1>
         <div className="flex flex-wrap gap-6 justify-center">
           {portfolio.map((project, idx) => (
-            <a key={project.title} href={project.github} target="_blank" rel="noopener noreferrer" ref={(el) => (sectionRefs.current[2 + idx] = el)} className="min-w-xs max-w-2xl w-auto rounded-xl shadow-md p-4 lg:h-[400px] md:h-[400px] h-[400px] hover:scale-[1.03] hover:shadow-lg opacity-0 transition-all duration-700" style={{ backgroundColor: "var(--card-bg)" }}>
+            <a key={project.title} href={project.github} target="_blank" rel="noopener noreferrer" ref={(el) => (sectionRefs.current[2 + idx] = el)} className="min-w-xs max-w-2xl w-auto rounded-xl shadow-md p-4 h-[400px] hover:scale-[1.03] hover:shadow-lg opacity-0 transition-all duration-700" style={{ backgroundColor: "var(--card-bg)" }}>
               <div className="flex flex-col h-full">
                 <div className="relative w-full h-full mb-4 rounded-lg" style={{ backgroundColor: "var(--card-image-bg)" }}>
                   <Image src={project.thumbnail} alt={project.title + " thumbnail"} fill style={{ objectFit: "contain" }} sizes="(max-width: 768px) calc(100vw - 64px), (max-width: 1024px) calc(50vw - 64px), 400px" />
                 </div>
                 <div className="flex flex-col h-auto">
-                  <h3 className="lg:text-xl md:text-xl text-lg mb-1" style={{ fontWeight: 800, color: "var(--page-text)" }}>
+                  <h2 className="sm:text-xl text-lg mb-1" style={{ fontWeight: 800, color: "var(--page-text)" }}>
                     {project.title}
-                  </h3>
+                  </h2>
                   <p className="mb-3 text-md" style={{ color: "var(--page-subtext)" }}>
                     {project.description}
                   </p>

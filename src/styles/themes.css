@@ -37,6 +37,16 @@
   font-style: normal;
 }
 
+h1 {
+  color: var(--heading-text);
+  font-weight: 800;
+}
+
+h2 {
+  color: var(--heading-text);
+  font-weight: 700;
+}
+
 [data-theme="light"] {
   --blob-purple: rgba(196, 181, 253, 0.4);
   --blob-blue: rgba(147, 197, 253, 0.4);
@@ -57,6 +67,7 @@
 
   --page-bg: rgb(229, 229, 229);
   --page-text: rgb(23, 23, 23);
+  --heading-text: rgb(23, 23, 23);
   --page-subtext: rgb(43, 43, 43);
 
   --footer-text: rgb(115, 115, 115);

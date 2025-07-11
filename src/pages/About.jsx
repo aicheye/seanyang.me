@@ -70,35 +70,37 @@ export default function About() {
       <ThemeButton />
       <div className="flex flex-col items-center min-h-screen">
         <div className="flex lg:flex-row flex-col items-center justify-center center flex-1 mt-18 lg:gap-0 gap-5">
-          <div className="flex flex-col gap-5 h-auto w-auto ml-5 lg:mr-[0] mr-5 lg:p-10 md:p-10 p-7 rounded-xl shadow-md max-w-3xl" style={{ backgroundColor: "var(--card-bg)", color: "var(--page-text)" }}>
-            <h1 className="lg:text-4xl md:text-4xl text-2xl font-extrabold">Nice to meet you!</h1>
-            <div className="flex flex-col gap-5 lg:text-lg md:text-lg text-md" style={{ color: "var(--page-subtext)" }}>
+          <div className="flex flex-col gap-5 h-auto w-auto ml-5 lg:mr-[0] mr-5 sm:p-10 p-7 rounded-xl shadow-md max-w-3xl min-w-xs" style={{ backgroundColor: "var(--card-bg)", color: "var(--page-text)" }}>
+            <h1 className="sm:text-4xl text-2xl font-extrabold">Nice to meet you!</h1>
+            <div className="flex flex-col gap-5 sm:text-lg text-md" style={{ color: "var(--page-subtext)" }}>
               <p>I believe in the power of technology to create positive change. I'm passionate about using my skills to contribute to a more equitable and sustainable future.</p>
               <p>If you are interested in my work, feel free to check out my projects on GitHub or connect with me on LinkedIn.</p>
               <p>I'm always open to new opportunities, especially in non-profit or ESG sectors, so don't hesitate to reach out if you think we could work together!</p>
-              <h1 className="lg:text-2xl md:text-2xl text-xl underline decoration-dashed font-bold">{"A few things about me"}</h1>
+              <h2 className="sm:text-2xl text-xl underline decoration-dashed font-bold">{"A few things about me"}</h2>
               <div className="flex flex-col gap-5">
                 <p>
                   Hometown:{" "}
-                  <span className="font-bold typed-caret sm:typed-[Toronto]">
-                    <span className="sm:hidden visible">Toronto</span>
+                  <span className="font-bold sm:typed-caret sm:typed-[Toronto]">
+                    <span className="sm:hidden">Toronto</span>
                   </span>
                 </p>
                 <p>
                   Pets: 🐕🐕{" "}
-                  <span className="font-bold sm:typed-[2_dogs] typed-caret">
+                  <span className="font-bold sm:typed-[2_dogs] sm:typed-caret">
                     <span className="sm:hidden visible">2 dogs</span>
                   </span>
                 </p>
                 <p>
-                  Favourite Games: <span className="font-bold typed-caret">Cities Skylines II, Minecraft, Overwatch</span>
+                  Favourite Games: <br className="sm:hidden" />
+                  <span className="font-bold sm:typed-caret">Cities Skylines II, Minecraft, Overwatch</span>
                 </p>
                 <p>
-                  Favourite Artists: <span className="font-bold typed-caret"> beabadoobee, Laufey, keshi, starfall</span>
+                  Favourite Artists: <br className="sm:hidden" />
+                  <span className="font-bold sm:typed-caret"> beabadoobee, Laufey, keshi, starfall</span>
                 </p>
                 <p>
                   If I could live anywhere, it would be: 🌑{" "}
-                  <span className="font-bold sm:typed-[The_Moon] typed-caret">
+                  <span className="font-bold sm:typed-[The_Moon] sm:typed-caret">
                     <span className="sm:hidden visible">The Moon</span>
                   </span>
                 </p>
@@ -106,10 +108,10 @@ export default function About() {
             </div>
           </div>
           <div className="flex flex-col gap-5 h-auto w-auto">
-            <div className="flex flex-col h-auto w-auto mx-5 lg:p-10 md:p-10 p-7 rounded-xl shadow-md max-w-3xl gap-3" style={{ backgroundColor: "var(--card-bg)", color: "var(--page-subtext)" }}>
-              <h1 className="lg:text-2xl md:text-2xl text-xl font-bold" style={{ color: "var(--page-text)" }}>
+            <div className="flex flex-col h-auto w-auto mx-5 sm:p-10 p-7 rounded-xl shadow-md max-w-3xl gap-3 min-w-xs" style={{ backgroundColor: "var(--card-bg)", color: "var(--page-subtext)" }}>
+              <h2 className="sm:text-2xl text-xl font-bold" style={{ color: "var(--page-text)" }}>
                 Song recommendation:{" "}
-              </h1>
+              </h2>
               <div className="w-full h-20 rounded-xl overflow-hidden" style={{ backgroundColor: "var(--card-image-bg)" }}>
                 {songEmbedUrl ? (
                   <iframe src={songEmbedUrl} width="100%" height="80" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" style={{ border: "none", borderRadius: "12px" }} />
@@ -119,12 +121,12 @@ export default function About() {
                   </div>
                 )}
               </div>
-              <button onClick={handleChangeSong} className="px-6 py-3 rounded-lg font-medium transition-colors self-stretch sm:self-start min-w-[80px] hover:scale-105 active:scale-100 flex items-center justify-center cursor-pointer" style={{ backgroundColor: "var(--spot-color)", color: "var(--page-bg)" }}>
+              <button onClick={handleChangeSong} className="px-6 py-3 rounded-lg font-medium transition-colors self-stretch sm:self-start hover:scale-105 active:scale-100 flex items-center justify-center cursor-pointer" style={{ backgroundColor: "var(--spot-color)", color: "var(--page-bg)" }}>
                 Change!
               </button>
             </div>
-            <div className="flex flex-col h-auto w-auto mx-5 lg:p-10 md:p-10 p-7 rounded-xl shadow-md max-w-3xl gap-1" style={{ backgroundColor: "var(--card-bg)", color: "var(--page-text)" }}>
-              <h2 className="lg:text-2xl md:text-2xl text-xl font-bold">Ping my phone!</h2>
+            <div className="flex flex-col h-auto w-auto mx-5 sm:p-10 p-7 rounded-xl shadow-md max-w-3xl gap-1 min-w-xs" style={{ backgroundColor: "var(--card-bg)", color: "var(--page-text)" }}>
+              <h2 className="sm:text-2xl text-xl">Ping my phone!</h2>
               <p>
                 Yes,{" "}
                 <Link href="/ping.png" target="_blank" rel="noopener noreferrer" className="underline" style={{ color: "var(--link-color)" }}>
@@ -162,7 +164,7 @@ export default function About() {
                 </div>
                 <button
                   type="submit"
-                  className="px-6 py-3 rounded-lg font-medium transition-colors self-stretch min-w-[80px] hover:scale-105 active:scale-100 flex items-center justify-center cursor-pointer"
+                  className="px-6 py-3 rounded-lg font-medium transition-colors self-stretch hover:scale-105 active:scale-100 flex items-center justify-center cursor-pointer"
                   style={{
                     backgroundColor: "var(--accent-color)",
                     color: "var(--page-bg)",
