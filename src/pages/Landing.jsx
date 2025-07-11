@@ -204,9 +204,9 @@ export default function Landing() {
                   <p className="mb-3 text-md" style={{ color: "var(--page-subtext)" }}>
                     {project.description}
                   </p>
-                  <span className="font-medium text-md" style={{ color: "var(--link-color)" }}>
+                  <p className="font-medium text-md" style={{ color: "var(--link-color)" }}>
                     View on GitHub →
-                  </span>
+                  </p>
                 </div>
               </div>
             </a>
