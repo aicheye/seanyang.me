@@ -147,9 +147,10 @@ export default function About() {
                       maxLength={42}
                       autoComplete="off"
                     />
-                    <textarea
+                    <input
+                      type="text"
                       name="poke-from"
-                      className="flex-1 min-h-12 max-h-24 p-3 border rounded-lg resize-none"
+                      className="h-12 p-3 border rounded-lg"
                       style={{
                         backgroundColor: "var(--page-bg)",
                         color: "var(--page-text)",
@@ -158,7 +159,6 @@ export default function About() {
                       placeholder="From:"
                       maxLength={21}
                       autoComplete="off"
-                      rows={1}
                     />
                   </div>
                   <button
