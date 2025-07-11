@@ -80,11 +80,11 @@ export default function About() {
       <div className="flex flex-col items-center min-h-screen">
         <div className="flex lg:flex-row flex-col items-center justify-center center flex-1 mt-18 lg:gap-0 gap-5">
           <div className="flex flex-col gap-5 h-auto w-auto ml-5 lg:mr-[0] mr-5 sm:p-10 p-7 rounded-xl shadow-md max-w-3xl min-w-xs" style={{ backgroundColor: "var(--card-bg)", color: "var(--page-text)" }}>
-            <h1 className="sm:text-4xl text-2xl font-extrabold">Nice to meet you!</h1>
+            <h2 className="sm:text-4xl text-2xl">Nice to meet you!</h2>
             <div className="flex flex-col gap-5 sm:text-lg text-md" style={{ color: "var(--page-subtext)" }}>
               <p>I believe in the power of technology to create positive change. I'm passionate about using my skills to contribute to a more equitable and sustainable future.</p>
-              <p>If you are interested in my work, feel free to check out my projects on GitHub or connect with me on LinkedIn.</p>
-              <p>I'm always open to new opportunities, especially in non-profit or ESG sectors, so don't hesitate to reach out if you think we could work together!</p>
+              <p>I'm always open to new opportunities, especially in non-profit or ESG sectors.</p>
+              <p> Don't hesitate to reach out if you think we could work together!</p>
               <h2 className="sm:text-2xl text-xl underline decoration-dashed font-bold">{"A few things about me"}</h2>
               <div className="flex flex-col gap-5">
                 <p>

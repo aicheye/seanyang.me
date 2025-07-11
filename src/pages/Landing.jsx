@@ -164,7 +164,7 @@ export default function Landing() {
             <span>
               {" "}
               [
-              <Link href="/about" className="underline" style={{ color: "var(--link-color)" }}>
+              <Link href="/about" className="underline" style={{ color: "var(--link-color)" }} onMouseEnter={() => handleMouseEnter("Learn more about me")} onMouseLeave={handleMouseLeave}>
                 ...
               </Link>
               ]
@@ -192,13 +192,13 @@ export default function Landing() {
         </h1>
         <div className="flex flex-wrap gap-6 justify-center">
           {portfolio.map((project, idx) => (
-            <a key={project.title} href={project.github} target="_blank" rel="noopener noreferrer" ref={(el) => (sectionRefs.current[2 + idx] = el)} className="min-w-xs max-w-2xl w-auto rounded-xl shadow-md p-4 h-[400px] hover:scale-[1.03] hover:shadow-lg opacity-0 transition-all duration-700" style={{ backgroundColor: "var(--card-bg)" }}>
+            <a key={project.title} href={project.github} target="_blank" rel="noopener noreferrer" ref={(el) => (sectionRefs.current[2 + idx] = el)} className="min-w-xs max-w-2xl w-auto rounded-xl shadow-md p-4 h-[400px] hover:scale-[1.03] hover:shadow-lg opacity-0 transition-all duration-700" style={{ backgroundColor: "var(--card-bg)" }} onMouseEnter={() => handleMouseEnter("View on GitHub")} onMouseLeave={handleMouseLeave}>
               <div className="flex flex-col h-full">
                 <div className="relative w-full h-full mb-4 rounded-lg" style={{ backgroundColor: "var(--card-image-bg)" }}>
                   <Image src={project.thumbnail} alt={project.title + " thumbnail"} fill style={{ objectFit: "contain" }} sizes="(max-width: 768px) calc(100vw - 64px), (max-width: 1024px) calc(50vw - 64px), 400px" />
                 </div>
                 <div className="flex flex-col h-auto">
-                  <h2 className="sm:text-xl text-lg mb-1" style={{ fontWeight: 800, color: "var(--page-text)" }}>
+                  <h2 className="sm:text-xl text-lg mb-1" style={{ color: "var(--page-text)" }}>
                     {project.title}
                   </h2>
                   <p className="mb-3 text-md" style={{ color: "var(--page-subtext)" }}>
