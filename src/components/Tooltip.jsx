@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export default function Tooltip({ tooltipVisible, text }) {
+export default function Tooltip({ visible, text }) {
   const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
   const [isTouchDevice, setIsTouchDevice] = useState(false);
 
@@ -18,7 +18,7 @@ export default function Tooltip({ tooltipVisible, text }) {
 
   return (
     !isTouchDevice &&
-    tooltipVisible && (
+    visible && (
       <>
         <div
           className="overflow-hidden fixed pointer-events-none px-2 py-1 text-sm rounded-lg shadow-lg transition-opacity duration-200 border"

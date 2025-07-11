@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import Background from "../components/Background";
 import Footer from "../components/Footer";
 import HomeButton from "../components/HomeButton";
+import Oneko from "../components/Oneko.jsx";
 import ThemeButton from "../components/ThemeButton";
 import songs from "../data/songs";
 
@@ -75,11 +76,12 @@ export default function About() {
   return (
     <>
       <Background />
+      <Oneko />
       <HomeButton />
       <ThemeButton />
       <div className="flex flex-col items-center min-h-screen">
         <div className="flex lg:flex-row flex-col items-center justify-center center flex-1 mt-18 lg:gap-0 gap-5">
-          <div className="flex flex-col gap-5 h-auto w-auto ml-5 lg:mr-[0] mr-5 sm:p-10 p-7 rounded-xl shadow-md max-w-3xl min-w-xs" style={{ backgroundColor: "var(--card-bg)", color: "var(--page-text)" }}>
+          <div className="flex flex-col gap-5 h-auto w-auto ml-5 lg:mr-[0] mr-5 sm:p-10 p-7 rounded-xl shadow-md max-w-xl min-w-xs" style={{ backgroundColor: "var(--card-bg)", color: "var(--page-text)" }}>
             <h2 className="sm:text-4xl text-2xl">Nice to meet you!</h2>
             <div className="flex flex-col gap-5 sm:text-lg text-md" style={{ color: "var(--page-subtext)" }}>
               <p>I believe in the power of technology to create positive change. I'm passionate about using my skills to contribute to a more equitable and sustainable future.</p>
@@ -117,13 +119,13 @@ export default function About() {
             </div>
           </div>
           <div className="flex flex-col gap-5 h-auto w-auto">
-            <div className="flex flex-col h-auto w-auto mx-5 sm:p-10 p-7 rounded-xl shadow-md max-w-3xl gap-3 min-w-xs" style={{ backgroundColor: "var(--card-bg)", color: "var(--page-subtext)" }}>
+            <div className="flex flex-col h-auto w-auto mx-5 p-7 rounded-xl shadow-md max-w-3xl gap-3 min-w-xs" style={{ backgroundColor: "var(--card-bg)", color: "var(--page-subtext)" }}>
               <h2 className="sm:text-2xl text-xl font-bold" style={{ color: "var(--page-text)" }}>
                 Song recommendation:{" "}
               </h2>
               <div className="w-full h-20 rounded-xl overflow-hidden" style={{ backgroundColor: "var(--card-image-bg)" }}>
                 {songEmbedUrl ? (
-                  <iframe src={songEmbedUrl} width="100%" height="80" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" style={{ border: "none", borderRadius: "12px" }} />
+                  <iframe src={songEmbedUrl} width="100%" height="80" loading="lazy" style={{ border: "none", borderRadius: "12px" }} />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center" style={{ color: "var(--subtext)" }}>
                     Loading song...
@@ -134,7 +136,7 @@ export default function About() {
                 Change!
               </button>
             </div>
-            <div className="flex flex-col h-auto w-auto mx-5 sm:p-10 p-7 rounded-xl shadow-md max-w-3xl gap-1 min-w-xs" style={{ backgroundColor: "var(--card-bg)", color: "var(--page-text)" }}>
+            <div className="flex flex-col h-auto w-auto mx-5 p-7 rounded-xl shadow-md max-w-3xl gap-1 min-w-xs" style={{ backgroundColor: "var(--card-bg)", color: "var(--page-text)" }}>
               <h2 className="sm:text-2xl text-xl">Ping my phone!</h2>
               <p>
                 Yes,{" "}

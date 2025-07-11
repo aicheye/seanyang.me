@@ -7,6 +7,7 @@ import Background from "../components/Background.jsx";
 import Blurb from "../components/Blurb.jsx";
 import ContactButton from "../components/ContactButton.jsx";
 import Footer from "../components/Footer.jsx";
+import Oneko from "../components/Oneko.jsx";
 import ThemeButton from "../components/ThemeButton.jsx";
 import Tooltip from "../components/Tooltip.jsx";
 import TopButton from "../components/TopButton.jsx";
@@ -131,6 +132,7 @@ export default function Landing() {
   return (
     <div className="relative flex flex-col min-h-screen overflow-hidden transition-colors duration-500">
       {!atTop && <TopButton />}
+      <Oneko />
       <ThemeButton />
       <ContactButton />
       <Background />
@@ -192,7 +194,7 @@ export default function Landing() {
         </h1>
         <div className="flex flex-wrap gap-6 justify-center">
           {portfolio.map((project, idx) => (
-            <a key={project.title} href={project.github} target="_blank" rel="noopener noreferrer" ref={(el) => (sectionRefs.current[2 + idx] = el)} className="min-w-xs max-w-2xl w-auto rounded-xl shadow-md p-4 h-[400px] hover:scale-[1.03] hover:shadow-lg opacity-0 transition-all duration-700" style={{ backgroundColor: "var(--card-bg)" }} onMouseEnter={() => handleMouseEnter("View on GitHub")} onMouseLeave={handleMouseLeave}>
+            <a key={project.title} href={project.github} target="_blank" rel="noopener noreferrer" ref={(el) => (sectionRefs.current[2 + idx] = el)} className="min-w-xs w-xl rounded-xl shadow-md p-4 h-[400px] hover:scale-[1.03] hover:shadow-lg opacity-0 transition-all duration-700" style={{ backgroundColor: "var(--card-bg)" }} onMouseEnter={() => handleMouseEnter("View on GitHub")} onMouseLeave={handleMouseLeave}>
               <div className="flex flex-col h-full">
                 <div className="relative w-full h-full mb-4 rounded-lg" style={{ backgroundColor: "var(--card-image-bg)" }}>
                   <Image src={project.thumbnail} alt={project.title + " thumbnail"} fill style={{ objectFit: "contain" }} sizes="(max-width: 768px) calc(100vw - 64px), (max-width: 1024px) calc(50vw - 64px), 400px" />
@@ -214,7 +216,7 @@ export default function Landing() {
         </div>
       </section>
       <Footer />
-      <Tooltip tooltipVisible={tooltipVisible} text={tooltipText} />
+      <Tooltip visible={tooltipVisible} text={tooltipText} />
     </div>
   );
 }

@@ -7,6 +7,8 @@
 
   --dot-color: #555;
 
+  --cat-text: rgb(31, 31, 31);
+
   --tooltip-bg: rgb(38, 38, 38);
   --tooltip-text: rgb(255, 255, 255);
   --tooltip-border: rgb(64, 64, 64);

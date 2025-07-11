@@ -55,7 +55,7 @@ export default function Footer() {
         </div>
       </footer>
 
-      <Tooltip tooltipVisible={tooltipVisible} text={tooltipText} />
+      <Tooltip visible={tooltipVisible} text={tooltipText} />
     </>
   );
 }

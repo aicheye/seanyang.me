@@ -23,6 +23,12 @@ const portfolio = [
     github: "https://github.com/aicheye/seanyang.me",
     thumbnail: "/portfolio/portfolio.png",
   },
+  {
+    title: "Chess in Python",
+    description: "A chess GUI written in Python, implementing FEN parsing and PGN notation.",
+    github: "https://github.com/aicheye/chess",
+    thumbnail: "/portfolio/chess.png",
+  },
 ];
 
 export default portfolio;
