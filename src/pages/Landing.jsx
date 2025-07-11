@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Background from "../components/Background.jsx";
 import Blurb from "../components/Blurb.jsx";
 import ContactButton from "../components/ContactButton.jsx";
@@ -47,6 +47,18 @@ function useScrollAnimation() {
   return refs;
 }
 
+function throttle(func, delay) {
+  let lastCall = 0;
+  return (...args) => {
+    const now = new Date().getTime();
+    if (now - lastCall < delay) {
+      return;
+    }
+    lastCall = now;
+    return func(...args);
+  };
+}
+
 export default function Landing() {
   const sectionRefs = useScrollAnimation();
   const [zoomed, setZoomed] = useState(false);
@@ -54,7 +66,29 @@ export default function Landing() {
   const isLightMode = useThemeStore((state) => state.isLightMode);
   const [tooltipVisible, setTooltipVisible] = useState(false);
   const [tooltipText, setTooltipText] = useState("");
+  const [rotate, setRotate] = useState({ x: 0, y: 0 });
   const heroRef = useRef(null);
+
+  const onMouseMove = useCallback(
+    throttle((e) => {
+      const card = e.currentTarget;
+      const box = card.getBoundingClientRect();
+      const x = e.clientX - box.left;
+      const y = e.clientY - box.top;
+      const centerX = box.width / 2;
+      const centerY = box.height / 2;
+      const rotateX = (centerY - y) / 32;
+      const rotateY = (x - centerX) / 32;
+
+      setRotate({ x: rotateX, y: rotateY });
+    }, 100),
+    []
+  );
+
+  const handleMouseLeaveHero = () => {
+    setTooltipVisible(false);
+    setRotate({ x: 0, y: 0 });
+  };
 
   useEffect(() => {
     setTimeout(() => setZoomed(true), 100); // slight delay for effect
@@ -109,14 +143,15 @@ export default function Landing() {
         id="top"
         className="flex flex-col items-center lg:justify-center md:justify-center min-h-screen py-18 gap-8 opacity-0 transition-all duration-700 relative"
       >
-        <a href="https://open.spotify.com/playlist/2B34ID9SWdE8WcEeh4q4mX" target="_blank" rel="noopener noreferrer" className="inline-block transition-transform duration-300" onMouseEnter={() => handleMouseEnter("🎵 My go-to playlist")} onMouseLeave={handleMouseLeave}>
+        <a href="https://open.spotify.com/playlist/2B34ID9SWdE8WcEeh4q4mX" target="_blank" rel="noopener noreferrer" className="inline-block transition-transform duration-300" onMouseEnter={() => handleMouseEnter("🎵 My go-to playlist")} onMouseLeave={handleMouseLeaveHero} onMouseMove={onMouseMove}>
           <div
-            className="relative flex-shrink-0 lg:w-[50vh] lg:h-[50vh] md:w-[50vh] md:h-[50vh] w-[90vw] h-[90vw] rounded-lg overflow-hidden flex items-center justify-center transition-transform duration-1000"
+            className="relative flex-shrink-0 lg:w-[50vh] lg:h-[50vh] md:w-[50vh] md:h-[50vh] w-[90vw] h-[90vw] rounded-lg overflow-hidden flex items-center justify-center"
             style={{
               backgroundColor: "var(--hero-image-bg)",
               boxShadow: "0 8px 32px rgba(0,0,0,0.08)",
-              transform: zoomed ? "scale(1)" : "scale(0.7)",
               willChange: "transform",
+              transform: `${zoomed ? "scale(1)" : "scale(0.7)"} perspective(1000px) rotateX(${rotate.x}deg) rotateY(${rotate.y}deg) scale3d(1, 1, 1)`,
+              transition: `${rotate.x !== 0 && rotate.y !== 0 ? "all 1000ms cubic-bezier(0.03, 0.98, 0.52, 0.99) 0s" : "700ms transform"}`,
             }}
           >
             <Image src="/hero.png" alt="Profile" fill style={{ objectFit: "cover" }} sizes="(max-width: 768px) 90vw, 50vh" priority={true} />
@@ -126,7 +161,14 @@ export default function Landing() {
           <p className="typed-[Hello,_World!] typed-caret" style={{ fontWeight: 800 }}></p>
           <div>
             <Blurb />
-            <Link href="/about">{" [...]"}</Link>
+            <span>
+              {" "}
+              [
+              <Link href="/about" className="underline" style={{ color: "var(--link-color)" }}>
+                ...
+              </Link>
+              ]
+            </span>
           </div>
         </div>
 

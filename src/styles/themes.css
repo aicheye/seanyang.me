@@ -25,7 +25,8 @@
   --card-image-bg: rgb(38, 38, 38);
   --hero-image-bg: rgb(38, 38, 38);
   --link-color: rgb(96, 165, 250);
-  --accent-color: rgb(96, 165, 250);
+  --accent-color: rgb(199, 82, 66);
+  --spot-color: rgb(64, 207, 100);
   --scroll-indicator: rgb(255, 255, 255);
 
   background-color: var(--page-bg);
@@ -56,7 +57,7 @@
 
   --page-bg: rgb(229, 229, 229);
   --page-text: rgb(23, 23, 23);
-  --page-subtext: rgb(82, 82, 82);
+  --page-subtext: rgb(43, 43, 43);
 
   --footer-text: rgb(115, 115, 115);
 
@@ -65,7 +66,8 @@
 
   --hero-image-bg: rgb(38, 38, 38);
 
-  --link-color: rgb(96, 165, 250);
-  --accent-color: rgb(96, 165, 250);
+  --link-color: rgb(64, 139, 231);
+  --accent-color: rgb(204, 69, 59);
+  --spot-color: rgb(34, 180, 71);
   --scroll-indicator: rgb(38, 38, 38);
 }
