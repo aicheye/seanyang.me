@@ -119,7 +119,7 @@ export default function About() {
                   </div>
                 )}
               </div>
-              <button onClick={handleChangeSong} className="px-6 py-3 rounded-lg font-medium transition-colors self-stretch sm:self-start min-w-[80px] hover:scale-105 active:scale-100 flex items-center justify-center" style={{ backgroundColor: "var(--spot-color)", color: "var(--page-bg)" }}>
+              <button onClick={handleChangeSong} className="px-6 py-3 rounded-lg font-medium transition-colors self-stretch sm:self-start min-w-[80px] hover:scale-105 active:scale-100 flex items-center justify-center cursor-pointer" style={{ backgroundColor: "var(--spot-color)", color: "var(--page-bg)" }}>
                 Change!
               </button>
             </div>
@@ -162,7 +162,7 @@ export default function About() {
                 </div>
                 <button
                   type="submit"
-                  className="px-6 py-3 rounded-lg font-medium transition-colors self-stretch min-w-[80px] hover:scale-105 active:scale-100 flex items-center justify-center"
+                  className="px-6 py-3 rounded-lg font-medium transition-colors self-stretch min-w-[80px] hover:scale-105 active:scale-100 flex items-center justify-center cursor-pointer"
                   style={{
                     backgroundColor: "var(--accent-color)",
                     color: "var(--page-bg)",
