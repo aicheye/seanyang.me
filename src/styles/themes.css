@@ -25,8 +25,8 @@
   --card-image-bg: rgb(38, 38, 38);
   --hero-image-bg: rgb(38, 38, 38);
   --link-color: rgb(96, 165, 250);
-  --accent-color: rgb(199, 82, 66);
-  --spot-color: rgb(64, 207, 100);
+  --accent-color: rgb(224, 106, 91);
+  --spot-color: rgb(92, 216, 123);
   --scroll-indicator: rgb(255, 255, 255);
 
   background-color: var(--page-bg);
@@ -67,7 +67,7 @@
   --hero-image-bg: rgb(38, 38, 38);
 
   --link-color: rgb(64, 139, 231);
-  --accent-color: rgb(204, 69, 59);
+  --accent-color: rgb(240, 72, 60);
   --spot-color: rgb(34, 180, 71);
   --scroll-indicator: rgb(38, 38, 38);
 }
