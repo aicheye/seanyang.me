@@ -8,17 +8,26 @@ import HomeButton from "../components/HomeButton";
 import ThemeButton from "../components/ThemeButton";
 import songs from "../data/songs";
 
+let shuffled;
+
 export default function About() {
   const [songEmbedUrl, setSongEmbedUrl] = useState("");
+  const [currSongIndex, setCurrSongIndex] = useState(0);
 
   useEffect(() => {
-    const randomSong = songs[Math.floor(Math.random() * songs.length)].id;
-    setSongEmbedUrl(`https://open.spotify.com/embed/track/${randomSong}`);
+    shuffled = songs
+      .map((value) => ({ value, sort: Math.random() }))
+      .sort((a, b) => a.sort - b.sort)
+      .map(({ value }) => value);
+    const currSongId = shuffled[currSongIndex].id;
+    setSongEmbedUrl(`https://open.spotify.com/embed/track/${currSongId}`);
   }, []);
 
   const handleChangeSong = () => {
-    const randomSong = songs[Math.floor(Math.random() * songs.length)].id;
-    setSongEmbedUrl(`https://open.spotify.com/embed/track/${randomSong}`);
+    const nextIndex = (currSongIndex + 1) % songs.length;
+    setCurrSongIndex(nextIndex);
+    const nextSongId = shuffled[nextIndex].id;
+    setSongEmbedUrl(`https://open.spotify.com/embed/track/${nextSongId}`);
   };
 
   const handlePoke = async (event) => {
