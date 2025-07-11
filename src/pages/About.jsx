@@ -132,47 +132,45 @@ export default function About() {
                 </Link>
                 .
               </p>
-              <div className="flex flex-col sm:flex-row gap-3 w-full mt-2">
-                <form className="flex flex-col sm:flex-row gap-3 w-full" onSubmit={handlePoke}>
-                  <div className="flex flex-col gap-2 w-full">
-                    <textarea
-                      name="poke-message"
-                      className="flex-1 min-h-12 max-h-24 p-3 border rounded-lg resize-none"
-                      style={{
-                        backgroundColor: "var(--page-bg)",
-                        color: "var(--page-text)",
-                        borderColor: "var(--subtext)",
-                      }}
-                      placeholder="Your message here..."
-                      maxLength={42}
-                      autoComplete="off"
-                    />
-                    <input
-                      type="text"
-                      name="poke-from"
-                      className="h-12 p-3 border rounded-lg"
-                      style={{
-                        backgroundColor: "var(--page-bg)",
-                        color: "var(--page-text)",
-                        borderColor: "var(--subtext)",
-                      }}
-                      placeholder="From:"
-                      maxLength={21}
-                      autoComplete="off"
-                    />
-                  </div>
-                  <button
-                    type="submit"
-                    className="px-6 py-3 rounded-lg font-medium transition-colors self-stretch min-w-[80px] hover:scale-105 active:scale-100 flex items-center justify-center"
+              <form className="flex flex-col sm:flex-row gap-2 w-full mt-2" onSubmit={handlePoke}>
+                <div className="flex flex-col gap-2 w-full">
+                  <textarea
+                    name="poke-message"
+                    className="flex-1 min-h-12 max-h-24 p-3 border rounded-lg resize-none"
                     style={{
-                      backgroundColor: "var(--accent-color)",
-                      color: "var(--page-bg)",
+                      backgroundColor: "var(--page-bg)",
+                      color: "var(--page-text)",
+                      borderColor: "var(--subtext)",
                     }}
-                  >
-                    Poke
-                  </button>
-                </form>
-              </div>
+                    placeholder="Your message here..."
+                    maxLength={42}
+                    autoComplete="off"
+                  />
+                  <input
+                    type="text"
+                    name="poke-from"
+                    className="h-12 p-3 border rounded-lg"
+                    style={{
+                      backgroundColor: "var(--page-bg)",
+                      color: "var(--page-text)",
+                      borderColor: "var(--subtext)",
+                    }}
+                    placeholder="From:"
+                    maxLength={21}
+                    autoComplete="off"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="px-6 py-3 rounded-lg font-medium transition-colors self-stretch min-w-[80px] hover:scale-105 active:scale-100 flex items-center justify-center"
+                  style={{
+                    backgroundColor: "var(--accent-color)",
+                    color: "var(--page-bg)",
+                  }}
+                >
+                  Poke
+                </button>
+              </form>
             </div>
           </div>
         </div>
