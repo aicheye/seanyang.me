@@ -103,6 +103,10 @@ const songs = [
     desc: "Euphoria by keshi",
     id: "2F6Cjiv4jXoW6WinuSsNdc",
   },
+  {
+    desc: "The Morning by The Weeknd",
+    id: "4jBfUB4kQJCWOrjGLQqhO0",
+  },
 ];
 
 export default songs;
