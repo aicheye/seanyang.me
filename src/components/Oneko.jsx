@@ -5,26 +5,28 @@ import { useSupabaseClickCounter } from "../hooks/useSupabaseClickCounter.js";
 import useOnekoStore from "../stores/OnekoStore.jsx";
 import CatTooltip from "./CatTooltip.jsx";
 
-export default function Oneko({ initialX = useOnekoStore.getState().pos.x, initialY = useOnekoStore.getState().pos.y, nekoFile = "/oneko.gif" }) {
+export default function Oneko({ nekoFile = "/oneko.gif" }) {
+  const [tooltipText, setTooltipText] = useState("Click me! 🐱");
   const [tooltipVisible, setTooltipVisible] = useState(false);
-  const [tooltipText, setTooltipText] = useState("");
-  const [catPosition, setCatPosition] = useState({ x: initialX, y: initialY });
+  const [catPosition, setCatPosition] = useState({ x: 32, y: 32 });
+  const [isMounted, setIsMounted] = useState(false);
 
   // Supabase click counter
   const { incrementClick } = useSupabaseClickCounter();
 
   const nekoRef = useRef(null);
   const animationRef = useRef(null);
-  const positionRef = useRef({ x: initialX, y: initialY });
-  const mouseRef = useRef({ x: initialX, y: initialY }); // Initialize to neko's position
-  const stateRef = useRef({
-    frameCount: 0,
-    idleTime: 0,
-    idleAnimation: null,
-    idleAnimationFrame: 0,
-    lastFrameTimestamp: null,
-  });
-  const [isMounted, setIsMounted] = useState(false);
+
+  // Direct variables like the original (using refs to persist across renders)
+  const nekoPosX = useRef(32);
+  const nekoPosY = useRef(32);
+  const mousePosX = useRef(0);
+  const mousePosY = useRef(0);
+  const frameCount = useRef(0);
+  const idleTime = useRef(0);
+  const idleAnimation = useRef(null);
+  const idleAnimationFrame = useRef(0);
+  const lastFrameTimestamp = useRef(null);
 
   // Ensure we only render on client side
   useEffect(() => {
@@ -102,42 +104,39 @@ export default function Oneko({ initialX = useOnekoStore.getState().pos.x, initi
   };
 
   const resetIdleAnimation = () => {
-    stateRef.current.idleAnimation = null;
-    stateRef.current.idleAnimationFrame = 0;
+    idleAnimation.current = null;
+    idleAnimationFrame.current = 0;
   };
 
   const idle = () => {
-    const state = stateRef.current;
-    const pos = positionRef.current;
-
-    state.idleTime += 1;
+    idleTime.current += 1;
 
     // every ~ 20 seconds
-    if (state.idleTime > 10 && Math.floor(Math.random() * 200) === 0 && state.idleAnimation === null) {
+    if (idleTime.current > 10 && Math.floor(Math.random() * 200) === 0 && idleAnimation.current === null) {
       let availableIdleAnimations = ["sleeping", "scratchSelf"];
-      if (pos.x < 32) {
+      if (nekoPosX.current < 32) {
         availableIdleAnimations.push("scratchWallW");
       }
-      if (pos.y < 32) {
+      if (nekoPosY.current < 32) {
         availableIdleAnimations.push("scratchWallN");
       }
-      if (pos.x > window.innerWidth - 32) {
+      if (nekoPosX.current > window.innerWidth - 32) {
         availableIdleAnimations.push("scratchWallE");
       }
-      if (pos.y > window.innerHeight - 32) {
+      if (nekoPosY.current > window.innerHeight - 32) {
         availableIdleAnimations.push("scratchWallS");
       }
-      state.idleAnimation = availableIdleAnimations[Math.floor(Math.random() * availableIdleAnimations.length)];
+      idleAnimation.current = availableIdleAnimations[Math.floor(Math.random() * availableIdleAnimations.length)];
     }
 
-    switch (state.idleAnimation) {
+    switch (idleAnimation.current) {
       case "sleeping":
-        if (state.idleAnimationFrame < 8) {
+        if (idleAnimationFrame.current < 8) {
           setSprite("tired", 0);
           break;
         }
-        setSprite("sleeping", Math.floor(state.idleAnimationFrame / 4));
-        if (state.idleAnimationFrame > 192) {
+        setSprite("sleeping", Math.floor(idleAnimationFrame.current / 4));
+        if (idleAnimationFrame.current > 192) {
           resetIdleAnimation();
         }
         break;
@@ -146,8 +145,8 @@ export default function Oneko({ initialX = useOnekoStore.getState().pos.x, initi
       case "scratchWallE":
       case "scratchWallW":
       case "scratchSelf":
-        setSprite(state.idleAnimation, state.idleAnimationFrame);
-        if (state.idleAnimationFrame > 9) {
+        setSprite(idleAnimation.current, idleAnimationFrame.current);
+        if (idleAnimationFrame.current > 9) {
           resetIdleAnimation();
         }
         break;
@@ -155,32 +154,29 @@ export default function Oneko({ initialX = useOnekoStore.getState().pos.x, initi
         setSprite("idle", 0);
         return;
     }
-    state.idleAnimationFrame += 1;
+    idleAnimationFrame.current += 1;
   };
 
   const frame = () => {
-    const state = stateRef.current;
-    const pos = positionRef.current;
-    const mouse = mouseRef.current;
-
-    state.frameCount += 1;
-    const diffX = pos.x - mouse.x;
-    const diffY = pos.y - mouse.y;
+    frameCount.current += 1;
+    const diffX = nekoPosX.current - mousePosX.current;
+    const diffY = nekoPosY.current - mousePosY.current;
     const distance = Math.sqrt(diffX ** 2 + diffY ** 2);
 
-    if (distance < nekoSpeed || distance < 96) {
+    // Use 48 like the original instead of 96
+    if (distance < nekoSpeed || distance < 48) {
       idle();
       return;
     }
 
-    state.idleAnimation = null;
-    state.idleAnimationFrame = 0;
+    idleAnimation.current = null;
+    idleAnimationFrame.current = 0;
 
-    if (state.idleTime > 1) {
+    if (idleTime.current > 1) {
       setSprite("alert", 0);
       // count down after being alerted before moving
-      state.idleTime = Math.min(state.idleTime, 7);
-      state.idleTime -= 1;
+      idleTime.current = Math.min(idleTime.current, 7);
+      idleTime.current -= 1;
       return;
     }
 
@@ -189,37 +185,36 @@ export default function Oneko({ initialX = useOnekoStore.getState().pos.x, initi
     direction += diffY / distance < -0.5 ? "S" : "";
     direction += diffX / distance > 0.5 ? "W" : "";
     direction += diffX / distance < -0.5 ? "E" : "";
-    setSprite(direction, state.frameCount);
+    setSprite(direction, frameCount.current);
 
-    pos.x -= (diffX / distance) * nekoSpeed;
-    pos.y -= (diffY / distance) * nekoSpeed;
+    nekoPosX.current -= (diffX / distance) * nekoSpeed;
+    nekoPosY.current -= (diffY / distance) * nekoSpeed;
 
-    pos.x = Math.min(Math.max(16, pos.x), window.innerWidth - 16);
-    pos.y = Math.min(Math.max(16, pos.y), window.innerHeight - 16);
+    nekoPosX.current = Math.min(Math.max(16, nekoPosX.current), window.innerWidth - 16);
+    nekoPosY.current = Math.min(Math.max(16, nekoPosY.current), window.innerHeight - 16);
 
-    useOnekoStore.getState().setPos(pos);
-    setCatPosition({ x: pos.x, y: pos.y }); // Update state for tooltip
+    // Update store and state for tooltip
+    useOnekoStore.getState().setPos({ x: nekoPosX.current, y: nekoPosY.current });
+    setCatPosition({ x: nekoPosX.current, y: nekoPosY.current });
 
     if (nekoRef.current) {
-      nekoRef.current.style.left = `${pos.x - 16}px`;
-      nekoRef.current.style.top = `${pos.y - 16}px`;
+      nekoRef.current.style.left = `${nekoPosX.current - 16}px`;
+      nekoRef.current.style.top = `${nekoPosY.current - 16}px`;
     }
   };
 
   const onAnimationFrame = (timestamp) => {
-    const state = stateRef.current;
-
-    // Stop execution if component is unmounted
+    // Stops execution if the neko element is removed from DOM
     if (!nekoRef.current) {
       return;
     }
 
-    if (!state.lastFrameTimestamp) {
-      state.lastFrameTimestamp = timestamp;
+    if (!lastFrameTimestamp.current) {
+      lastFrameTimestamp.current = timestamp;
     }
 
-    if (timestamp - state.lastFrameTimestamp > 100) {
-      state.lastFrameTimestamp = timestamp;
+    if (timestamp - lastFrameTimestamp.current > 100) {
+      lastFrameTimestamp.current = timestamp;
       frame();
     }
 
@@ -227,30 +222,24 @@ export default function Oneko({ initialX = useOnekoStore.getState().pos.x, initi
   };
 
   useEffect(() => {
-    // Only run if mounted and not in reduced motion
+    // Only run if mounted
     if (!isMounted) return;
 
-    const isReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    // Check for reduced motion like the original
+    const isReducedMotion = window.matchMedia(`(prefers-reduced-motion: reduce)`) === true || window.matchMedia(`(prefers-reduced-motion: reduce)`).matches === true;
 
-    if (isReducedMotion) {
-      return;
-    }
+    if (isReducedMotion) return;
 
-    // Set initial position
-    positionRef.current = { x: initialX, y: initialY };
+    // Initialize positions from store or use defaults
+    const storedPos = useOnekoStore.getState().pos;
+    nekoPosX.current = storedPos.x || 32;
+    nekoPosY.current = storedPos.y || 32;
+    setCatPosition({ x: nekoPosX.current, y: nekoPosY.current });
 
-    // Initialize mouse position to current mouse position or neko position
-    const getCurrentMousePosition = () => {
-      // Try to get current mouse position, fallback to neko position
-      mouseRef.current = { x: initialX, y: initialY };
-    };
-
-    getCurrentMousePosition();
-
-    // Mouse move handler
+    // Mouse move handler - exactly like the original
     const handleMouseMove = (event) => {
-      mouseRef.current.x = event.clientX;
-      mouseRef.current.y = event.clientY;
+      mousePosX.current = event.clientX;
+      mousePosY.current = event.clientY;
     };
 
     document.addEventListener("mousemove", handleMouseMove);
@@ -265,7 +254,7 @@ export default function Oneko({ initialX = useOnekoStore.getState().pos.x, initi
         cancelAnimationFrame(animationRef.current);
       }
     };
-  }, [initialX, initialY, isMounted]);
+  }, [isMounted]);
 
   if (!isMounted) {
     return null;
@@ -277,6 +266,14 @@ export default function Oneko({ initialX = useOnekoStore.getState().pos.x, initi
     setTooltipVisible(true);
   };
 
+  const handleMouseEnter = () => {
+    // Keep tooltip visible when hovering
+  };
+
+  const handleMouseLeave = () => {
+    setTooltipVisible(false);
+  };
+
   return (
     <>
       <div
@@ -286,22 +283,21 @@ export default function Oneko({ initialX = useOnekoStore.getState().pos.x, initi
         style={{
           width: "32px",
           height: "32px",
-          imageRendering: "crisp-edges",
           position: "fixed",
-          pointerEvents: "auto", // Enable pointer events for clicking
-          left: `${initialX - 16}px`,
-          top: `${initialY - 16}px`,
+          pointerEvents: "auto", // Enable clicking unlike the original
+          imageRendering: "pixelated", // Use pixelated like the original
+          left: `${nekoPosX.current - 16}px`,
+          top: `${nekoPosY.current - 16}px`,
           zIndex: 2147483647,
           backgroundImage: `url(${nekoFile})`,
           backgroundSize: "256px 128px",
           backgroundRepeat: "no-repeat",
           backgroundPosition: "-96px -96px", // Default idle position
-          cursor: "pointer", // Show pointer cursor on hover
+          cursor: "pointer",
         }}
         onClick={handleClick}
-        onMouseLeave={() => {
-          setTooltipVisible(false);
-        }}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
       />
       <CatTooltip visible={tooltipVisible} text={tooltipText} catX={catPosition.x} catY={catPosition.y} />
     </>
