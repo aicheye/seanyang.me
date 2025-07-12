@@ -106,3 +106,9 @@ const portfolio = [
 ## License
 
 This project is licensed under Creative Commons Attribution-NonCommercial-ShareAlike 4.0 - see the [LICENSE](LICENSE) file for details.
+
+## License
+
+Acknowledgements:
+- oneko: https://github.com/adryd325/oneko.js
+- Idea to show song suggestions: Brian Cai
