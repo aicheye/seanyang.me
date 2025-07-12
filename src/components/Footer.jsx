@@ -25,8 +25,8 @@ export default function Footer() {
 
   return (
     <>
-      <footer className="mt-auto py-8 flex flex-col items-center gap-2 z-10">
-        <div id="contact" className="flex sm:flex-row flex-col sm:gap-4 gap-2 items-center" style={{ color: "var(--page-text)" }}>
+      <footer className="mt-auto py-8 flex flex-col items-center gap-3 z-10">
+        <div id="contact" className="flex sm:flex-row flex-col sm:gap-4 gap-1 items-center" style={{ color: "var(--page-text)" }}>
           <div className="flex sm:gap-4 gap-2 items-center">
             <span className="sm:text-3xl text-2xl flex gap-2 sm:gap-4 items-center">
               <a href="https://github.com/aicheye/" aria-label="GitHub" target="_blank" rel="noopener noreferrer" onMouseEnter={() => handleMouseEnter("github.com/aicheye")} onMouseLeave={handleMouseLeave}>
@@ -45,6 +45,12 @@ export default function Footer() {
           <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="underline sm:text-lg text-md flex items-center gap-2">
             View Resumé
             <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="text-sm" />
+          </a>
+        </div>
+        <div className="items-center text-sm" style={{ color: "var(--page-text)" }}>
+          Deployed with{" "}
+          <a href="https://app.netlify.com/projects/graceful-puffpuff-983cf3/deploys" target="_blank" rel="noopener noreferrer">
+            <img src="https://api.netlify.com/api/v1/badges/d19e7432-8155-4355-adb9-b2dc7621f984/deploy-status" alt="Netlify Status" className="inline-block h-6 pb-0.5" />
           </a>
         </div>
         <div className="text-sm" style={{ color: "var(--copyright-text)" }}>
