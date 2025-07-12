@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useSupabaseClickCounter } from "../hooks/useSupabaseClickCounter.js";
 import useOnekoStore from "../stores/OnekoStore.jsx";
 import CatTooltip from "./CatTooltip.jsx";
 
@@ -10,9 +9,6 @@ export default function Oneko({ nekoFile = "/oneko.gif" }) {
   const [tooltipVisible, setTooltipVisible] = useState(false);
   const [catPosition, setCatPosition] = useState({ x: 32, y: 32 });
   const [isMounted, setIsMounted] = useState(false);
-
-  // Supabase click counter
-  const { incrementClick } = useSupabaseClickCounter();
 
   const nekoRef = useRef(null);
   const animationRef = useRef(null);
@@ -261,9 +257,28 @@ export default function Oneko({ nekoFile = "/oneko.gif" }) {
   }
 
   const handleClick = async () => {
-    const newCount = await incrementClick();
-    setTooltipText(`Meow 💗 Global Click #${newCount.toLocaleString()}`);
-    setTooltipVisible(true);
+    try {
+      const response = await fetch("https://cat-clicks-289495744141.us-central1.run.app/", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        mode: "cors",
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        const count = data.count;
+        setTooltipText(`Meow 💗 Global Click #${count.toLocaleString()}`);
+        setTooltipVisible(true);
+      } else {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
+    } catch (error) {
+      console.error("Error sending click:", error);
+      setTooltipText("Meow 💗 Click failed - try again!");
+      setTooltipVisible(true);
+    }
   };
 
   const handleMouseEnter = () => {

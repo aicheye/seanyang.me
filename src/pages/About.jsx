@@ -35,29 +35,18 @@ export default function About() {
     event.preventDefault();
 
     const formData = new FormData(event.target);
-    let message = formData.get("poke-message");
+    const message = formData.get("poke-message");
     const from = formData.get("poke-from");
 
-    if (!message.trim()) {
-      message = "Poke!";
-    }
-
-    if (!from.trim()) {
-      message += " - Anonymous";
-    } else {
-      message += ` - ${from.trim()}`;
-    }
-
     try {
-      const response = await fetch("https://api.pushover.net/1/messages.json", {
+      const response = await fetch("https://poke-289495744141.us-central1.run.app", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          token: "ac7ys5qogv32ypgqcrhzih367wg8cr",
-          user: "u5wtajjrd9b3rsyf82a4ezc3y4j8gf",
-          message: message.trim(),
+          message: message,
+          author: from,
         }),
       });
 
@@ -65,7 +54,7 @@ export default function About() {
         alert("Poke sent! 🎉");
         event.target.reset();
       } else {
-        throw new Error("Failed to send poke");
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
       }
     } catch (error) {
       console.error("Error sending poke:", error);
