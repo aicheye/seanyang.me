@@ -262,7 +262,7 @@ export default function Oneko({ nekoFile = "/oneko.gif" }) {
 
   const handleClick = async () => {
     const newCount = await incrementClick();
-    setTooltipText(`Meow 💗 Global Click #${newCount}`);
+    setTooltipText(`Meow 💗 Global Click #${newCount.toLocaleString()}`);
     setTooltipVisible(true);
   };
 
