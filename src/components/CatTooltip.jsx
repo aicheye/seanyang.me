@@ -40,8 +40,7 @@ export default function CatTooltip({ visible = false, text, catX, catY }) {
 
       // Calculate if tooltip should be above or below cat
       const spaceAbove = catCenterY - tooltipHeight - tooltipSpacing;
-      const spaceBelow = viewportHeight - (catCenterY + catHeight / 2 + tooltipSpacing + tooltipHeight);
-      const showAbove = spaceAbove > spaceBelow && spaceAbove > 0;
+      const showAbove = spaceAbove > 12;
 
       // Calculate Y position
       let tooltipY;

@@ -20,8 +20,8 @@ export default function Oneko({ nekoFile = "/oneko.gif" }) {
   // Direct variables like the original (using refs to persist across renders)
   const nekoPosX = useRef(32);
   const nekoPosY = useRef(32);
-  const mousePosX = useRef(0);
-  const mousePosY = useRef(0);
+  const mousePosX = useRef(useOnekoStore.getState().pos.x);
+  const mousePosY = useRef(useOnekoStore.getState().pos.y);
   const frameCount = useRef(0);
   const idleTime = useRef(0);
   const idleAnimation = useRef(null);
