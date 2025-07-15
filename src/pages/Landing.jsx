@@ -192,7 +192,7 @@ export default function Landing() {
       </section>
 
       {/* Portfolio Section */}
-      <section id="projects" ref={(el) => (sectionRefs.current[1] = el)} className="flex flex-col sm:gap-10 gap-5 pt-20 px-5 opacity-0 transition-all duration-700 max-w-[100rem] w-full mx-auto">
+      <section id="projects" ref={(el) => (sectionRefs.current[1] = el)} className="sm:mb-30 mb-8 flex flex-col sm:gap-10 gap-5 pt-20 px-5 opacity-0 transition-all duration-700 max-w-[100rem] w-full mx-auto">
         <h1 className="sm:text-3xl text-2xl text-center" style={{ color: "var(--page-text)" }}>
           Projects
         </h1>

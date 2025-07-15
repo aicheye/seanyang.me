@@ -6,7 +6,7 @@ import useThemeStore from "../stores/ThemeStore";
 import { ExternalLinkIcon, GitHubIcon, LinkedInIcon } from "./Icons";
 import Tooltip from "./Tooltip";
 
-export default function Footer({ co2 = "0.09", percentage = "91" }) {
+export default function Footer({ co2 = "0.03", percentage = "93", url = "" }) {
   const [tooltipVisible, setTooltipVisible] = useState(false);
   const [tooltipText, setTooltipText] = useState("");
   const isLightMode = useThemeStore((state) => state.isLightMode);
@@ -22,7 +22,7 @@ export default function Footer({ co2 = "0.09", percentage = "91" }) {
 
   return (
     <>
-      <footer className="sm:mt-30 mt-8 py-8 flex flex-col items-center gap-2 sm:gap-4 z-10">
+      <footer className="py-8 flex flex-col items-center gap-2 sm:gap-4 z-10">
         <div id="contact" className="flex sm:flex-row flex-col sm:gap-4 gap-1 items-center" style={{ color: "var(--page-text)" }}>
           <div className="flex sm:gap-4 gap-2 items-center">
             <span className="text-4xl flex gap-2 sm:gap-4 items-center">
@@ -48,7 +48,7 @@ export default function Footer({ co2 = "0.09", percentage = "91" }) {
           </a>
         </div>
         <div className="items-center text-md" style={{ color: "var(--page-text)" }}>
-          <WebsiteCarbonBadge dark={!isLightMode} co2={co2} percentage={percentage} />
+          <WebsiteCarbonBadge dark={!isLightMode} co2={co2} percentage={percentage} url={"seanyang-me" + (url ? `-${url}` : "")} />
         </div>
 
         <div className="text-md" style={{ color: "var(--copyright-text)" }}>

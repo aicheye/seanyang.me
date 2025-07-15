@@ -69,7 +69,7 @@ export default function About() {
       <HomeButton />
       <ThemeButton />
       <div className="flex flex-col items-center min-h-screen">
-        <div className="flex lg:flex-row flex-col items-center justify-center center flex-1 mt-18 lg:gap-0 gap-5">
+        <div className="flex lg:flex-row flex-col items-center justify-center center flex-1 mt-18 lg:gap-0 gap-5 sm:mb-0 mb-8">
           <div className="flex flex-col gap-5 h-auto w-auto ml-5 lg:mr-[0] mr-5 sm:p-10 p-7 rounded-xl shadow-md max-w-xl min-w-xs" style={{ backgroundColor: "var(--card-bg)", color: "var(--page-text)" }}>
             <h2 className="sm:text-4xl text-2xl">Nice to meet you!</h2>
             <div className="flex flex-col gap-5 sm:text-lg text-md" style={{ color: "var(--page-subtext)" }}>
@@ -176,7 +176,7 @@ export default function About() {
             </div>
           </div>
         </div>
-        <Footer co2="0.33" percentage="64" />
+        <Footer co2="0.33" percentage="64" url="about" />
       </div>
     </>
   );
