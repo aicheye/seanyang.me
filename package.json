@@ -1,0 +1,27 @@
+{
+  "name": "seanyang.me",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@tailwindcss/postcss": "^4.1.11",
+    "babel-plugin-react-compiler": "^19.1.0-rc.2",
+    "next": "^15.3.5",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-websitecarbon-badge": "^1.0.6",
+    "tailwind-plugin-typed": "^1.1.2",
+    "tailwindcss": "^4",
+    "zustand": "^5.0.6"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "eslint": "^9",
+    "eslint-config-next": "15.3.5"
+  }
+}

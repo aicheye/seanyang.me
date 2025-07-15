@@ -1,0 +1,27 @@
+@import "tailwindcss";
+@import "../styles/themes.css";
+@plugin "tailwind-plugin-typed";
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("/fonts/JetBrains_Mono/JetBrainsMono-VariableFont_wght.ttf") format("woff2");
+  font-weight: 100 200 300 400 500 600 700 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("/fonts/JetBrains_Mono/JetBrainsMono-Italic-VariableFont_wght.ttf") format("woff2");
+  font-weight: 100 200 300 400 500 600 700 800;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("/fonts/Space_Grotesk/SpaceGrotesk-VariableFont_wght.ttf") format("woff2");
+  font-weight: 300 400 500 600 700;
+  font-style: normal;
+  font-display: swap;
+}

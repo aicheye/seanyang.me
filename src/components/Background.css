@@ -1,0 +1,114 @@
+@keyframes blob1 {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  20% {
+    transform: translate(20vw, 10vh) scale(1.12);
+  }
+  40% {
+    transform: translate(-15vw, 25vh) scale(0.95);
+  }
+  60% {
+    transform: translate(10vw, -20vh) scale(1.08);
+  }
+  80% {
+    transform: translate(-10vw, -10vh) scale(1.03);
+  }
+}
+
+@keyframes blob2 {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  20% {
+    transform: translate(-18vw, 12vh) scale(1.09);
+  }
+  40% {
+    transform: translate(12vw, -22vh) scale(0.97);
+  }
+  60% {
+    transform: translate(-20vw, 18vh) scale(1.11);
+  }
+  80% {
+    transform: translate(15vw, 15vh) scale(0.92);
+  }
+}
+
+@keyframes blob3 {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  20% {
+    transform: translate(15vw, -18vh) scale(1.15);
+  }
+  40% {
+    transform: translate(-12vw, 20vh) scale(0.93);
+  }
+  60% {
+    transform: translate(18vw, 18vh) scale(1.06);
+  }
+  80% {
+    transform: translate(-18vw, -15vh) scale(1.02);
+  }
+}
+
+@keyframes blob4 {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  20% {
+    transform: translate(22vw, 15vh) scale(1.13);
+  }
+  40% {
+    transform: translate(-20vw, -18vh) scale(0.96);
+  }
+  60% {
+    transform: translate(15vw, 22vh) scale(1.09);
+  }
+  80% {
+    transform: translate(-15vw, 10vh) scale(1.04);
+  }
+}
+
+@keyframes blob5 {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  20% {
+    transform: translate(-20vw, -15vh) scale(1.1);
+  }
+  40% {
+    transform: translate(18vw, 18vh) scale(0.94);
+  }
+  60% {
+    transform: translate(-15vw, 20vh) scale(1.07);
+  }
+  80% {
+    transform: translate(20vw, -18vh) scale(1.01);
+  }
+}
+
+.animate-blob1 {
+  animation: blob1 60s ease-in-out infinite;
+}
+
+.animate-blob2 {
+  animation: blob2 40s ease-in-out infinite;
+}
+
+.animate-blob3 {
+  animation: blob3 80s ease-in-out infinite;
+}
+
+.animate-blob4 {
+  animation: blob4 60s ease-in-out infinite;
+}
+
+.animate-blob5 {
+  animation: blob5 70s ease-in-out infinite;
+}
