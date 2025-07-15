@@ -144,7 +144,7 @@ export default function About() {
                       color: "var(--page-text)",
                       borderColor: "var(--subtext)",
                     }}
-                    placeholder="Your message here..."
+                    placeholder="Poke!"
                     maxLength={42}
                     autoComplete="off"
                   />
@@ -157,7 +157,7 @@ export default function About() {
                       color: "var(--page-text)",
                       borderColor: "var(--subtext)",
                     }}
-                    placeholder="From:"
+                    placeholder="Anonymous"
                     maxLength={21}
                     autoComplete="off"
                   />
@@ -170,7 +170,7 @@ export default function About() {
                     color: "var(--page-bg)",
                   }}
                 >
-                  Poke
+                  Send
                 </button>
               </form>
             </div>

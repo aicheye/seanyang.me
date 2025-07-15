@@ -21,11 +21,11 @@ export default function Blurb() {
     <>
       <span>
         I'm a coder,{" "}
-        <a href="https://en.wikipedia.org/wiki/Sustainable_urbanism" target="_blank" rel="noopener noreferrer" onMouseEnter={() => handleMouseEnter("🌿 Read more")} onMouseLeave={handleMouseLeave} aria-label="Sustainable urbanism">
+        <a className="underline decoration-wavy" style={{ textDecorationColor: "var(--spot-color)" }} href="https://en.wikipedia.org/wiki/Sustainable_urbanism" target="_blank" rel="noopener noreferrer" onMouseEnter={() => handleMouseEnter("🌿 Read more")} onMouseLeave={handleMouseLeave} aria-label="Sustainable urbanism">
           sustainable urbanist
         </a>
         , and advocate for{" "}
-        <a href="https://en.wikipedia.org/wiki/Democratic_socialism" target="_blank" rel="noopener noreferrer" onMouseEnter={() => handleMouseEnter("🌹 Read more")} onMouseLeave={handleMouseLeave} aria-label="Democratic socialism">
+        <a className="underline decoration-dotted" style={{ textDecorationColor: "var(--accent-color)" }} href="https://en.wikipedia.org/wiki/Democratic_socialism" target="_blank" rel="noopener noreferrer" onMouseEnter={() => handleMouseEnter("🌹 Read more")} onMouseLeave={handleMouseLeave} aria-label="Democratic socialism">
           economic justice
         </a>{" "}
         studying Software Engineering{" "}
