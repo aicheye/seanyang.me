@@ -176,7 +176,7 @@ export default function About() {
             </div>
           </div>
         </div>
-        <Footer co2="0.33" percentage="64" url="about" />
+        <Footer co2="0.13" percentage="69" url="about" />
       </div>
     </>
   );
