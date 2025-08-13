@@ -1,0 +1,92 @@
+:root {
+  --blob-purple: rgba(168, 85, 247, 0.07);
+  --blob-blue: rgba(59, 130, 246, 0.07);
+  --blob-cyan: rgba(34, 211, 238, 0.07);
+  --blob-orange: rgba(249, 115, 22, 0.07);
+  --blob-red: rgba(239, 68, 68, 0.07);
+
+  --dot-color: #555;
+
+  --cat-text: rgb(31, 31, 31);
+
+  --tooltip-bg: rgb(38, 38, 38);
+  --tooltip-text: rgb(255, 255, 255);
+  --tooltip-border: rgb(64, 64, 64);
+
+  --button-bg: rgb(255, 255, 255);
+  --button-hover: rgb(212, 212, 212);
+  --theme-button-icon: rgb(38, 38, 38);
+  --contact-button-icon: rgb(38, 38, 38);
+
+  --page-bg: rgb(10, 10, 10);
+  --page-text: rgb(229, 229, 229);
+  --heading-text: rgb(229, 229, 229);
+  --subtext: rgb(163, 163, 163);
+  --copyright-text: rgb(115, 115, 115);
+  --card-bg: rgb(23, 23, 23);
+  --card-image-bg: rgb(38, 38, 38);
+  --hero-image-bg: rgb(38, 38, 38);
+  --link-color: rgb(96, 165, 250);
+  --accent-color: rgb(241, 98, 79);
+  --spot-color: rgb(92, 216, 123);
+  --scroll-indicator: rgb(255, 255, 255);
+
+  background-color: var(--page-bg);
+  color: var(--page-text);
+  font-family: "JetBrains Mono", "Courier New", monospace;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+h1 {
+  color: var(--heading-text);
+  font-weight: 800;
+}
+
+h2 {
+  color: var(--heading-text);
+  font-weight: 700;
+}
+
+p {
+  color: var(--page-text);
+  font-weight: 400;
+  font-family: "Space Grotesk", "Helvetica Neue", sans-serif;
+}
+
+[data-theme="light"] {
+  --blob-purple: rgba(196, 181, 253, 0.4);
+  --blob-blue: rgba(147, 197, 253, 0.4);
+  --blob-cyan: rgba(165, 243, 252, 0.4);
+  --blob-orange: rgba(254, 215, 170, 0.4);
+  --blob-red: rgba(252, 165, 165, 0.4);
+
+  --dot-color: #333;
+
+  --tooltip-bg: rgb(255, 255, 255);
+  --tooltip-text: rgb(38, 38, 38);
+  --tooltip-border: rgb(229, 229, 229);
+
+  --button-bg: rgb(38, 38, 38);
+  --button-hover: rgb(82, 82, 82);
+  --theme-button-icon: rgb(255, 255, 255);
+  --contact-button-icon: rgb(255, 255, 255);
+
+  --page-bg: rgb(229, 229, 229);
+  --page-text: rgb(23, 23, 23);
+  --heading-text: rgb(23, 23, 23);
+  --page-subtext: rgb(43, 43, 43);
+
+  --copyright-text: rgb(97, 97, 97);
+
+  --card-bg: rgb(250, 250, 250);
+  --card-image-bg: rgb(212, 212, 212);
+
+  --hero-image-bg: rgb(38, 38, 38);
+
+  --link-color: rgb(11, 101, 211);
+  --accent-color: rgb(187, 22, 10);
+  --spot-color: rgb(8, 146, 43);
+  --scroll-indicator: rgb(38, 38, 38);
+}

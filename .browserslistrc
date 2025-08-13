@@ -1,0 +1,23 @@
+# Modern browsers that support ES2022+ features
+
+# This reduces the need for polyfills and transpilation
+
+# Last 2 versions of major browsers
+
+last 2 Chrome versions
+last 2 Firefox versions
+last 2 Safari versions
+last 2 Edge versions
+
+# Exclude Internet Explorer completely
+
+not IE 11
+not IE_Mob 11
+
+# Support browsers with > 0.5% market share
+
+> 0.5%
+
+# Only browsers that are still maintained
+
+not dead
