@@ -1,7 +1,7 @@
 const portfolio = [
   {
     title: "aicheye's Combat Tagging",
-    description: "Minecraft mod to make PvP fairer. Fast, performant, and fully customizable, totaling 200+ downloads on Modrinth.",
+    description: "Minecraft mod to make PvP fairer. Fast, performant, and fully customizable, totaling 350+ downloads on Modrinth.",
     github: "https://github.com/aicheye/combat-tag",
     thumbnail: "/portfolio/combat-tag.png",
   },
