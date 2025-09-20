@@ -34,14 +34,14 @@ export default function Footer({ co2 = "0.03", percentage = "93", url = "" }) {
               </a>
             </span>
             <span>·</span>
-            <a href="mailto:contact@seanyang.me" aria-label="Email" className="text-lg underline" target="_blank" rel="noopener noreferrer">
+            <a href="mailto:sean@seanyang.me" aria-label="Email" className="text-lg underline" target="_blank" rel="noopener noreferrer">
               <div className="flex items-center justify-center" style={{ height: "32px" }}>
-                contact@seanyang.me
+                sean@seanyang.me
               </div>
             </a>
           </div>
           <span className="hidden sm:block">·</span>
-          <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="underline text-lg flex items-center gap-2">
+          <a href="docs.seanyang.me/resume/resume.pdf" target="_blank" rel="noopener noreferrer" className="underline text-lg flex items-center gap-2">
             <div className="flex items-center justify-center gap-2" style={{ height: "32px" }}>
               View Resumé <ExternalLinkIcon className="w-6 h-6" />
             </div>
