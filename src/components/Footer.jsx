@@ -41,7 +41,7 @@ export default function Footer({ co2 = "0.03", percentage = "93", url = "" }) {
             </a>
           </div>
           <span className="hidden sm:block">·</span>
-          <a href="docs.seanyang.me/resume/resume.pdf" target="_blank" rel="noopener noreferrer" className="underline text-lg flex items-center gap-2">
+          <a href="https://docs.seanyang.me/resume/resume.pdf" target="_blank" rel="noopener noreferrer" className="underline text-lg flex items-center gap-2">
             <div className="flex items-center justify-center gap-2" style={{ height: "32px" }}>
               View Resumé <ExternalLinkIcon className="w-6 h-6" />
             </div>
