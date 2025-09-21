@@ -32,10 +32,10 @@ export default function Footer({ co2 = "0.03", percentage = "93", url = "" }) {
               <a href="https://www.linkedin.com/in/syang07/" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer" onMouseEnter={() => handleMouseEnter("linkedin.com/in/syang07")} onMouseLeave={handleMouseLeave}>
                 <LinkedInIcon className="w-10 h-10" />
               </a>
-              <a href="https://www.instagram.com/seanyang_esports_gaming/" aria-label="Instagram" target="_blank" rel="noopener noreferrer" onMouseEnter={() => handleMouseEnter("instagram.com/seanyang_esports_gaming/")} onMouseLeave={handleMouseLeave}>
+              <a href="https://www.instagram.com/seanyang_esports_gaming/" aria-label="Instagram" target="_blank" rel="noopener noreferrer" onMouseEnter={() => handleMouseEnter("instagram.com/seanyang_esports_gaming")} onMouseLeave={handleMouseLeave}>
                 <InstagramIcon className="w-10 h-10" />
               </a>
-              <a href="https://letterboxd.com/aicheye/" aria-label="Letterboxd" target="_blank" rel="noopener noreferrer" onMouseEnter={() => handleMouseEnter("letterboxd.com/aicheye/")} onMouseLeave={handleMouseLeave}>
+              <a href="https://letterboxd.com/aicheye/" aria-label="Letterboxd" target="_blank" rel="noopener noreferrer" onMouseEnter={() => handleMouseEnter("letterboxd.com/aicheye")} onMouseLeave={handleMouseLeave}>
                 <LetterboxdIcon className="w-10 h-10" />
               </a>
             </span>
