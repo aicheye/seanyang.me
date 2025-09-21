@@ -23,7 +23,7 @@ export default function ThemeButton() {
         }}
         aria-label={isLightMode ? "Switch to dark mode" : "Switch to light mode"}
       >
-        {isLightMode ? <MoonIcon className="w-5 h-5" /> : <SunIcon className="w-5 h-5" />}
+        {isLightMode ? <MoonIcon className="w-5 h-5" /> : <SunIcon className="w-6 h-6" />}
       </button>
     </>
   );

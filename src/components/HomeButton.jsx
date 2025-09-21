@@ -19,7 +19,7 @@ export default function HomeButton() {
         }}
         aria-label="Home"
       >
-        <HomeIcon className="w-5 h-5" />
+        <HomeIcon className="w-6 h-6" />
       </Link>
     </>
   );

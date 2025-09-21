@@ -24,7 +24,7 @@ export default function ContactButton() {
         }}
         aria-label="Contact"
       >
-        {isHovered ? <ArrowDownIcon className="w-5 h-5" /> : <ContactIcon className="w-5 h-5" />}
+        {isHovered ? <ArrowDownIcon className="w-5 h-5" /> : <ContactIcon className="w-6 h-6" />}
       </Link>
     </>
   );

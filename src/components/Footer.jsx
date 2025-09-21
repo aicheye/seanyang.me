@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { WebsiteCarbonBadge } from "react-websitecarbon-badge";
 import useThemeStore from "../stores/ThemeStore";
-import { ExternalLinkIcon, GitHubIcon, LinkedInIcon } from "./Icons";
+import { ExternalLinkIcon, GitHubIcon, InstagramIcon, LetterboxdIcon, LinkedInIcon } from "./Icons";
 import Tooltip from "./Tooltip";
 
 export default function Footer({ co2 = "0.03", percentage = "93", url = "" }) {
@@ -25,12 +25,18 @@ export default function Footer({ co2 = "0.03", percentage = "93", url = "" }) {
       <footer className="py-8 flex flex-col items-center gap-2 sm:gap-4 z-10">
         <div id="contact" className="flex sm:flex-row flex-col sm:gap-4 gap-1 items-center" style={{ color: "var(--page-text)" }}>
           <div className="flex sm:gap-4 gap-2 items-center">
-            <span className="text-4xl flex gap-2 sm:gap-4 items-center">
+            <span className="text-4xl flex sm:gap-2 items-center">
               <a href="https://github.com/aicheye/" aria-label="GitHub" target="_blank" rel="noopener noreferrer" onMouseEnter={() => handleMouseEnter("github.com/aicheye")} onMouseLeave={handleMouseLeave}>
-                <GitHubIcon className="w-8 h-8" />
+                <GitHubIcon className="w-10 h-10" />
               </a>
               <a href="https://www.linkedin.com/in/syang07/" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer" onMouseEnter={() => handleMouseEnter("linkedin.com/in/syang07")} onMouseLeave={handleMouseLeave}>
-                <LinkedInIcon className="w-8 h-8" />
+                <LinkedInIcon className="w-10 h-10" />
+              </a>
+              <a href="https://www.instagram.com/seanyang_esports_gaming/" aria-label="Instagram" target="_blank" rel="noopener noreferrer" onMouseEnter={() => handleMouseEnter("instagram.com/seanyang_esports_gaming/")} onMouseLeave={handleMouseLeave}>
+                <InstagramIcon className="w-10 h-10" />
+              </a>
+              <a href="https://letterboxd.com/aicheye/" aria-label="Letterboxd" target="_blank" rel="noopener noreferrer" onMouseEnter={() => handleMouseEnter("letterboxd.com/aicheye/")} onMouseLeave={handleMouseLeave}>
+                <LetterboxdIcon className="w-10 h-10" />
               </a>
             </span>
             <span>·</span>
