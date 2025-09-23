@@ -100,13 +100,16 @@ const songs = [
     id: "1Fhb9iJPufNMZSwupsXiRe",
   },
   {
-    desc: "HELL/HEAVEN by keshi",
-    id: "4ZrT4GknVWRvBYA8AcLCeY",
-  },
-
-  {
     desc: "Cross Your Mind by Shelly",
     id: "3a3zDlE4bgI6ZvU00m6o84",
+  },
+  {
+    desc: "ANGEL by keshi",
+    id: "0srUf03MHZ4cbOO4o2ydDu",
+  },
+  {
+    desc: "Spectre by Radiohead",
+    id: "4Nwrh5BlZ8I31znYQULS7G",
   },
 ];
 
