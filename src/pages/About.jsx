@@ -39,7 +39,7 @@ export default function About() {
     const from = formData.get("poke-from");
 
     try {
-      const response = await fetch("https://poke-289495744141.us-central1.run.app", {
+      const response = await fetch("https://api.seanyang.me/poke", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

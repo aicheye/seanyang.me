@@ -255,16 +255,13 @@ export default function Oneko({ nekoFile = "/oneko.gif" }) {
 
   const handleClick = async () => {
     try {
-      const response = await fetch("https://cat-clicks-289495744141.us-central1.run.app/", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        mode: "cors",
+      const response = await fetch("https://api.seanyang.me/cat", {
+        method: "POST",
       });
 
       if (response.ok) {
         const data = await response.json();
+        console.log("Click response data:", data);
         const count = data.count;
         setTooltipText(`Meow 💗 Global Click #${count.toLocaleString()}`);
         setTooltipVisible(true);
