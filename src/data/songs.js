@@ -111,6 +111,18 @@ const songs = [
     desc: "Spectre by Radiohead",
     id: "4Nwrh5BlZ8I31znYQULS7G",
   },
+  {
+    desc: "Hype Boy by NewJeans",
+    id: "0a4MMyCrzT0En247IhqZbD",
+  },
+  {
+    desc: "whyy by bixby",
+    id: "72WxMwec03zySBDZDNhg11",
+  },
+  {
+    desc: "OMG by NewJeans",
+    id: "65FftemJ1DbbZ45DUfHJXE",
+  },
 ];
 
 export default songs;
