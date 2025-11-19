@@ -4,6 +4,10 @@
 
 A modern, responsive personal portfolio website built with Next.js 15, featuring an animated background, light/dark mode toggle, interactive tooltips, and smooth scroll animations.
 
+Dynamic content served from https://api.seanyang.me/
+
+See https://github.com/aicheye/api.seanyang.me for more.
+
 ## Features
 
 ### Visual Design
