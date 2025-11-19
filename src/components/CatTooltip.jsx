@@ -19,10 +19,9 @@ export default function CatTooltip({ visible = false, text, catX, catY }) {
   }, [visible]);
 
   useEffect(() => {
-    if (!tooltipRef.current || !text) return;
-
     const updatePosition = () => {
       const tooltip = tooltipRef.current;
+      if (!tooltip || !text) return;
       const tooltipRect = tooltip.getBoundingClientRect();
       const tooltipWidth = tooltipRect.width;
       const tooltipHeight = tooltipRect.height;
@@ -84,7 +83,6 @@ export default function CatTooltip({ visible = false, text, catX, catY }) {
     };
   }, [catX, catY, text, visible]);
 
-  if (!isAnimating && !visible) return null;
   if (!text) return null;
 
   return (
