@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import "../styles/animations.css";
 
 export default function CatTooltip({ visible = false, text, catX, catY }) {
@@ -18,7 +18,7 @@ export default function CatTooltip({ visible = false, text, catX, catY }) {
     }
   }, [visible]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const updatePosition = () => {
       const tooltip = tooltipRef.current;
       if (!tooltip || !text) return;
@@ -72,13 +72,12 @@ export default function CatTooltip({ visible = false, text, catX, catY }) {
       });
     };
 
-    // Initial position calculation (with small delay to ensure DOM is ready)
-    const timer = setTimeout(updatePosition, 0);
+    // Initial position calculation
+    updatePosition();
 
     // Recalculate on window resize
     window.addEventListener("resize", updatePosition);
     return () => {
-      clearTimeout(timer);
       window.removeEventListener("resize", updatePosition);
     };
   }, [catX, catY, text, visible]);

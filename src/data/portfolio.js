@@ -19,7 +19,7 @@ const portfolio = [
   },
   {
     title: "seanyang.me",
-    description: "This website. Built with Next.js, Tailwind CSS, and React. Responsive, animated, and interactive.",
+    description: "This website. Built with Next.js, Tailwind CSS, and React and a light Flask backend. Responsive, animated, and interactive.",
     github: "https://github.com/aicheye/seanyang.me",
     thumbnail: "/portfolio/portfolio.png",
   },
@@ -29,6 +29,12 @@ const portfolio = [
     github: "https://github.com/aicheye/chess",
     thumbnail: "/portfolio/chess.png",
   },
+  {
+    title: "Bucket",
+    description: "The all-in-one student dashboard for University of Waterloo students. WIP project.",
+    github: "https://github.com/aicheye/bucket",
+    thumbnail: "/portfolio/bucket.png",
+  }
 ];
 
 export default portfolio;
