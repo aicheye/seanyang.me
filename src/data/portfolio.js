@@ -31,7 +31,7 @@ const portfolio = [
   },
   {
     title: "Bucket",
-    description: "The all-in-one student dashboard for University of Waterloo students. WIP project.",
+    description: "The all-in-one student dashboard for Waterloo students. Built with TS, Next.js, and Hasura engine. WIP project.",
     github: "https://github.com/aicheye/bucket",
     thumbnail: "/portfolio/bucket.png",
   }
