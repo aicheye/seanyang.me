@@ -9,11 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^7.1.0",
+    "@fortawesome/react-fontawesome": "^3.1.1",
     "@tailwindcss/postcss": "^4.1.11",
     "babel-plugin-react-compiler": "^19.1.0-rc.2",
-    "next": "^15.3.5",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
     "react-websitecarbon-badge": "^1.0.6",
     "tailwind-plugin-typed": "^1.1.2",
     "tailwindcss": "^4",
@@ -21,7 +20,13 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "and": "^0.0.3",
     "eslint": "^9",
-    "eslint-config-next": "15.3.5"
+    "eslint-config-next": "^16.0.7",
+    "i": "^0.3.7",
+    "next": "^16.0.7",
+    "npm": "^11.6.4",
+    "react": "^19.2.1",
+    "react-dom": "^19.2.1"
   }
 }
