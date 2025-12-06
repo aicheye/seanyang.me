@@ -4,9 +4,8 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import Background from "../components/Background";
 import Footer from "../components/Footer";
-import HomeButton from "../components/HomeButton";
+import NavButtons from "../components/NavButtons";
 import Oneko from "../components/Oneko.jsx";
-import ThemeButton from "../components/ThemeButton";
 import songs from "../data/songs";
 
 let shuffled;
@@ -66,8 +65,7 @@ export default function About() {
     <>
       <Background />
       <Oneko />
-      <HomeButton />
-      <ThemeButton />
+      <NavButtons showHome={true} />
       <div className="flex flex-col items-center min-h-screen">
         <div className="flex lg:flex-row flex-col items-center justify-center center flex-1 mt-18 lg:gap-0 gap-5 sm:mb-0 mb-8">
           <div className="flex flex-col gap-5 h-auto w-auto ml-5 lg:mr-[0] mr-5 sm:p-10 p-7 rounded-xl shadow-md max-w-xl min-w-xs" style={{ backgroundColor: "var(--card-bg)", color: "var(--page-text)" }}>

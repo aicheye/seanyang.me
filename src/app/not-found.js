@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Background from "../components/Background";
 import Footer from "../components/Footer";
-import ThemeButton from "../components/ThemeButton";
+import NavButtons from "../components/NavButtons";
 
 export const metadata = {
   title: "404",
@@ -11,7 +11,7 @@ export const metadata = {
 export default function NotFound() {
   return (
     <>
-      <ThemeButton />
+      <NavButtons showHome={true} />
       <Background />
       <div className="flex flex-col min-h-screen">
         <div className="flex items-center justify-center flex-1 mx-6">
