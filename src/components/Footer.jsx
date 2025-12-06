@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { WebsiteCarbonBadge } from "react-websitecarbon-badge";
 import useThemeStore from "../stores/ThemeStore";
-import { ExternalLinkIcon, GitHubIcon, InstagramIcon, LetterboxdIcon, LinkedInIcon } from "./Icons";
+import { ExternalLinkIcon, GitHubIcon, InstagramIcon, TwitterIcon, LetterboxdIcon, LinkedInIcon } from "./Icons";
 import Tooltip from "./Tooltip";
 
 export default function Footer({ co2 = "0.03", percentage = "93", url = "" }) {
@@ -35,6 +35,9 @@ export default function Footer({ co2 = "0.03", percentage = "93", url = "" }) {
                 </a>
                 <a href="https://www.instagram.com/seanyang_esports_gaming/" aria-label="Instagram" target="_blank" rel="noopener noreferrer" onMouseEnter={() => handleMouseEnter("instagram.com/seanyang_esports_gaming")} onMouseLeave={handleMouseLeave}>
                   <InstagramIcon className="w-10 h-10" />
+                </a>
+                <a href="https://x.com/aicheye" aria-label="X (Twitter)" target="_blank" rel="noopener noreferrer" onMouseEnter={() => handleMouseEnter("x.com/aicheye")} onMouseLeave={handleMouseLeave}>
+                  <TwitterIcon className="w-10 h-10" />
                 </a>
                 <a href="https://letterboxd.com/aicheye/" aria-label="Letterboxd" target="_blank" rel="noopener noreferrer" onMouseEnter={() => handleMouseEnter("letterboxd.com/aicheye")} onMouseLeave={handleMouseLeave}>
                   <LetterboxdIcon className="w-10 h-10" />
