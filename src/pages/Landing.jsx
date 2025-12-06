@@ -228,7 +228,7 @@ export default function Landing() {
                     <Image src={project.image} alt={project.alt} fill style={{ objectFit: "cover" }} />
                   </div>
                   <div className="flex flex-col items-start">
-                    <span className="font-medium text-lg group-hover:text-blue-400 transition-colors" style={{ color: "var(--page-text)" }}>{project.name}</span>
+                    <span className="text-left font-medium text-lg group-hover:text-blue-400 transition-colors" style={{ color: "var(--page-text)" }}>{project.name}</span>
                     <span className="text-sm text-left" style={{ color: "var(--page-subtext)" }}>{project.description}</span>
                   </div>
                 </a>
