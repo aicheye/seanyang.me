@@ -323,7 +323,7 @@ export default function Landing() {
         </section>
 
         {/* Portfolio Section */}
-        <section id="projects" ref={(el) => (sectionRefs.current[2] = el)} className="px-6 py-6 max-w-7xl mx-auto w-full opacity-0 transition-all duration-700">
+        <section id="projects" ref={(el) => (sectionRefs.current[3] = el)} className="px-6 py-6 max-w-7xl mx-auto w-full opacity-0 transition-all duration-700">
           <div className="flex items-center gap-4 mb-12">
             <h2 className="text-3xl font-bold" style={{ color: "var(--page-text)" }}>
               Selected Works
@@ -338,7 +338,7 @@ export default function Landing() {
                 href={project.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                ref={(el) => (sectionRefs.current[3 + idx] = el)}
+                ref={(el) => (sectionRefs.current[4 + idx] = el)}
                 className="group flex flex-col bg-white/5 rounded-xl overflow-hidden hover:scale-105 transition-all duration-300 hover:shadow-xl opacity-0"
                 style={{ backgroundColor: "var(--card-bg)" }}
                 onMouseEnter={() => handleMouseEnter("View on GitHub")}
@@ -373,7 +373,7 @@ export default function Landing() {
         {/* Contact Card at page bottom (ensure always visible) */}
         <section
           id="contact"
-          ref={(el) => (sectionRefs.current[3 + portfolio.length] = el)}
+          ref={(el) => (sectionRefs.current[4 + portfolio.length] = el)}
           className="px-6 py-6 max-w-6xl mx-auto w-full relative z-10 opacity-0 transition-all duration-700"
           style={{ backgroundColor: "transparent" }}
         >
