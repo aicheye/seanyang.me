@@ -1,11 +1,11 @@
 const buildingProjects = [
   {
-    name: "Watonomous | Prediction Team",
-    url: "https://watonomous.com",
+    name: "Watonomous",
+    url: "https://www.watonomous.ca/projects/eve",
     image: "/icons/watonomous.jpg",
     alt: "Watonomous Logo",
     description: "Rapid-inference motion prediction models for autonomous vehicles",
-    hoverText: "🚗 Watonomous",
+    hoverText: "🚗 More on Eve",
   },
   {
     name: "Bucket",
