@@ -75,6 +75,54 @@ export default function Landing() {
   const [currSongIndex, setCurrSongIndex] = useState(0);
   const shuffledRef = useRef([]);
 
+  const buildingRef = useRef(null);
+  const buildingTextRef = useRef(null);
+  const [buildingPath, setBuildingPath] = useState("");
+  const [pathLength, setPathLength] = useState(0);
+  const pathRef = useRef(null);
+
+  useEffect(() => {
+    const updatePath = () => {
+      if (!buildingRef.current || !buildingTextRef.current) return;
+
+      const containerRect = buildingRef.current.getBoundingClientRect();
+      const textRect = buildingTextRef.current.getBoundingClientRect();
+
+      const startX = textRect.right - containerRect.left + 8; // +16 for gap-4
+      const width = containerRect.width;
+      const height = containerRect.height;
+      const radius = 20;
+      const startY = textRect.top - containerRect.top + textRect.height / 2;
+
+      const path = `
+        M ${startX} ${startY}
+        L ${width - radius} ${startY}
+        Q ${width} ${startY} ${width} ${startY + radius}
+        L ${width} ${height - radius}
+        Q ${width} ${height} ${width - radius} ${height}
+        L ${radius} ${height}
+        Q 0 ${height} 0 ${height - radius}
+        L 0 ${startY + radius}
+        Q 0 ${startY} ${radius} ${startY}
+      `;
+      setBuildingPath(path);
+    }; updatePath();
+    const observer = new ResizeObserver(updatePath);
+    if (buildingRef.current) observer.observe(buildingRef.current);
+
+    window.addEventListener("resize", updatePath);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", updatePath);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (pathRef.current) {
+      setPathLength(pathRef.current.getTotalLength());
+    }
+  }, [buildingPath]);
+
   const onMouseMove = useCallback(
     throttle((e) => {
       const card = e.currentTarget;
@@ -203,21 +251,36 @@ export default function Landing() {
           </div>
 
           {/* Currently Building - Integrated */}
-          <div className="w-full max-w-md">
-            <div className="flex items-center gap-4 mb-4">
-              <p className="text-md uppercase tracking-widest font-bold" style={{ color: "var(--accent-color)" }}>
+          <div ref={buildingRef} className="w-full max-w-md relative sm:p-5 p-3">
+            <svg className="absolute inset-0 w-full h-full pointer-events-none overflow-visible" style={{ zIndex: 0 }}>
+              <path
+                ref={pathRef}
+                d={buildingPath}
+                fill="none"
+                stroke="var(--accent-color)"
+                strokeWidth="1"
+                strokeLinecap="round"
+                style={{
+                  strokeDasharray: pathLength,
+                  strokeDashoffset: pathLength,
+                  opacity: 0.4
+                }}
+                className={pathLength > 0 ? "animate-draw-path" : ""}
+              />
+            </svg>
+            <div className="flex items-center gap-4 sm:mb-3 mb-1 relative z-10">
+              <p ref={buildingTextRef} className="pl-4 sm:pl-2 text-md uppercase tracking-widest font-bold" style={{ color: "var(--accent-color)" }}>
                 Currently Building
               </p>
-              <div className="h-[1px] flex-1 opacity-20 self-center" style={{ backgroundColor: "var(--accent-color)" }}></div>
             </div>
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4 relative z-10">
               {buildingProjects.map((project) => (
                 <a
                   key={project.name}
                   href={project.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`group flex items-center gap-4 p-3 rounded-lg transition-all border border-transparent ${isLightMode
+                  className={`group flex items-center gap-4 sm:p-3 p-1 rounded-lg transition-all border border-transparent ${isLightMode
                     ? "hover:bg-black/5 hover:border-black/20"
                     : "hover:bg-white/5 hover:border-white/10"
                     }`}

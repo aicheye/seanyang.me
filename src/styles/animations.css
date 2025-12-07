@@ -59,3 +59,16 @@ section,
 .animate-pulse-glow {
   animation: pulse-glow 2s ease-in-out infinite;
 }
+
+@keyframes draw-path {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.animate-draw-path {
+  animation: draw-path 1.5s ease-in-out forwards;
+  animation-delay: 0.8s;
+}
+
+
