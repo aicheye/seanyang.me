@@ -12,6 +12,12 @@ const portfolio = [
     thumbnail: "/portfolio/bucket.png",
   },
   {
+    title: "Wunder RNN Challenge",
+    description: "A custom transformer model for predicting time-series market data. Built in PyTorch, achieved top 5% in the Wunder RNN Challenge.",
+    github: "https://github.com/aicheye/wundernn",
+    thumbnail: "/portfolio/wundernn.png",
+  },
+  {
     title: "Quoridor",
     description: "A minimax game agent for Quoridor applying pathfinding algorithms, heuristic ordering strategies, and alpha-beta pruning.",
     github: "https://github.com/aicheye/Quoridor",
