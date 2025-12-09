@@ -1,4 +1,5 @@
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import useThemeStore from "../stores/ThemeStore";
 import "./globals.css";
 
@@ -45,7 +46,7 @@ export default function RootLayout({ children }) {
         <link rel="preload" href="/fonts/JetBrains_Mono/JetBrainsMono-VariableFont_wght.ttf" as="font" type="font/woff2" crossOrigin="anonymous" />
         <link rel="preload" href="/fonts/Space_Grotesk/SpaceGrotesk-VariableFont_wght.ttf" as="font" type="font/woff2" crossOrigin="anonymous" />
       </head>
-      <body>{children}<Analytics /></body>
+      <body>{children}<Analytics /><SpeedInsights /></body>
     </html>
   );
 }
