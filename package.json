@@ -12,6 +12,7 @@
     "@fortawesome/fontawesome-svg-core": "^7.1.0",
     "@fortawesome/react-fontawesome": "^3.1.1",
     "@tailwindcss/postcss": "^4.1.11",
+    "@vercel/analytics": "^1.6.1",
     "babel-plugin-react-compiler": "^19.1.0-rc.2",
     "react-websitecarbon-badge": "^1.0.6",
     "tailwind-plugin-typed": "^1.1.2",
