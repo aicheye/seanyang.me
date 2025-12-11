@@ -238,7 +238,7 @@ export default function Landing() {
           heroRef.current = el;
         }}
         id="top"
-        className="flex flex-col lg:flex-row items-center justify-center min-h-screen py-20 gap-12 lg:gap-20 opacity-0 transition-all duration-700 relative max-w-7xl mx-auto px-6"
+        className="flex flex-col lg:flex-row items-center justify-center min-h-screen py-20 gap-12 lg:gap-20 opacity-0 transition-all duration-700 relative max-w-7xl mx-auto px-12"
       >
         {/* Text Content */}
         <div className="flex-1 flex flex-col items-center lg:items-start text-center lg:text-left z-10 order-2 lg:order-1">
@@ -301,7 +301,7 @@ export default function Landing() {
         </div>
 
         {/* Hero Image */}
-        <div className="flex-1 flex justify-center items-center order-1 lg:order-2 relative">
+        <div className="flex justify-center items-center order-1 lg:order-2 relative">
           <a href="https://open.spotify.com/playlist/2B34ID9SWdE8WcEeh4q4mX" target="_blank" rel="noopener noreferrer" className="inline-block transition-transform duration-300" onMouseEnter={() => handleMouseEnter("🎵 My go-to playlist")} onMouseLeave={handleMouseLeaveHero} onMouseMove={isTouchDevice ? undefined : onMouseMove}>
             <div
               className="relative flex-shrink-0 w-[70vw] h-[70vw] lg:max-w-[30rem] lg:max-h-[30rem] max-w-[20rem] max-h-[20rem] rounded-md overflow-hidden flex items-center justify-center"
