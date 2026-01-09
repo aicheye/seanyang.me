@@ -1,3 +1,3 @@
-import { ResumePage } from "../resume.pdf/page";
+import ResumePage from "../resume.pdf/page";
 
 export default ResumePage;
