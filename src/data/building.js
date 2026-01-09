@@ -8,12 +8,12 @@ const buildingProjects = [
     hoverText: "🚗 More on Eve",
   },
   {
-    name: "Bucket",
-    url: "https://bucket.seanyang.me",
-    image: "/icons/bucket.png",
-    alt: "Bucket Logo",
-    description: "The all-in-one academic dashboard for Waterloo students",
-    hoverText: "🪣 Check it out",
+    name: "EZP2P Arcade",
+    url: "https://ezp2p.seanyang.me",
+    image: "/icons/ezp2p.png",
+    alt: "EZP2P Arcade Logo",
+    description: "A peer-to-peer gaming platform that supports multiple classic games",
+    hoverText: "🕹️ Play now",
   },
 ];
 
