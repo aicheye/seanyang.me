@@ -90,11 +90,11 @@ export default function About() {
                 </p>
                 <p>
                   Favourite Games: <br className="sm:hidden" />
-                  <span className="font-bold sm:typed-caret">Cities Skylines II, Minecraft, Overwatch</span>
+                  <span className="font-bold sm:typed-caret">Subway Builder, Cities Skylines II, Minecraft</span>
                 </p>
                 <p>
                   Favourite Artists: <br className="sm:hidden" />
-                  <span className="font-bold sm:typed-caret"> beabadoobee, Laufey, keshi, starfall</span>
+                  <span className="font-bold sm:typed-caret"> beabadoobee, Laufey, keshi</span>
                 </p>
                 <p>
                   If I could live anywhere, it would be: 🌑{" "}

@@ -1,5 +1,17 @@
 const portfolio = [
   {
+    title: "Wunder RNN Challenge",
+    description: "A custom transformer model for predicting time-series market data. Built in PyTorch, achieved top 5% in the Wunder RNN Challenge.",
+    github: "https://github.com/aicheye/wundernn",
+    thumbnail: "/portfolio/wundernn.png",
+  },
+  {
+    title: "Bucket",
+    description: "The all-in-one student dashboard for Waterloo students. Built with TS, Next.js, and Hasura engine. WIP project.",
+    github: "https://github.com/aicheye/bucket",
+    thumbnail: "/portfolio/bucket.png",
+  },
+  {
     title: "EZP2P Arcade",
     description: "A beautiful peer-to-peer gaming platform that supports multiple classic games. Built with React, Node.js, and WebRTC.",
     github: "https://github.com/aicheye/ezp2p",
@@ -10,18 +22,6 @@ const portfolio = [
     description: "Minecraft mod to make PvP fairer. Fast, performant, and fully customizable, totaling 570+ downloads on Modrinth.",
     github: "https://github.com/aicheye/combat-tag",
     thumbnail: "/portfolio/combat-tag.png",
-  },
-  {
-    title: "Bucket",
-    description: "The all-in-one student dashboard for Waterloo students. Built with TS, Next.js, and Hasura engine. WIP project.",
-    github: "https://github.com/aicheye/bucket",
-    thumbnail: "/portfolio/bucket.png",
-  },
-  {
-    title: "Wunder RNN Challenge",
-    description: "A custom transformer model for predicting time-series market data. Built in PyTorch, achieved top 5% in the Wunder RNN Challenge.",
-    github: "https://github.com/aicheye/wundernn",
-    thumbnail: "/portfolio/wundernn.png",
   },
   {
     title: "CampusYap",
