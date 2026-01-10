@@ -343,8 +343,8 @@ export default function Landing() {
                 <div className="flex flex-col gap-3">
                   <p>Hometown: <span className="font-bold sm:typed-caret sm:typed-[Toronto]"><span className="sm:hidden">Toronto</span></span></p>
                   <p>Pets: 🐕🐕 <span className="font-bold sm:typed-[2_dogs] sm:typed-caret"><span className="sm:hidden visible">2 dogs</span></span></p>
-                  <p>Favourite Games: <span className="font-bold sm:typed-caret">Cities Skylines II, Minecraft, Overwatch</span></p>
-                  <p>Favourite Artists: <span className="font-bold sm:typed-caret">beabadoobee, Laufey, keshi, starfall</span></p>
+                  <p>Favourite Games: <span className="font-bold sm:typed-caret">Subway Builder, Cities Skylines II, Minecraft</span></p>
+                  <p>Favourite Artists: <span className="font-bold sm:typed-caret">beabadoobee, Laufey, keshi</span></p>
                   <p>If I could live anywhere, it would be: 🌑 <span className="font-bold sm:typed-[The_Moon] sm:typed-caret"><span className="sm:hidden visible">The Moon</span></span></p>
                 </div>
               </div>

@@ -1,3 +1,5 @@
-import ResumePage from "../resume.pdf/page";
+import { redirect } from 'next/navigation';
 
-export default ResumePage;
+export default function ResumePage() {
+  redirect('/resume.pdf');
+}
