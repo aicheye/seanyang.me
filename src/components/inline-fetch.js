@@ -15,7 +15,7 @@ export async function inlineFetch(request, UPSTREAM) {
   const headers = new Headers(upstreamRes.headers);
   headers.set('content-disposition', 'inline; filename="' + UPSTREAM.split('/').pop() + '"');
   headers.set('content-type', headers.get('content-type') || 'application/pdf');
-  headers.set('cache-control', 'public, max-age=3600, s-maxage=86400, stale-while-revalidate=86400');
+  headers.set('cache-control', 'public, max-age=60, s-maxage=60, must-revalidate');
 
   return new NextResponse(upstreamRes.body, { status: 200, headers });
 }
