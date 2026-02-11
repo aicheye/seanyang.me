@@ -18,6 +18,12 @@ const portfolio = [
     thumbnail: "/portfolio/ezp2p.png",
   },
   {
+    title: "CRusTTY",
+    description: "A custom C interpreter with a step-through debugger TUI. Built with Rust and Ratatui for interactive code exploration.",
+    github: "https://github.com/aicheye/crustty",
+    thumbnail: "/portfolio/crustty.png",
+  },
+  {
     title: "aicheye's Combat Tagging",
     description: "Minecraft mod to make PvP fairer. Fast, performant, and fully customizable, totaling 570+ downloads on Modrinth.",
     github: "https://github.com/aicheye/combat-tag",
