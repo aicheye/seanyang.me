@@ -1,5 +1,6 @@
 "use client";
 
+import { DM_Serif_Display } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -9,13 +10,21 @@ import ContactCard from "../components/ContactCard.jsx";
 import Footer from "../components/Footer.jsx";
 import NavButtons from "../components/NavButtons.jsx";
 import Oneko from "../components/Oneko.jsx";
+import ProjectModal from "../components/ProjectModal.jsx";
 import Tooltip from "../components/Tooltip.jsx";
 import buildingProjects from "../data/building.js";
 import portfolio from "../data/portfolio";
+import quotes from "../data/quotes";
 import songs from "../data/songs";
 import useThemeStore from "../stores/ThemeStore.jsx";
-import { authenticatedFetch } from "../utils/api.js";
 import "../styles/animations.css";
+import { authenticatedFetch } from "../utils/api.js";
+
+const dmSerifDisplay = DM_Serif_Display({
+  weight: "400",
+  style: "italic",
+  subsets: ["latin"],
+});
 
 function useScrollAnimation() {
   const refs = useRef([]);
@@ -75,6 +84,9 @@ export default function Landing() {
   const [songEmbedUrl, setSongEmbedUrl] = useState("");
   const [currSongIndex, setCurrSongIndex] = useState(0);
   const shuffledRef = useRef([]);
+  const [selectedProject, setSelectedProject] = useState(null);
+  const [currQuoteIndex, setCurrQuoteIndex] = useState(0);
+  const shuffledQuotesRef = useRef([]);
 
   const buildingRef = useRef(null);
   const buildingTextRef = useRef(null);
@@ -184,11 +196,31 @@ export default function Landing() {
     if (currSongId) setSongEmbedUrl(`https://open.spotify.com/embed/track/${currSongId}`);
   }, []);
 
+  // Shuffle quotes on mount
+  useEffect(() => {
+    shuffledQuotesRef.current = quotes
+      .map((value) => ({ value, sort: Math.random() }))
+      .sort((a, b) => a.sort - b.sort)
+      .map(({ value }) => value);
+  }, []);
+
   const handleChangeSong = () => {
     const nextIndex = (currSongIndex + 1) % songs.length;
     setCurrSongIndex(nextIndex);
     const nextSongId = shuffledRef.current[nextIndex]?.id;
     if (nextSongId) setSongEmbedUrl(`https://open.spotify.com/embed/track/${nextSongId}`);
+  };
+
+  const handleChangeQuote = () => {
+    const quotesArray = shuffledQuotesRef.current.length > 0 ? shuffledQuotesRef.current : quotes;
+    const nextIndex = (currQuoteIndex + 1) % quotesArray.length;
+    setCurrQuoteIndex(nextIndex);
+  };
+
+  const handlePreviousQuote = () => {
+    const quotesArray = shuffledQuotesRef.current.length > 0 ? shuffledQuotesRef.current : quotes;
+    const prevIndex = (currQuoteIndex - 1 + quotesArray.length) % quotesArray.length;
+    setCurrQuoteIndex(prevIndex);
   };
 
   const handlePoke = async (event) => {
@@ -387,6 +419,64 @@ export default function Landing() {
           </div>
         </section>
 
+        {/* Quotes Section */}
+        <section ref={(el) => (sectionRefs.current[2] = el)} className="px-6 py-12 max-w-4xl mx-auto w-full opacity-0 transition-all duration-700">
+          {(() => {
+            const quotesArray = shuffledQuotesRef.current.length > 0 ? shuffledQuotesRef.current : quotes;
+            return quotesArray.length > 0 ? (
+              <div className="flex items-center w-full gap-8" style={{ height: "300px" }}>
+                {/* Back button - left side */}
+                <button
+                  onClick={handlePreviousQuote}
+                  className="px-5 py-2 text-sm font-medium transition-all duration-200 hover:scale-105 active:scale-95 border rounded-full flex-shrink-0"
+                  style={{
+                    color: "var(--accent-color)",
+                    borderColor: "var(--accent-color)",
+                    backgroundColor: "transparent"
+                  }}
+                >
+                  ←
+                </button>
+
+                {/* Quote content container */}
+                <div className="relative w-full max-w-3xl flex-1 h-full flex items-center">
+                  {/* Quote block - centered */}
+                  <div className="w-full relative">
+                    <div className="absolute -left-4 top-0 w-1 h-full opacity-30 rounded-full" style={{ backgroundColor: "var(--accent-color)" }}></div>
+
+                    {/* Quote text */}
+                    <p className={`text-2xl lg:text-4xl font-light leading-relaxed pl-8 text-left mb-6 ${dmSerifDisplay.className}`} style={{ color: "var(--page-text)" }}>
+                      "{quotesArray[currQuoteIndex]?.text}"
+                    </p>
+
+                    {/* Author */}
+                    <p className="text-lg lg:text-xl font-medium text-right pl-8" style={{ color: "var(--page-subtext)" }}>
+                      — {quotesArray[currQuoteIndex]?.author}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Next button - right side */}
+                <button
+                  onClick={handleChangeQuote}
+                  className="px-5 py-2 text-sm font-medium transition-all duration-200 hover:scale-105 active:scale-95 border rounded-full flex-shrink-0"
+                  style={{
+                    color: "var(--accent-color)",
+                    borderColor: "var(--accent-color)",
+                    backgroundColor: "transparent"
+                  }}
+                >
+                  →
+                </button>
+              </div>
+            ) : (
+              <div className="text-center" style={{ color: "var(--page-subtext)" }}>
+                <p>No quotes added yet.</p>
+              </div>
+            );
+          })()}
+        </section>
+
         {/* Portfolio Section */}
         <section id="projects" ref={(el) => (sectionRefs.current[3] = el)} className="px-6 py-6 max-w-7xl mx-auto w-full opacity-0 transition-all duration-700">
           <div className="flex items-center gap-4 mb-12">
@@ -398,15 +488,13 @@ export default function Landing() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {portfolio.map((project, idx) => (
-              <a
+              <div
                 key={project.title}
-                href={project.github}
-                target="_blank"
-                rel="noopener noreferrer"
                 ref={(el) => (sectionRefs.current[4 + idx] = el)}
-                className="group flex flex-col bg-white/5 rounded-xl overflow-hidden hover:scale-105 transition-all duration-300 hover:shadow-xl opacity-0"
+                className="group flex flex-col bg-white/5 rounded-xl overflow-hidden hover:scale-105 transition-all duration-300 hover:shadow-xl opacity-0 cursor-pointer"
                 style={{ backgroundColor: "var(--card-bg)" }}
-                onMouseEnter={() => handleMouseEnter("View on GitHub")}
+                onClick={() => setSelectedProject(project)}
+                onMouseEnter={() => handleMouseEnter("View Details")}
                 onMouseLeave={handleMouseLeave}
               >
                 <div className="relative w-full aspect-video overflow-hidden" style={{ backgroundColor: "var(--card-image-bg)" }}>
@@ -420,17 +508,17 @@ export default function Landing() {
                   />
                 </div>
                 <div className="p-6 flex flex-col flex-1">
-                  <h3 className="text-xl font-bold mb-2 group-hover:text-blue-300 3ransition-colors" style={{ color: "var(--page-text)" }}>
+                  <h3 className="text-xl font-bold mb-2 group-hover:text-blue-300 transition-colors" style={{ color: "var(--page-text)" }}>
                     {project.title}
                   </h3>
                   <p className="text-sm leading-relaxed mb-4 flex-1" style={{ color: "var(--page-subtext)" }}>
                     {project.description}
                   </p>
                   <div className="flex items-center text-sm font-medium mt-auto" style={{ color: "var(--link-color)" }}>
-                    View Project <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
+                    View Details <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
                   </div>
                 </div>
-              </a>
+              </div>
             ))}
           </div>
         </section>
@@ -448,6 +536,14 @@ export default function Landing() {
 
       <Footer hideLinks={true} />
       <Tooltip visible={tooltipVisible} text={tooltipText} />
+
+      {/* Project Modal */}
+      {selectedProject && (
+        <ProjectModal
+          project={selectedProject}
+          onClose={() => setSelectedProject(null)}
+        />
+      )}
     </div>
   );
 }
