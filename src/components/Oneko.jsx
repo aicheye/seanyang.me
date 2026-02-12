@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import useOnekoStore from "../stores/OnekoStore.jsx";
 import CatTooltip from "./CatTooltip.jsx";
+import { authenticatedFetch } from "../utils/api.js";
 
 export default function Oneko({ nekoFile = "/oneko.gif" }) {
   const [isTouchDevice, setIsTouchDevice] = useState(false);
@@ -255,7 +256,7 @@ export default function Oneko({ nekoFile = "/oneko.gif" }) {
 
   const handleClick = async () => {
     try {
-      const response = await fetch("https://api.seanyang.me/cat", {
+      const response = await authenticatedFetch("https://api.seanyang.me/cat", {
         method: "POST",
       });
 

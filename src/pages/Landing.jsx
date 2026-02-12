@@ -14,6 +14,7 @@ import buildingProjects from "../data/building.js";
 import portfolio from "../data/portfolio";
 import songs from "../data/songs";
 import useThemeStore from "../stores/ThemeStore.jsx";
+import { authenticatedFetch } from "../utils/api.js";
 import "../styles/animations.css";
 
 function useScrollAnimation() {
@@ -196,10 +197,11 @@ export default function Landing() {
     const message = formData.get("poke-message");
     const from = formData.get("poke-from");
     try {
-      const response = await fetch("https://api.seanyang.me/poke", {
+      const body = JSON.stringify({ message, author: from });
+      const response = await authenticatedFetch("https://api.seanyang.me/poke", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message, author: from }),
+        body: body,
       });
       if (response.ok) {
         alert("Poke sent! 🎉");
