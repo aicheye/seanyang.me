@@ -332,6 +332,32 @@ export default function Landing() {
               ))}
             </div>
           </div>
+
+          {/* Terminal hint */}
+          <div className="mt-4 px-4">
+            <p className="text-xs uppercase tracking-widest font-bold mb-2" style={{ color: "var(--accent-color)", opacity: 0.7 }}>
+              Prefer a terminal?
+            </p>
+            <button
+              className={`group flex items-center gap-2 px-3 py-2 rounded-lg font-mono text-sm transition-all border ${isLightMode ? "border-black/15 hover:border-black/30 bg-black/5 hover:bg-black/10" : "border-white/10 hover:border-white/25 bg-white/5 hover:bg-white/10"}`}
+              style={{ color: "var(--page-subtext)" }}
+              onClick={() => {
+                navigator.clipboard.writeText("ssh tui.seanyang.me");
+                setTooltipText("Copied!");
+                setTooltipVisible(true);
+                setTimeout(() => setTooltipVisible(false), 1500);
+              }}
+              onMouseEnter={() => handleMouseEnter("Click to copy")}
+              onMouseLeave={handleMouseLeave}
+            >
+              <span style={{ color: "var(--accent-color)", opacity: 0.8 }}>$</span>
+              <span>ssh tui.seanyang.me</span>
+              <svg className="ml-1 opacity-40 group-hover:opacity-70 transition-opacity" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+              </svg>
+            </button>
+          </div>
         </div>
 
         {/* Hero Image */}
