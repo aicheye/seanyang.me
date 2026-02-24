@@ -4,7 +4,7 @@ const portfolio = [
     description: "A custom C interpreter with a step-through debugger TUI. Built with Rust and Ratatui for interactive code exploration.",
     github: "https://github.com/aicheye/crustty",
     thumbnail: "/portfolio/crustty.png",
-    languages: ["Rust"],
+    languages: ["Rust", "C"],
     features: [
       "C language interpreter",
       "Step-through debugging",
@@ -38,7 +38,7 @@ const portfolio = [
     description: "The all-in-one student dashboard for Waterloo students. Built with TS, Next.js, and Hasura engine.",
     github: "https://github.com/aicheye/bucket",
     thumbnail: "/portfolio/bucket.png",
-    languages: ["TypeScript", "JavaScript"],
+    languages: ["TypeScript", "GraphQL", "React", "Next.js"],
     features: [
       "Student dashboard interface",
       "Real-time data updates",
@@ -72,7 +72,7 @@ const portfolio = [
     description: "A beautiful peer-to-peer gaming platform that supports multiple classic games. Built with React, Node.js, and WebRTC.",
     github: "https://github.com/aicheye/ezp2p",
     thumbnail: "/portfolio/ezp2p.png",
-    languages: ["JavaScript", "HTML", "CSS"],
+    languages: ["TypeScript", "React", "Vite"],
     features: [
       "Peer-to-peer connectivity",
       "Multiple classic games",
@@ -106,7 +106,7 @@ const portfolio = [
     description: "This website. Built with Next.js, Tailwind CSS, and React and a light Flask backend. Responsive, animated, and interactive.",
     github: "https://github.com/aicheye/seanyang.me",
     thumbnail: "/portfolio/portfolio.png",
-    languages: ["JavaScript", "Python"],
+    languages: ["JavaScript", "React", "Python"],
     features: [
       "Server-side rendering",
       "Responsive design",

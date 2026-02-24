@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import {
   SiPython, SiJavascript, SiTypescript, SiRust,
   SiKotlin, SiHtml5, SiCss3, SiGo, SiRuby, SiPhp, SiSwift,
-  SiCplusplus, SiC
+  SiCplusplus, SiC, SiGraphql, SiDocker, SiReact, SiVite, SiNextdotjs
 } from "react-icons/si";
 import { ExternalLinkIcon, GitHubIcon } from "./Icons";
 
@@ -25,6 +25,11 @@ const languageColors = {
   Swift: "#ffac45",
   "C++": "#f34b7d",
   C: "#555555",
+  GraphQL: "#e10098",
+  Docker: "#2496ED",
+  React: "#61DAFB",
+  Vite: "#646CFF",
+  "Next.js": "#AAAAAA",
 };
 
 // Custom Java icon (SVG)
@@ -50,6 +55,11 @@ const languageIcons = {
   Swift: SiSwift,
   "C++": SiCplusplus,
   C: SiC,
+  GraphQL: SiGraphql,
+  Docker: SiDocker,
+  React: SiReact,
+  Vite: SiVite,
+  "Next.js": SiNextdotjs,
 };
 
 // Language icons with proper icons from react-icons
