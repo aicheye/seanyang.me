@@ -1,9 +1,9 @@
-import { GitHubIcon, InstagramIcon, LetterboxdIcon, LinkedInIcon, TwitterIcon } from "../components/Icons";
+import { BlueskyIcon, GitHubIcon, InstagramIcon, LetterboxdIcon, LinkedInIcon, TwitterIcon } from "../components/Icons";
 
 export const primaryEmail = {
-    label: "sean@seanyang.me",
-    href: "mailto:sean@seanyang.me",
-  };
+  label: "sean@seanyang.me",
+  href: "mailto:sean@seanyang.me",
+};
 
 export const socials = [
   { label: "GitHub", href: "https://github.com/aicheye", icon: GitHubIcon },
@@ -11,4 +11,5 @@ export const socials = [
   { label: "Twitter/X", href: "https://x.com/aicheye", icon: TwitterIcon },
   { label: "Instagram", href: "https://instagram.com/seanyang_esports_gaming", icon: InstagramIcon },
   { label: "Letterboxd", href: "https://letterboxd.com/aicheye/", icon: LetterboxdIcon },
+  { label: "Bluesky", href: "https://bsky.app/profile/seanyang.me", icon: BlueskyIcon },
 ];
