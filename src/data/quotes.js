@@ -49,7 +49,7 @@ const quotes = [
   },
   {
     text: "Wherever you go, there you are.",
-    author: "Eckhart Tolle",
+    author: "Thomas à Kempis",
   },
   {
     text: "The wound is the place where the light enters you.",
