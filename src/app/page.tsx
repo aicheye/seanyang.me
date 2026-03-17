@@ -3,8 +3,8 @@ import jobs from '../data/jobs'
 import portfolio from '../data/portfolio'
 import quotes from '../data/quotes'
 import { primaryEmail, socials } from '../data/socials'
-import { SSHCopyButton } from './SSHCopyButton'
 import { GameOfLife } from './GameOfLife'
+import { SSHCopyButton } from './SSHCopyButton'
 import { TermProgress } from './TermProgress'
 
 export default function Page() {
@@ -20,9 +20,8 @@ export default function Page() {
             <span className="location"><span className="pulse" />Waterloo, ON</span>
           </div>
           <div className="tagline">
-            <span>{primaryEmail.label}</span>
-            <span>·</span>
-            <a className="resume-link" href="/resume" target="_blank" rel="noopener noreferrer">resume ↗</a>
+            <a href={primaryEmail.href}>{primaryEmail.label}</a>
+            <a href="/resume" target="_blank" rel="noopener noreferrer">resume ↗</a>
           </div>
           <div className="about">
             <span className="sep">&#91;</span>
@@ -88,9 +87,9 @@ export default function Page() {
         </section>
 
         <footer>
-          <span>0.03 g CO₂ / view</span>
+          <a href="https://websitecarbon.com/website/seanyang-me/" target="_blank" rel="noopener noreferrer">0.03 g CO₂ / view</a>
           <a className="webring" href="https://se-webring.xyz" target="_blank" rel="noopener noreferrer">
-            <img src="/webring_logo_w.svg" alt="SE Webring" />
+            <img src="/logo_b.png" alt="SE Webring" />
           </a>
         </footer>
       </div>

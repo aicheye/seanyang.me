@@ -9,13 +9,13 @@ interface Email {
 }
 
 export const primaryEmail: Email = {
-  label: "sean@seanyang.me",
+  label: "sean [at] seanyang.me",
   href: "mailto:sean@seanyang.me",
 };
 
 export const socials: Social[] = [
   { label: "GitHub", href: "https://github.com/aicheye" },
-  { label: "LinkedIn", href: "https://www.linkedin.com/in/syang07/" },
+  { label: "LinkedIn", href: "https://linkedin.com/in/syang07/" },
   { label: "Twitter/X", href: "https://x.com/aicheye" },
   { label: "Instagram", href: "https://instagram.com/seanyang_esports_gaming" },
   { label: "Letterboxd", href: "https://letterboxd.com/aicheye/" },

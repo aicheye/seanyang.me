@@ -19,8 +19,8 @@ const jobs: Job[] = [
     logo: "/assets/jobs/moss.jpg",
     location: "San Francisco, CA",
     technologies: [],
-    dates: ["2026.5", "present"],
-    current: true,
+    dates: ["inc. 2026.5"],
+    current: false,
   },
   {
     title: "Robotics Software Engineer",
@@ -30,8 +30,8 @@ const jobs: Job[] = [
     logo: "/assets/jobs/watonomous.jpg",
     location: "Waterloo, ON",
     technologies: ["C++", "ROS 2", "Docker", "Foxglove"],
-    dates: ["2025.9", "2026.5"],
-    current: false,
+    dates: ["2025.9", "present"],
+    current: true,
   },
 ];
 

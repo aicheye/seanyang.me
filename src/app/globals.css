@@ -1,11 +1,14 @@
 :root {
-  --text: #a8a29e;
-  --text-h: #fafaf9;
-  --bg: #0c0a09;
-  --border: #292524;
-  --accent: #f08c72;
-  --link: #6b9ef1;
-  --badge-bg: #1a1817;
+  --text: #6b5545;
+  --text-h: #3b2010;
+  --bg: #fdf6e3;
+  --border: #d6cfb8;
+  --accent: #d16d3e;
+  --secondary: #77934d;
+  --link: #268bd2;
+  --badge-bg: #eee8d5;
+  --surface: rgba(253, 246, 227, 0.96);
+  --surface-shadow: rgba(253, 246, 227, 0.96);
   --display: var(--font-unbounded), system-ui, sans-serif;
 
   font: 16px/1.7 var(--font-geist), system-ui, sans-serif;
@@ -36,13 +39,13 @@ a:focus-visible {
 }
 
 .site {
-  max-width: 650px;
+  max-width: 670px;
   margin: 0 auto;
   padding: 64px 32px;
   position: relative;
   z-index: 1;
-  background: rgba(12, 10, 9, 0.85);
-  box-shadow: 0 0 80px 40px rgba(12, 10, 9, 0.85);
+  background: var(--surface);
+  box-shadow: 0 0 60px 30px var(--surface-shadow);
 }
 
 .site a:hover {
@@ -66,16 +69,15 @@ header {
 .tagline {
   display: flex;
   align-items: baseline;
-  gap: 16px;
+  gap: 32px;
   color: var(--text);
   margin: 0;
-  font-size: 15px;
 }
 
-.resume-link {
-  font-size: 13px;
+.tagline a {
   color: var(--text);
   text-decoration: none;
+  font-size: 14px;
 }
 
 
@@ -93,9 +95,9 @@ header {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #22c55e;
+  background: var(--accent);
   flex-shrink: 0;
-  animation: blink 2.5s ease-in-out infinite;
+  animation: blink 2s ease infinite;
 }
 
 @keyframes blink {
@@ -123,10 +125,10 @@ section {
 
 h2 {
   font-size: 11px;
-  font-weight: 500;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1.5px;
-  color: var(--accent);
+  color: var(--secondary);
   margin: 0;
   padding-top: 3px;
 }
@@ -171,7 +173,8 @@ h2 span {
 }
 
 .about .sep {
-  color: var(--accent);
+  color: var(--secondary);
+  font-weight: 700;
 }
 
 /* Quote */
@@ -253,11 +256,11 @@ h2 span {
   height: 7px;
   border-radius: 50%;
   background: var(--bg);
-  border: 1px solid var(--accent);
+  border: 1px solid var(--secondary);
 }
 
 .job-current .job-header::before {
-  background: var(--accent);
+  background: var(--secondary);
 }
 
 .job-header a {
@@ -368,11 +371,16 @@ footer {
   align-items: center;
 }
 
+footer a {
+  color: var(--text);
+  text-decoration: none;
+}
+
 
 .webring img {
   height: 20px;
   display: block;
-  opacity: 0.65;
+  filter: sepia(1) saturate(1.5) hue-rotate(5deg) brightness(0.5) opacity(0.7);
 }
 
 /* Term progress */
@@ -400,7 +408,7 @@ footer {
   left: 0;
   top: 0;
   height: 100%;
-  background: var(--accent);
+  background: var(--secondary);
 }
 
 .term-tick {
@@ -423,9 +431,8 @@ footer {
   flex-direction: column;
   align-items: flex-end;
   gap: 6px;
-  background: rgba(12, 10, 9, 0.85);
-  box-shadow: 0 0 80px 40px rgba(12, 10, 9, 0.85);
-  border-radius: 6px;
+  background: var(--surface);
+  box-shadow: 0 0 60px 30px var(--surface-shadow);
   padding: 10px 12px;
 }
 
@@ -509,7 +516,7 @@ footer {
 
 .ssh-copy:hover {
   border-color: var(--accent);
-  color: #fff;
+  color: var(--text-h);
 }
 
 .ssh-copy code {
