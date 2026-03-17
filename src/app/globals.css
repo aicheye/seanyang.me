@@ -181,6 +181,14 @@ h2 span {
   font-weight: 700;
 }
 
+@media (max-width: 560px) {
+  .about {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+}
+
 /* Quote */
 
 .quote {
