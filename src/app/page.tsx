@@ -1,24 +1,18 @@
-import { useState } from 'react'
-import './App.css'
-import webringW from './assets/webring/webring_logo_w.svg'
-import adjectives from './data/adjectives'
-import jobs from './data/jobs'
-import portfolio from './data/portfolio'
-import quotes from './data/quotes'
-import { primaryEmail, socials } from './data/socials'
+import adjectives from '../data/adjectives'
+import jobs from '../data/jobs'
+import portfolio from '../data/portfolio'
+import quotes from '../data/quotes'
+import { primaryEmail, socials } from '../data/socials'
+import { SSHCopyButton } from './SSHCopyButton'
+import { GameOfLife } from './GameOfLife'
+import { TermProgress } from './TermProgress'
 
-function App() {
-  const [quote] = useState(() => quotes[Math.floor(Math.random() * quotes.length)])
-  const [copied, setCopied] = useState(false)
-
-  function copySSH() {
-    navigator.clipboard.writeText('ssh seanyang.me')
-    setCopied(true)
-    setTimeout(() => setCopied(false), 1500)
-  }
+export default function Page() {
+  const quote = quotes[Math.floor(Math.random() * quotes.length)]
 
   return (
     <>
+      <GameOfLife />
       <div className="site">
         <header>
           <div className="name-row">
@@ -38,13 +32,8 @@ function App() {
             )}
             <span className="sep">&#93;</span>
           </div>
-          <div className="ssh-hint">
-            prefer a terminal?
-            <button className="ssh-copy" onClick={copySSH}>
-              <code>$ ssh seanyang.me</code>
-              <span className="ssh-copy-label">{copied ? '✓' : '(copy)'}</span>
-            </button>
-          </div>
+          <TermProgress />
+          <SSHCopyButton />
         </header>
 
         <div className="quote">
@@ -101,12 +90,10 @@ function App() {
         <footer>
           <span>0.03 g CO₂ / view</span>
           <a className="webring" href="https://se-webring.xyz" target="_blank" rel="noopener noreferrer">
-            <img src={webringW} alt="SE Webring" />
+            <img src="/webring_logo_w.svg" alt="SE Webring" />
           </a>
         </footer>
       </div>
     </>
   )
 }
-
-export default App
