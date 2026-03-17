@@ -1,96 +1,75 @@
-[![Netlify Status](https://api.netlify.com/api/v1/badges/d19e7432-8155-4355-adb9-b2dc7621f984/deploy-status)](https://app.netlify.com/projects/graceful-puffpuff-983cf3/deploys)
+# React + TypeScript + Vite
 
-# seanyang.me - Personal Portfolio Website
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-A modern, responsive personal portfolio website built with Next.js 15, featuring an animated background, light/dark mode toggle, interactive tooltips, and smooth scroll animations.
+Currently, two official plugins are available:
 
-Dynamic content served from https://api.seanyang.me/
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
 
-See https://github.com/aicheye/api.seanyang.me for more.
+## React Compiler
 
-## Features
+The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
 
-### Visual Design
+Note: This will impact Vite dev & build performances.
 
-- **Animated Background**: Dynamic blob animations and dot patterns that adapt to light/dark themes
-- **Light/Dark Mode**: Seamless theme switching with persistent user preference
-- **Responsive Design**: Fully responsive layout optimized for all screen sizes
-- **Modern UI**: Clean, minimalist design with smooth transitions and hover effects
+## Expanding the ESLint configuration
 
-### Interactive Elements
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-- **Mouse-Following Tooltips**: Interactive tooltips that follow cursor movement
-- **Smooth Animations**: Fade-in effects and bounce animations for enhanced user experience
-- **Scroll Animations**: Content appears dynamically as users scroll
-- **Theme Toggle**: Fixed theme switcher with sun/moon icons (synced to system settings)
-
-### Technical Features
-
-- **Next.js 15**: Latest version with Turbopack for fast development
-- **React 19**: Modern React with hooks and functional components
-- **Tailwind CSS 4**: Utility-first CSS framework for rapid styling
-
-## Getting Started
-
-### Prerequisites
-
-- Node.js 18.0 or later
-- npm, yarn, or pnpm
-
-### Installation
-
-1. **Clone the repository**
-
-   ```bash
-   git clone https://github.com/your-username/seanyang.me.git
-   cd seanyang.me
-   ```
-
-2. **Install dependencies**
-
-   ```bash
-   npm install
-   # or
-   yarn install
-   # or
-   pnpm install
-   ```
-
-3. **Start the development server**
-
-   ```bash
-   npm run dev
-   # or
-   yarn dev
-   # or
-   pnpm dev
-   ```
-
-4. **Open your browser**
-
-   Navigate to [http://localhost:3000](http://localhost:3000) to view the website.
-
-## Adding New Projects
-
-Edit the `src/data/portfolio.js` file to add new projects:
-
-```javascript
-const portfolio = [
+```js
+export default defineConfig([
+  globalIgnores(['dist']),
   {
-    title: "Your Project Title",
-    description: "Brief description of your project",
-    github: "https://github.com/username/repo",
-    thumbnail: "/your-image.png", // Place image in public/ folder
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+
+      // Remove tseslint.configs.recommended and replace with this
+      tseslint.configs.recommendedTypeChecked,
+      // Alternatively, use this for stricter rules
+      tseslint.configs.strictTypeChecked,
+      // Optionally, add this for stylistic rules
+      tseslint.configs.stylisticTypeChecked,
+
+      // Other configs...
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
   },
-  // Add more projects...
-];
+])
 ```
 
-## License
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
-This project is licensed under Creative Commons Attribution-NonCommercial-ShareAlike 4.0 - see the [LICENSE](LICENSE) file for details.
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
 
-## Acknowledgements
-
-- oneko: https://github.com/adryd325/oneko.js
-- Idea to show song suggestions: Brian Cai
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+      // Enable lint rules for React
+      reactX.configs['recommended-typescript'],
+      // Enable lint rules for React DOM
+      reactDom.configs.recommended,
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```
