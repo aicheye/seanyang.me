@@ -160,6 +160,10 @@ h2 span {
   .links {
     grid-template-columns: 1fr 1fr;
   }
+
+  .gol-controls {
+    display: none !important;
+  }
 }
 
 /* About */
