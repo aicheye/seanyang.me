@@ -94,7 +94,7 @@ export default function Page() {
         </section>
 
         <footer>
-          <a href="https://websitecarbon.com/website/seanyang-me/" target="_blank" rel="noopener noreferrer">0.03 g CO₂ / view</a>
+          <a href="https://websitecarbon.com/website/seanyang-me/" target="_blank" rel="noopener noreferrer">0.02 g CO₂ / view</a>
           <a className="webring" href="https://se-webring.xyz" target="_blank" rel="noopener noreferrer">
             <img src="/logo_b.png" alt="SE Webring" />
           </a>
