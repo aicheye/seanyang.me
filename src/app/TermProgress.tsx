@@ -1,3 +1,7 @@
+'use client'
+
+import { useEffect, useState } from 'react'
+
 const START = new Date('2025-09-01')
 const END = new Date('2030-05-01')
 
@@ -27,11 +31,19 @@ function buildTerms(): { startPct: number; endPct: number }[] {
 
 export function TermProgress() {
   const terms = buildTerms()
-  const progressPct = Math.max(0, Math.min(100, toPct(new Date())))
+  const [progressPct, setProgressPct] = useState(() => Math.max(0, Math.min(100, toPct(new Date()))))
+
+  useEffect(() => {
+    const id = setInterval(() => setProgressPct(Math.max(0, Math.min(100, toPct(new Date())))), 100)
+    return () => clearInterval(id)
+  }, [])
 
   return (
     <div className="term-progress">
-      <span className="term-label">uw bse &apos;30 progress</span>
+      <div className="term-label">
+        <span>uw bse &apos;30 progress</span>
+        <span style={{ fontFamily: 'var(--font-mono), monospace' }}>{progressPct.toFixed(8)}%</span>
+      </div>
       <div className="term-bar">
         <div className="term-fill" style={{ width: `${progressPct}%` }} />
         {terms.slice(0, -1).map((term, i) => (

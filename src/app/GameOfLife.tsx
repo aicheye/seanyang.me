@@ -116,15 +116,9 @@ export function GameOfLife() {
     const down = (e: MouseEvent) => { painting.current = true; paint(e.clientX, e.clientY) }
     const move = (e: MouseEvent) => { if (painting.current) paint(e.clientX, e.clientY) }
     const up = () => { painting.current = false }
-    const touchStart = (e: TouchEvent) => { painting.current = true; paint(e.touches[0].clientX, e.touches[0].clientY) }
-    const touchMove = (e: TouchEvent) => { if (painting.current) paint(e.touches[0].clientX, e.touches[0].clientY) }
-
     window.addEventListener('mousedown', down)
     window.addEventListener('mousemove', move)
     window.addEventListener('mouseup', up)
-    window.addEventListener('touchstart', touchStart, { passive: true })
-    window.addEventListener('touchmove', touchMove, { passive: true })
-    window.addEventListener('touchend', up)
 
     return () => {
       window.removeEventListener('resize', resize)
@@ -132,9 +126,6 @@ export function GameOfLife() {
       window.removeEventListener('mousedown', down)
       window.removeEventListener('mousemove', move)
       window.removeEventListener('mouseup', up)
-      window.removeEventListener('touchstart', touchStart)
-      window.removeEventListener('touchmove', touchMove)
-      window.removeEventListener('touchend', up)
     }
   }, [tick, paint, render, seed])
 

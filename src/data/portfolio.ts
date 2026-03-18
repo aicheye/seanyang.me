@@ -8,13 +8,13 @@ interface Project {
 const portfolio: Project[] = [
   {
     title: "swarm_ws",
-    description: "robotic swarm maze solver",
+    description: "decentralized robotic swarm maze solver",
     github: "https://github.com/RRohan4/swarm_ws",
     languages: ["C++", "ROS 2", "Docker"],
   },
   {
     title: "CRusTTY",
-    description: "c interpreter from scratch",
+    description: "tui c interpreter from scratch",
     github: "https://github.com/aicheye/crustty",
     languages: ["Rust", "C"],
   },

@@ -1,3 +1,4 @@
+import { FiMapPin } from 'react-icons/fi'
 import adjectives from '../data/adjectives'
 import jobs from '../data/jobs'
 import portfolio from '../data/portfolio'
@@ -17,10 +18,11 @@ export default function Page() {
         <header>
           <div className="name-row">
             <h1>Sean Yang</h1>
-            <span className="location"><span className="pulse" />Waterloo, ON</span>
+            <span className="location"><span className="pulse" />Waterloo, Ontario<FiMapPin size={12} /></span>
           </div>
           <div className="tagline">
             <a href={primaryEmail.href}>{primaryEmail.label}</a>
+            <span>|</span>
             <a href="/resume" target="_blank" rel="noopener noreferrer">resume ↗</a>
           </div>
           <div className="about">
@@ -46,15 +48,20 @@ export default function Page() {
             {jobs.map((job) => (
               <div key={job.title} className={`job${job.current ? ' job-current' : ''}`}>
                 <div className="job-header">
-                  <span className="job-meta">{job.dates.join(' – ')}</span>
-                  <a href={job.website} target="_blank" rel="noopener noreferrer"><strong>{job.title} @ {job.company}</strong></a>
-                </div>
-                {job.description && <p className="job-description">{job.description}</p>}
-                {job.technologies.length > 0 && (
-                  <div className="badges badges-right">
-                    {job.technologies.map((t: string) => <span key={t} className="badge">{t}</span>)}
+                  <div className="job-meta">
+                    <span>{job.dates.join(' – ')}</span>
+                    {job.location && <span className="job-location">{job.location}</span>}
                   </div>
-                )}
+                  <div className="job-body">
+                    <a href={job.website} target="_blank" rel="noopener noreferrer"><strong>{job.title} @ {job.company}</strong></a>
+                    {job.description && <p className="job-description">{job.description}</p>}
+                    {job.technologies.length > 0 && (
+                      <div className="badges badges-right">
+                        {job.technologies.map((t: string) => <span key={t} className="badge">{t}</span>)}
+                      </div>
+                    )}
+                  </div>
+                </div>
               </div>
             ))}
           </div>
