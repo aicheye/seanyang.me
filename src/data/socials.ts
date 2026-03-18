@@ -17,7 +17,7 @@ export const socials: Social[] = [
   { label: "GitHub", href: "https://github.com/aicheye" },
   { label: "LinkedIn", href: "https://linkedin.com/in/syang07/" },
   { label: "Twitter/X", href: "https://x.com/aicheye" },
+  { label: "Bluesky", href: "https://bsky.app/profile/seanyang.me" },
   { label: "Instagram", href: "https://instagram.com/seanyang_esports_gaming" },
   { label: "Letterboxd", href: "https://letterboxd.com/aicheye/" },
-  { label: "Bluesky", href: "https://bsky.app/profile/seanyang.me" },
 ];

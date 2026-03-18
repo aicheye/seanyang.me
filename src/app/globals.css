@@ -7,7 +7,7 @@
   --secondary: #77934d;
   --link: #268bd2;
   --badge-bg: #eee8d5;
-  --surface: rgba(253, 246, 227, 0.85);
+  --surface: rgba(253, 246, 227, 0.83);
   --surface-shadow: rgba(253, 246, 227, 0.96);
   --display: var(--font-unbounded), system-ui, sans-serif;
 
@@ -132,13 +132,15 @@ section {
 }
 
 h2 {
+  font-family: var(--display);
   font-size: 11px;
-  font-weight: 700;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 1.5px;
+  letter-spacing: 1.2px;
   color: var(--secondary);
   margin: 0;
   padding-top: 3px;
+
 }
 
 h2 span {
@@ -235,7 +237,7 @@ h2 span {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  gap: 12px;
+  gap: 24px;
   position: relative;
 }
 
@@ -288,7 +290,6 @@ h2 span {
   margin: 0;
   font-size: 14px;
   color: var(--text);
-  text-align: right;
 }
 
 .badges-right {
@@ -337,7 +338,8 @@ h2 span {
 
 .links {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-auto-flow: column;
+  grid-template-rows: repeat(2, 1fr);
   gap: 6px 0;
 }
 
@@ -580,5 +582,18 @@ footer a {
     box-shadow: none;
     position: relative;
     z-index: 2;
+  }
+
+  .job-header {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .job-body {
+    align-items: flex-start;
+  }
+
+  .job {
+    padding-bottom: 32px;
   }
 }
