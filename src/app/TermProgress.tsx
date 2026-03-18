@@ -19,7 +19,7 @@ function termEnd(date: Date): Date {
 
 function buildTerms(): { startPct: number; endPct: number }[] {
   const terms = []
-  let cur = new Date(START)
+  let cur = termEnd(START)
   while (cur < END) {
     const end = termEnd(cur)
     const clipped = end < END ? end : new Date(END)
@@ -42,7 +42,7 @@ export function TermProgress() {
   return (
     <div className="term-progress">
       <div className="term-label">
-        <span>uw bse &apos;30 progress</span>
+        <span>uwaterloo bse &apos;30 progress</span>
         <span style={{ fontFamily: 'var(--font-mono), monospace' }}>{progressPct.toFixed(8)}%</span>
       </div>
       <div className="term-bar">

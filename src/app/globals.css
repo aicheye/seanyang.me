@@ -164,14 +164,6 @@ h2 span {
   font-weight: 700;
 }
 
-@media (max-width: 560px) {
-  .about {
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    gap: 6px;
-  }
-}
-
 /* Quote */
 
 .quote {
@@ -219,7 +211,7 @@ h2 span {
   left: -16px;
   width: 1px;
   top: 10px;
-  height: 48px;
+  height: 64px;
   background: var(--border);
 }
 
@@ -407,7 +399,7 @@ footer a {
 
 .term-bar {
   position: relative;
-  height: 6px;
+  height: 8px;
   background: var(--border);
   overflow: visible;
 }
@@ -422,9 +414,8 @@ footer a {
 
 .term-tick {
   position: absolute;
-  top: -3px;
   width: 1px;
-  height: 9px;
+  height: 8px;
   background: var(--bg);
   transform: translateX(-50%);
 }
@@ -543,6 +534,12 @@ footer a {
 }
 
 @media (max-width: 1000px) {
+  .about {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 0px 8px;
+  }
+
   .site {
     padding: 48px 20px 40px;
     min-height: unset;
@@ -595,5 +592,9 @@ footer a {
 
   .job {
     padding-bottom: 32px;
+  }
+
+  .ssh-hint {
+    display: none;
   }
 }
