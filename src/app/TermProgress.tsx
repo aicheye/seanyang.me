@@ -31,9 +31,10 @@ function buildTerms(): { startPct: number; endPct: number }[] {
 
 export function TermProgress() {
   const terms = buildTerms()
-  const [progressPct, setProgressPct] = useState(() => Math.max(0, Math.min(100, toPct(new Date()))))
+  const [progressPct, setProgressPct] = useState(0)
 
   useEffect(() => {
+    setProgressPct(Math.max(0, Math.min(100, toPct(new Date()))))
     const id = setInterval(() => setProgressPct(Math.max(0, Math.min(100, toPct(new Date())))), 100)
     return () => clearInterval(id)
   }, [])

@@ -22,7 +22,7 @@ export function GameOfLife() {
     if (!canvas) return
     const ctx = canvas.getContext('2d')!
     ctx.clearRect(0, 0, canvas.width, canvas.height)
-    ctx.fillStyle = '#292524'
+    ctx.fillStyle = '#d6cfb8'
     const C = cols.current
     const R = rows.current
     const g = grid.current
@@ -102,16 +102,41 @@ export function GameOfLife() {
 
   useEffect(() => {
     const canvas = canvasRef.current!
-    const resize = () => {
-      canvas.width = window.innerWidth
-      canvas.height = window.innerHeight
-      cols.current = Math.ceil(canvas.width / CELL)
-      rows.current = Math.ceil(canvas.height / CELL)
-      seed()
-    }
-    resize()
-    window.addEventListener('resize', resize)
+
+    // Initial setup: size canvas and seed
+    canvas.width = window.innerWidth
+    canvas.height = window.innerHeight
+    cols.current = Math.ceil(canvas.width / CELL)
+    rows.current = Math.ceil(canvas.height / CELL)
+    seed()
+
     timer.current = setInterval(tick, TICK)
+
+    // On resize: preserve existing grid, copy cells into new dimensions
+    let resizeTimer: ReturnType<typeof setTimeout>
+    const resize = () => {
+      clearTimeout(resizeTimer)
+      resizeTimer = setTimeout(() => {
+        const newCols = Math.ceil(window.innerWidth / CELL)
+        const newRows = Math.ceil(window.innerHeight / CELL)
+        const oldGrid = grid.current
+        const oldCols = cols.current
+        const oldRows = rows.current
+        const newGrid = new Uint8Array(newCols * newRows)
+        const minR = Math.min(oldRows, newRows)
+        const minC = Math.min(oldCols, newCols)
+        for (let r = 0; r < minR; r++)
+          for (let c = 0; c < minC; c++)
+            newGrid[r * newCols + c] = oldGrid[r * oldCols + c]
+        canvas.width = window.innerWidth
+        canvas.height = window.innerHeight
+        cols.current = newCols
+        rows.current = newRows
+        grid.current = newGrid
+        render()
+      }, 400)
+    }
+    window.addEventListener('resize', resize)
 
     const down = (e: MouseEvent) => { painting.current = true; paint(e.clientX, e.clientY) }
     const move = (e: MouseEvent) => { if (painting.current) paint(e.clientX, e.clientY) }
@@ -121,6 +146,7 @@ export function GameOfLife() {
     window.addEventListener('mouseup', up)
 
     return () => {
+      clearTimeout(resizeTimer)
       window.removeEventListener('resize', resize)
       clearInterval(timer.current)
       window.removeEventListener('mousedown', down)
