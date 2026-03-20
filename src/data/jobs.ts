@@ -12,12 +12,12 @@ interface Job {
 
 const jobs: Job[] = [
   {
-    title: "Robotics Intern",
+    title: "Robotics Perception Intern",
     company: "moss",
-    description: "perception for outdoor robotics",
+    description: "perception for agbots",
     website: "https://moss.ag/",
     logo: "/assets/jobs/moss.jpg",
-    location: "San Francisco, California",
+    location: "San Francisco, CA",
     technologies: [],
     dates: ["inc. 2026.5"],
     current: false,
@@ -28,7 +28,7 @@ const jobs: Job[] = [
     description: "prediction pipelines for autonomous vehicles",
     website: "https://watonomous.ca/projects/eve",
     logo: "/assets/jobs/watonomous.jpg",
-    location: "Waterloo, Ontario",
+    location: "Waterloo, ON",
     technologies: ["C++", "ROS 2", "Docker", "Foxglove"],
     dates: ["2025.9", "present"],
     current: true,
