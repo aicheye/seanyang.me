@@ -12,9 +12,9 @@ interface Job {
 
 const jobs: Job[] = [
   {
-    title: "Robotics Intern",
+    title: "Robotics Perception Intern",
     company: "moss",
-    description: "perception for outdoor robotics",
+    description: "perception for agbots",
     website: "https://moss.ag/",
     logo: "/assets/jobs/moss.jpg",
     location: "San Francisco, California",
