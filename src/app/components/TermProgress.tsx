@@ -34,7 +34,6 @@ export function TermProgress() {
   const [progressPct, setProgressPct] = useState(0)
 
   useEffect(() => {
-    setProgressPct(Math.max(0, Math.min(100, toPct(new Date()))))
     const id = setInterval(() => setProgressPct(Math.max(0, Math.min(100, toPct(new Date())))), 100)
     return () => clearInterval(id)
   }, [])
