@@ -29,23 +29,26 @@ function buildTerms(): { startPct: number; endPct: number }[] {
   return terms
 }
 
+const terms = buildTerms()
+
 export function TermProgress() {
-  const terms = buildTerms()
-  const [progressPct, setProgressPct] = useState(0)
+  const [progressPct, setProgressPct] = useState(() => Math.max(0, Math.min(100, toPct(new Date()))))
 
   useEffect(() => {
-    const id = setInterval(() => setProgressPct(Math.max(0, Math.min(100, toPct(new Date())))), 100)
+    const id = setInterval(() => {
+      setProgressPct(Math.max(0, Math.min(100, toPct(new Date()))))
+    }, 50)
     return () => clearInterval(id)
   }, [])
 
   return (
     <div className="term-progress">
       <div className="term-label">
-        <span>uwaterloo bse &apos;30 progress</span>
-        <span style={{ fontFamily: 'var(--font-mono), monospace' }}>{progressPct.toFixed(8)}%</span>
+        <span>uwaterloo bse &apos;30</span>
+        <span suppressHydrationWarning style={{ fontFamily: 'var(--font-mono), monospace' }}>{progressPct.toFixed(8)}%</span>
       </div>
       <div className="term-bar">
-        <div className="term-fill" style={{ width: `${progressPct}%` }} />
+        <div className="term-fill" suppressHydrationWarning style={{ width: `${progressPct}%` }} />
         {terms.slice(0, -1).map((term, i) => (
           <div key={i} className="term-tick" style={{ left: `${term.endPct}%` }} />
         ))}

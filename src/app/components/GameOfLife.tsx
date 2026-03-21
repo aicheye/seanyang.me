@@ -72,8 +72,9 @@ export function GameOfLife() {
     const C = cols.current
     const R = rows.current
     const g = new Uint8Array(C * R)
-    // sparsity 1–10 → divisor 200–5000 (log scale)
-    const divisor = 200 * Math.pow(25, (sparsityRef.current - 1) / 9)
+    // sparsity 1–10 → divisor 200–5000 (log scale), halved on mobile for more clusters
+    const mobile = window.innerWidth <= 1000
+    const divisor = (mobile ? 100 : 200) * Math.pow(25, (sparsityRef.current - 1) / 9)
     const clusterCount = Math.max(1, Math.floor((C * R) / divisor))
     const fillProb = densityRef.current / 10
     for (let k = 0; k < clusterCount; k++) {

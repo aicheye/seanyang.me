@@ -391,7 +391,7 @@ footer a {
 .webring img {
   height: 22px;
   display: block;
-  filter: sepia(1) saturate(1.5) hue-rotate(5deg) brightness(0.5) opacity(0.7);
+  filter: invert(35%) sepia(20%) saturate(300%) hue-rotate(345deg);
 }
 
 .webring-arrow {

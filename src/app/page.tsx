@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 import { ExperienceSection } from '@/app/components/ExperienceSection'
 import { Footer } from '@/app/components/Footer'
 import { GameOfLife } from '@/app/components/GameOfLife'
