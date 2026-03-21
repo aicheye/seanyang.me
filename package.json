@@ -22,6 +22,7 @@
     "eslint": "^9.39.4",
     "eslint-plugin-react-hooks": "^7.0.1",
     "globals": "^17.4.0",
+    "jiti": "^2.6.1",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.56.1"
   }
