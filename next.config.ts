@@ -1,6 +1,11 @@
 import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
+  images: {
+    remotePatterns: [
+      { hostname: 'se30webring.com' },
+    ],
+  },
   redirects: async () => [
     {
       source: '/resume.pdf',
