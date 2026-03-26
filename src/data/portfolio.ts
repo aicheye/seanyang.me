@@ -8,9 +8,9 @@ interface Project {
 const portfolio: Project[] = [
   {
     title: "swarm_ws",
-    description: "decentralized robotic swarm maze solver",
+    description: "robotic swarm maze exploration",
     github: "https://github.com/RRohan4/swarm_ws",
-    languages: ["C++", "ROS 2", "Docker"],
+    languages: ["Python", "ROS 2", "Docker"],
   },
   {
     title: "CRusTTY",
@@ -22,13 +22,25 @@ const portfolio: Project[] = [
     title: "Wunder RNN Challenge",
     description: "top 5% market prediction model",
     github: "https://github.com/aicheye/wundernn",
-    languages: ["Python"],
+    languages: ["Python", "ML", "Jupyter"],
   },
   {
     title: "aicheye's Combat Tagging",
-    description: "minecraft mod with 1k+ downloads",
+    description: "minecraft mod w/ 1k+ downloads",
     github: "https://github.com/aicheye/combat-tag",
-    languages: ["Java"],
+    languages: ["Java", "Gradle"],
+  },
+  {
+    title: "Bucket",
+    description: "intuitive student dashboard",
+    github: "https://github.com/aicheye/bucket",
+    languages: ["TypeScript", "React", "GraphQL"],
+  },
+  {
+    title: "ezp2p Arcade",
+    description: "p2p serverless minigames",
+    github: "https://github.com/aicheye/ezp2p",
+    languages: ["TypeScript", "Vite", "WebRTC"],
   },
 ];
 
