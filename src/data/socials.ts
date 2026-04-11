@@ -9,7 +9,7 @@ interface Email {
 }
 
 export const primaryEmail: Email = {
-  label: "sean [at] seanyang.me",
+  label: "sean@seanyang.me",
   href: "mailto:sean@seanyang.me",
 };
 
