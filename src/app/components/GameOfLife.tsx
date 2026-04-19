@@ -18,6 +18,8 @@ export function GameOfLife() {
   const densityRef = useRef(5)
   const [mounted, setMounted] = useState(false)
 
+  useEffect(() => { setMounted(true) }, [])
+
   const render = useCallback(() => {
     const canvas = canvasRef.current
     if (!canvas) return
@@ -146,8 +148,6 @@ export function GameOfLife() {
     window.addEventListener('mousedown', down)
     window.addEventListener('mousemove', move)
     window.addEventListener('mouseup', up)
-
-    setMounted(true)
 
     return () => {
       clearTimeout(resizeTimer)
