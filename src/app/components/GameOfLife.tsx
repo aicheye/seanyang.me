@@ -16,6 +16,7 @@ export function GameOfLife() {
   const [density, setDensity] = useState(5)  // 1–10: sparse → dense
   const sparsityRef = useRef(6)              // derived: 11 - density
   const densityRef = useRef(5)
+  const [mounted, setMounted] = useState(false)
 
   const render = useCallback(() => {
     const canvas = canvasRef.current
@@ -146,6 +147,8 @@ export function GameOfLife() {
     window.addEventListener('mousemove', move)
     window.addEventListener('mouseup', up)
 
+    setMounted(true)
+
     return () => {
       clearTimeout(resizeTimer)
       window.removeEventListener('resize', resize)
@@ -162,7 +165,7 @@ export function GameOfLife() {
         ref={canvasRef}
         style={{ position: 'fixed', inset: 0, zIndex: 0, pointerEvents: 'none' }}
       />
-      <div className="gol-controls" style={{ position: 'fixed', top: 20, right: 24, zIndex: 2 }}>
+      {mounted && <div className="gol-controls" style={{ position: 'fixed', top: 20, right: 24, zIndex: 2 }}>
         <a
           href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life"
           target="_blank"
@@ -187,7 +190,7 @@ export function GameOfLife() {
           <button className="gol-btn" onClick={clear}>clear</button>
           <button className="gol-btn" onClick={seed}>regenerate</button>
         </div>
-      </div>
+      </div>}
     </>
   )
 }

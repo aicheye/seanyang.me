@@ -433,6 +433,7 @@ footer a {
   height: 8px;
   background: var(--bg);
   transform: translateX(-50%);
+  z-index: 1;
 }
 
 /* Game of Life controls */
