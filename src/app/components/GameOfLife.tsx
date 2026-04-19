@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from 'react'
 
 const CELL = 14
 const TICK = 80
@@ -13,13 +13,11 @@ export function GameOfLife() {
   const painting = useRef(false)
   const timer = useRef<ReturnType<typeof setInterval> | undefined>(undefined)
 
+  const mounted = useSyncExternalStore(() => () => {}, () => true, () => false)
+
   const [density, setDensity] = useState(5)  // 1–10: sparse → dense
   const sparsityRef = useRef(6)              // derived: 11 - density
   const densityRef = useRef(5)
-  const [mounted, setMounted] = useState(false)
-
-  useEffect(() => { setMounted(true) }, [])
-
   const render = useCallback(() => {
     const canvas = canvasRef.current
     if (!canvas) return
