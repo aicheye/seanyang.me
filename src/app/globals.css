@@ -425,6 +425,7 @@ footer a {
   top: 0;
   height: 100%;
   background: var(--secondary);
+  z-index: 0;
 }
 
 .term-tick {
