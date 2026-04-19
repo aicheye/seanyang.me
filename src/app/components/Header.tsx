@@ -14,7 +14,7 @@ export function Header() {
       <div className="tagline">
         <a href={primaryEmail.href}>{primaryEmail.label}</a>
         <span>|</span>
-        <a href="/resume" target="_blank" rel="noopener noreferrer">resume ↗</a>
+        <a href="/resume" target="_blank" rel="noopener noreferrer">résumé ↗</a>
       </div>
       <div className="about">
         <span className="sep">&#91;</span>
