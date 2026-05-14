@@ -1,6 +1,6 @@
-import { FiMapPin } from 'react-icons/fi'
 import adjectives from '@/data/adjectives'
 import { primaryEmail } from '@/data/socials'
+import { FiMapPin } from 'react-icons/fi'
 import { SSHCopyButton } from './SSHCopyButton'
 import { TermProgress } from './TermProgress'
 
@@ -9,7 +9,7 @@ export function Header() {
     <header>
       <div className="name-row">
         <h1>Sean Yang</h1>
-        <span className="location"><span className="pulse" />Waterloo, ON<FiMapPin size={12} /></span>
+        <span className="location"><span className="pulse" />San Francisco, CA<FiMapPin size={12} /></span>
       </div>
       <div className="tagline">
         <a href={primaryEmail.href}>{primaryEmail.label}</a>
