@@ -437,6 +437,213 @@ footer a {
   z-index: 1;
 }
 
+/* Now Playing */
+
+.now-playing {
+  position: fixed;
+  top: 20px;
+  left: 24px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  background: var(--surface);
+  box-shadow: 0 0 20px 8px var(--surface-shadow);
+  padding: 10px 12px;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+}
+
+.site .now-playing:hover,
+.site .now-playing:focus {
+  text-decoration: none;
+}
+
+.np-album {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  flex-shrink: 0;
+  perspective: 600px;
+}
+
+/* Adapted directly from CodePen #vinyl */
+.np-vinyl {
+  position: absolute;
+  top: 2.5%;
+  left: 0;
+  z-index: 0;
+  width: 95%;
+  height: 95%;
+  display: block;
+  background-image: url('/assets/vinyl/record.png');
+  background-size: 106% 106%;
+  background-position: center;
+  box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.25);
+  border-radius: 50%;
+  animation: np-spin 5s linear infinite;
+  animation-play-state: paused;
+  transition: left 1s ease-out;
+}
+
+.np-vinyl-out {
+  left: 50%;
+  animation-play-state: running;
+}
+
+/* Keep the record out of sight at the edge-on moment of the cover flip */
+.np-vinyl-hidden {
+  visibility: hidden;
+}
+
+/* Center label — dominant album color (from CodePen #print) */
+.np-print {
+  position: absolute;
+  top: 33%;
+  left: 33%;
+  height: 34%;
+  width: 34%;
+  box-shadow: inset 0 0 0 5px rgba(150, 150, 150, 0.5);
+  border-radius: 50%;
+}
+
+/* 3D flip card holding the two cover faces */
+.np-cover-flip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  transition: transform 0.9s ease-in-out;
+}
+
+/* Adapted from CodePen #cover — now a single flip-card face */
+.np-cover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: 100% 100%;
+  background-color: var(--badge-bg);
+  box-shadow:
+    3px 0 10px 0 rgba(0, 0, 0, 0.2),
+    inset 0 0 6px 2px rgba(255, 255, 255, 0.1),
+    inset 0 0 3px 1px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.np-cover-back {
+  transform: rotateY(180deg);
+}
+
+.np-cover::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  background-image: url('/assets/vinyl/cover-tex.jpg');
+  background-size: 100% 100%;
+  border-radius: 4px;
+  mix-blend-mode: screen;
+  opacity: 0.2;
+  content: '';
+}
+
+.np-cover::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 20;
+  width: 100%;
+  height: 100%;
+  background-image: url('/assets/vinyl/cover-tex2.jpg');
+  background-size: 100% 100%;
+  border-radius: 4px;
+  mix-blend-mode: screen;
+  opacity: 0.08;
+  content: '';
+}
+
+@keyframes np-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.np-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  max-width: 160px;
+  background: var(--surface);
+  box-shadow: 0 0 16px 8px var(--surface-shadow);
+  padding: 4px 0;
+}
+
+.np-title {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-h);
+  min-width: 0;
+}
+
+.np-title-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Spotify-style now-playing equalizer */
+.np-eq {
+  display: flex;
+  align-items: flex-end;
+  flex-shrink: 0;
+  gap: 1.5px;
+  height: 10px;
+}
+
+.np-eq span {
+  width: 2px;
+  height: 100%;
+  background: var(--text-h);
+  transform-origin: bottom;
+  animation: np-eq-bounce ease-in-out infinite;
+}
+
+.np-eq span:nth-child(1) { animation-duration: 1.1s; animation-delay: -0.6s; }
+.np-eq span:nth-child(2) { animation-duration: 1.6s; animation-delay: -0.3s; }
+.np-eq span:nth-child(3) { animation-duration: 0.9s; animation-delay: -0.9s; }
+
+@keyframes np-eq-bounce {
+  0%, 100% { transform: scaleY(0.25); }
+  50%      { transform: scaleY(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .np-eq span { animation: none; transform: scaleY(0.5); }
+}
+
+.np-artist {
+  font-size: 11px;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 /* Game of Life controls */
 
 .gol-controls {
@@ -577,6 +784,32 @@ footer a {
 
   .links {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .now-playing {
+    position: static;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    background: none;
+    box-shadow: none;
+    padding: 0;
+    margin-top: 10px;
+  }
+
+  .now-playing.np-playing {
+    gap: 50px;
+  }
+
+  .np-album {
+    width: 64px;
+    height: 64px;
+  }
+
+  .np-info {
+    background: none;
+    box-shadow: none;
+    padding: 0;
   }
 
   .gol-controls {

@@ -14,7 +14,7 @@ const jobs: Job[] = [
   {
     title: "Robotics Perception Intern",
     company: "moss",
-    description: "perception for agbots",
+    description: "data gen/ml pipelines & firmware for agbots",
     website: "https://moss.ag/",
     logo: "/assets/jobs/moss.jpg",
     location: "San Francisco, CA",
