@@ -28,7 +28,42 @@ function rgbToHsl(r: number, g: number, b: number) {
   return { h, s, l }
 }
 
-// Pick the most prevalent *vibrant* hue rather than a single saturated pixel.
+// Animated covers (GIF / animated WebP) get promoted to their own compositing
+// layer, which stops the `mix-blend-mode: screen` texture overlays from
+// blending — so the texture disappears. Drawing one frame to a canvas and
+// using that static data URL as the cover keeps the overlay working (and stops
+// the distracting loop). Cached per URL so we only pay the decode once.
+const frameCache = new Map<string, string>()
+async function freezeFrame(artUrl: string): Promise<string | null> {
+  const cached = frameCache.get(artUrl)
+  if (cached) return cached
+  try {
+    const img = await new Promise<HTMLImageElement>((resolve, reject) => {
+      const el = new Image()
+      el.onload = () => resolve(el)
+      el.onerror = reject
+      el.src = `/api/lastfm/art?url=${encodeURIComponent(artUrl)}`
+    })
+    const max = 320
+    const scale = Math.min(1, max / Math.max(img.naturalWidth || max, img.naturalHeight || max))
+    const w = Math.max(1, Math.round((img.naturalWidth || max) * scale))
+    const h = Math.max(1, Math.round((img.naturalHeight || max) * scale))
+    const canvas = document.createElement('canvas')
+    canvas.width = w
+    canvas.height = h
+    canvas.getContext('2d')!.drawImage(img, 0, 0, w, h)
+    const url = canvas.toDataURL('image/jpeg', 0.92)
+    frameCache.set(artUrl, url)
+    return url
+  } catch {
+    return null
+  }
+}
+
+// Downsample the art to a coarse 16×16 grid (each cell is an averaged block of
+// the original), then pick the most saturated cell — ignoring near-black and
+// near-white cells that have no real colour. The bucketing tames noise while
+// the max-saturation pick keeps the vivid colour the art is actually built on.
 async function extractDominantColor(artUrl: string): Promise<string> {
   try {
     const img = await new Promise<HTMLImageElement>((resolve, reject) => {
@@ -37,42 +72,23 @@ async function extractDominantColor(artUrl: string): Promise<string> {
       el.onerror = reject
       el.src = `/api/lastfm/art?url=${encodeURIComponent(artUrl)}`
     })
-    const N = 40
+    const N = 16
     const canvas = document.createElement('canvas')
     canvas.width = canvas.height = N
     const ctx = canvas.getContext('2d')!
     ctx.drawImage(img, 0, 0, N, N)
     const { data } = ctx.getImageData(0, 0, N, N)
 
-    // Histogram over hue buckets, each pixel weighted by how vivid + mid-toned it is.
-    const BUCKETS = 24
-    const w = new Float64Array(BUCKETS)
-    const sr = new Float64Array(BUCKETS)
-    const sg = new Float64Array(BUCKETS)
-    const sb = new Float64Array(BUCKETS)
+    let best = FALLBACK_COLOR
+    let bestS = -1
     for (let i = 0; i < data.length; i += 4) {
       if (data[i + 3] < 128) continue // skip transparent
       const r = data[i], g = data[i + 1], b = data[i + 2]
-      const { h, s, l } = rgbToHsl(r, g, b)
-      if (s < 0.2 || l < 0.12 || l > 0.92) continue // ignore grey / near-black / near-white
-      const weight = s * s * (1 - Math.abs(l - 0.55) * 1.2) // favour saturated, mid-luminance
-      if (weight <= 0) continue
-      const k = Math.min(BUCKETS - 1, Math.floor((h / 360) * BUCKETS))
-      w[k] += weight
-      sr[k] += r * weight
-      sg[k] += g * weight
-      sb[k] += b * weight
+      const { s, l } = rgbToHsl(r, g, b)
+      if (l < 0.12 || l > 0.92) continue // ignore near-black / near-white cells
+      if (s > bestS) { bestS = s; best = `rgb(${r},${g},${b})` }
     }
-
-    let best = -1, bestW = 0
-    for (let k = 0; k < BUCKETS; k++) if (w[k] > bestW) { bestW = w[k]; best = k }
-    if (best < 0) return FALLBACK_COLOR // greyscale art — no clear colour
-
-    // Weighted-average colour of the winning hue, as-is (no saturation boost).
-    const r = Math.round(sr[best] / w[best])
-    const g = Math.round(sg[best] / w[best])
-    const b = Math.round(sb[best] / w[best])
-    return `rgb(${r},${g},${b})`
+    return best
   } catch {
     return FALLBACK_COLOR
   }
@@ -121,6 +137,9 @@ export function NowPlaying() {
     const artChanged = albumArt !== prevArtRef.current
     prevArtRef.current = albumArt
     const colorPromise = artChanged && albumArt ? extractDominantColor(albumArt) : null
+    // Static frame for display (keeps the blend-mode texture working on animated
+    // covers); resolves to the raw URL if freezing fails.
+    const framePromise = albumArt ? freezeFrame(albumArt).then(f => f ?? albumArt) : null
 
     const wasPlaying = wasPlayingRef.current
     wasPlayingRef.current = isPlaying
@@ -131,24 +150,18 @@ export function NowPlaying() {
       let cancelled = false
       const timers: ReturnType<typeof setTimeout>[] = []
       const wait = (ms: number) => new Promise<void>(r => timers.push(setTimeout(r, ms)))
-      const preload = new Promise<void>(resolve => {
-        if (!albumArt) return resolve()
-        const im = new Image()
-        im.onload = im.onerror = () => resolve()
-        im.src = albumArt
-      })
 
       ;(async () => {
-        setRecordOut(false)                        // 1. record slides in behind the cover
-        await Promise.all([wait(1000), preload])   //    wait for the slide-in AND the new art to be ready
+        setRecordOut(false)                            // 1. record slides in behind the cover
+        const [, frame] = await Promise.all([wait(1000), framePromise]) // slide-in AND the frozen frame
         if (cancelled) return
 
         // 2. disk colour + flip, in parallel
         const color = colorPromise ? await colorPromise.catch(() => null) : null
         if (cancelled) return
         if (color) setLabelColor(color)            //    change the disk colour…
-        if (frontVisible) setBackArt(albumArt)     //    …and put the new art on the hidden face
-        else setFrontArt(albumArt)
+        if (frontVisible) setBackArt(frame ?? albumArt)  // …and put the new art on the hidden face
+        else setFrontArt(frame ?? albumArt)
         setFlipHide(true)                          //    hide the record through the whole flip
         angleRef.current += 180
         setCoverAngle(angleRef.current)            //    …and start the flip
@@ -171,7 +184,8 @@ export function NowPlaying() {
 
     const settle = (out: boolean) => {
       setRecordOut(out)
-      setVisibleArt(albumArt)
+      setVisibleArt(albumArt)                              // paint something immediately…
+      framePromise?.then(f => { if (f) setVisibleArt(f) }) // …then upgrade to the static frame
       setFrontOnTop(frontVisible)
       colorPromise?.then(setLabelColor).catch(() => {})
     }

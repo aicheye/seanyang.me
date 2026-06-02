@@ -557,8 +557,10 @@ footer a {
   background-image: url('/assets/vinyl/cover-tex.jpg');
   background-size: 100% 100%;
   border-radius: 4px;
-  mix-blend-mode: screen;
-  opacity: 0.2;
+  /* overlay (not screen) so the grain shows on light covers too — screen only
+     adds light and vanishes on bright art. */
+  mix-blend-mode: overlay;
+  opacity: 0.50;
   content: '';
 }
 
