@@ -53,7 +53,9 @@ export function NowPlaying() {
       try {
         const res = await fetch('/api/lastfm')
         if (res.ok) setTrack(await res.json())
-      } catch {}
+      } catch {
+        /* ignore transient fetch errors; the next poll retries */
+      }
     }
     load()
     const poll = setInterval(load, 3_000)
@@ -64,6 +66,8 @@ export function NowPlaying() {
   const trackKey = `${track?.title ?? ''}__${track?.artist ?? ''}`
   const isPlaying = track?.isPlaying ?? false
   const albumArt = track?.albumArt ?? null
+  // This effect orchestrates an animation state machine, so synchronous setState is intentional.
+  /* eslint-disable react-hooks/set-state-in-effect */
   useEffect(() => {
     if (!track?.title) return // nothing real yet — don't touch the refs (avoids a first-load flip)
 
@@ -135,7 +139,9 @@ export function NowPlaying() {
       setFlipHide(false)
       timers.forEach(clearTimeout)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [trackKey, isPlaying, albumArt])
+  /* eslint-enable react-hooks/set-state-in-effect */
 
   if (!track || !track.title) return null
 
