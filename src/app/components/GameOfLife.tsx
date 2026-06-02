@@ -77,11 +77,12 @@ export function GameOfLife() {
     const mobile = window.innerWidth <= 1000
     const divisor = (mobile ? 100 : 200) * Math.pow(25, (sparsityRef.current - 1) / 9)
     const clusterCount = Math.max(1, Math.floor((C * R) / divisor))
-    const fillProb = densityRef.current / 10
+    // Cap fill so clusters stay porous — solid blobs all die at once on the first tick (the "flash").
+    const fillProb = 0.15 + (densityRef.current / 10) * 0.35  // 0.18 (sparse) → 0.5 (dense)
     for (let k = 0; k < clusterCount; k++) {
       const cx = Math.random() * C
       const cy = Math.random() * R
-      const radius = 3 + Math.random() * 5
+      const radius = 3 + Math.random() * 4
       for (let dr = -Math.ceil(radius); dr <= Math.ceil(radius); dr++) {
         for (let dc = -Math.ceil(radius); dc <= Math.ceil(radius); dc++) {
           const dist = Math.sqrt(dr * dr + dc * dc)
@@ -181,6 +182,7 @@ export function GameOfLife() {
               setDensity(v)
               densityRef.current = v
               sparsityRef.current = 11 - v
+              seed()
             }}
           />
         </label>
