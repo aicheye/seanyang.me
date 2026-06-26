@@ -1,6 +1,4 @@
-// Single source of truth lives in public/data so the data is also served
-// statically over HTTP (e.g. for the SSH TUI at tui.seanyang.me).
-import data from '../../public/data/socials.json'
+import data from '@public/data/socials.json'
 
 export interface Social {
   name: string;
@@ -11,7 +9,7 @@ export interface Social {
 
 export interface Email {
   label: string;
-  href: string;
+  url: string;
 }
 
 export const primaryEmail: Email = data.primaryEmail;

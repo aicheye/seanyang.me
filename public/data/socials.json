@@ -1,8 +1,7 @@
 {
   "primaryEmail": {
     "label": "sean@seanyang.me",
-    "href": "mailto:sean@seanyang.me",
-    "address": "sean@seanyang.me"
+    "url": "mailto:sean@seanyang.me"
   },
   "socials": [
     {
