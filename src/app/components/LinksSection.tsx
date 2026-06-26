@@ -6,7 +6,7 @@ export function LinksSection() {
       <h2><span>Links</span></h2>
       <nav className="links">
         {socials.map((s) => (
-          <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer">
+          <a key={s.label} href={s.url} target="_blank" rel="noopener noreferrer">
             {s.label}
           </a>
         ))}

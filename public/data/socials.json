@@ -1,0 +1,45 @@
+{
+  "primaryEmail": {
+    "label": "sean@seanyang.me",
+    "href": "mailto:sean@seanyang.me",
+    "address": "sean@seanyang.me"
+  },
+  "socials": [
+    {
+      "name": "GitHub",
+      "label": "GitHub",
+      "url": "https://github.com/aicheye",
+      "handle": "aicheye"
+    },
+    {
+      "name": "LinkedIn",
+      "label": "LinkedIn",
+      "url": "https://linkedin.com/in/syang07",
+      "handle": "syang07"
+    },
+    {
+      "name": "Twitter / X",
+      "label": "Twitter/X",
+      "url": "https://x.com/aicheye",
+      "handle": "aicheye"
+    },
+    {
+      "name": "Bluesky",
+      "label": "Bluesky",
+      "url": "https://bsky.app/profile/seanyang.me",
+      "handle": "seanyang.me"
+    },
+    {
+      "name": "Instagram",
+      "label": "Instagram",
+      "url": "https://instagram.com/seanyang_esports_gaming",
+      "handle": "seanyang_esports_gaming"
+    },
+    {
+      "name": "Letterboxd",
+      "label": "Letterboxd",
+      "url": "https://letterboxd.com/aicheye",
+      "handle": "aicheye"
+    }
+  ]
+}

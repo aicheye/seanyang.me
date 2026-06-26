@@ -1,4 +1,8 @@
-interface Job {
+// Single source of truth lives in public/data so the data is also served
+// statically over HTTP (e.g. for the SSH TUI at tui.seanyang.me).
+import jobs from '../../public/data/jobs.json'
+
+export interface Job {
   title: string;
   company: string;
   description: string;
@@ -10,29 +14,4 @@ interface Job {
   current: boolean;
 }
 
-const jobs: Job[] = [
-  {
-    title: "Robotics Perception Intern",
-    company: "moss",
-    description: "autonomy, cv pipelines, and firmware for agbots",
-    website: "https://moss.ag/",
-    logo: "/assets/jobs/moss.jpg",
-    location: "San Francisco, CA",
-    technologies: ["ROS 2", "Rust", "C++", "Linux"],
-    dates: ["2026.5", "present"],
-    current: true,
-  },
-  {
-    title: "Robotics SWE",
-    company: "WATonomous",
-    description: "prediction pipelines for autonomous vehicles",
-    website: "https://watonomous.ca/projects/eve",
-    logo: "/assets/jobs/watonomous.jpg",
-    location: "Waterloo, ON",
-    technologies: ["C++", "ROS 2", "Docker", "Foxglove"],
-    dates: ["2025.9", "2026.4"],
-    current: false,
-  },
-];
-
-export default jobs;
+export default jobs as Job[]
