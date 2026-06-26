@@ -1,0 +1,67 @@
+name: Purge jsDelivr
+
+# The data under public/data/ is consumed by the SSH TUI (tui.seanyang.me) via
+# jsDelivr, which caches a branch ref (@main) for up to ~12h. When that data
+# changes on main, tell jsDelivr to re-fetch the edited files so the TUI picks
+# them up without waiting for the CDN TTL.
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'public/data/**'
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  purge:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Determine changed data files
+        id: changed
+        env:
+          EVENT: ${{ github.event_name }}
+          BASE: ${{ github.event.before }}
+          HEAD: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          if [ "$EVENT" = 'workflow_dispatch' ] \
+             || [ -z "${BASE:-}" ] \
+             || [ "$BASE" = '0000000000000000000000000000000000000000' ] \
+             || ! git cat-file -e "${BASE}^{commit}" 2>/dev/null; then
+            # No usable diff base (manual run, new branch, or force-push) —
+            # purge every data file to be safe.
+            files=$(ls public/data/*.json)
+          else
+            files=$(git diff --name-only "$BASE" "$HEAD" -- 'public/data/')
+          fi
+          {
+            echo 'files<<EOF'
+            echo "$files"
+            echo 'EOF'
+          } >> "$GITHUB_OUTPUT"
+          echo "Changed data files:"; echo "$files"
+
+      - name: Purge jsDelivr cache
+        if: steps.changed.outputs.files != ''
+        env:
+          FILES: ${{ steps.changed.outputs.files }}
+        run: |
+          set -uo pipefail
+          status=0
+          while IFS= read -r f; do
+            [ -z "$f" ] && continue
+            url="https://purge.jsdelivr.net/gh/${GITHUB_REPOSITORY}@main/${f}"
+            echo "Purging ${url}"
+            if ! curl -fsS --retry 3 --retry-delay 2 "$url"; then
+              echo "::warning::purge request failed for ${f}"
+              status=1
+            fi
+            echo
+          done <<< "$FILES"
+          exit $status
