@@ -13,7 +13,7 @@ export function Header() {
         <span className="location"><span className="pulse" />San Francisco, CA<FiMapPin size={12} /></span>
       </div>
       <div className="tagline">
-        <a href={primaryEmail.href}>{primaryEmail.label}</a>
+        <a href={primaryEmail.url}>{primaryEmail.label}</a>
         <span>|</span>
         <a href="/resume" target="_blank" rel="noopener noreferrer">résumé ↗</a>
       </div>

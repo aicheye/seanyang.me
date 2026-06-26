@@ -1,23 +1,17 @@
-interface Social {
+import data from '@public/data/socials.json'
+
+export interface Social {
+  name: string;
   label: string;
-  href: string;
+  url: string;
+  handle: string;
 }
 
-interface Email {
+export interface Email {
   label: string;
-  href: string;
+  url: string;
 }
 
-export const primaryEmail: Email = {
-  label: "sean@seanyang.me",
-  href: "mailto:sean@seanyang.me",
-};
+export const primaryEmail: Email = data.primaryEmail;
 
-export const socials: Social[] = [
-  { label: "GitHub", href: "https://github.com/aicheye" },
-  { label: "LinkedIn", href: "https://linkedin.com/in/syang07/" },
-  { label: "Twitter/X", href: "https://x.com/aicheye" },
-  { label: "Bluesky", href: "https://bsky.app/profile/seanyang.me" },
-  { label: "Instagram", href: "https://instagram.com/seanyang_esports_gaming" },
-  { label: "Letterboxd", href: "https://letterboxd.com/aicheye/" },
-];
+export const socials: Social[] = data.socials;

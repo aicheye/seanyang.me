@@ -1,8 +1,3 @@
-const adjectives: string[] = [
-  "robotics engineer",
-  "sustainable urbanist",
-  "democratic socialist",
-  "optimist",
-];
+import adjectives from '@public/data/adjectives.json'
 
-export default adjectives;
+export default adjectives as string[]
