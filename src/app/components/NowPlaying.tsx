@@ -7,6 +7,7 @@ interface Track {
   title: string
   artist: string
   albumArt: string | null
+  spotifyUrl: string
 }
 
 const FALLBACK_COLOR = '#8a5c42'
@@ -227,7 +228,7 @@ export function NowPlaying() {
   return (
     <a
       className={`now-playing${isPlaying ? ' np-playing' : ''}`}
-      href="https://open.spotify.com/user/apexblu"
+      href={track.spotifyUrl}
       target="_blank"
       rel="noopener noreferrer"
     >

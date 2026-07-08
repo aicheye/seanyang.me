@@ -22,11 +22,17 @@ export async function GET() {
   const bySize = new Map(images.map(i => [i.size, i['#text']]))
   const pick = (...names: string[]) => names.map(n => bySize.get(n)).find(Boolean) || null
 
+  const title = track.name ?? ''
+  const artist = track.artist?.['#text'] ?? track.artist ?? ''
+
   return Response.json({
     isPlaying,
-    title: track.name ?? '',
-    artist: track.artist?.['#text'] ?? track.artist ?? '',
+    title,
+    artist,
     timestamp,
     albumArt: pick('extralarge', 'large', 'medium'),
+    spotifyUrl: title
+      ? `https://open.spotify.com/search/${encodeURIComponent(`${title} ${artist}`)}`
+      : 'https://open.spotify.com/user/apexblu',
   })
 }
