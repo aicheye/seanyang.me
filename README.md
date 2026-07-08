@@ -18,6 +18,15 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) in your browser.
 
+## Environment Variables
+
+| Variable | Description |
+|----------|-------------|
+| `LASTFM_API_KEY` | Last.fm API key for the now-playing vinyl widget |
+| `HARDCOVER_API_TOKEN` | Hardcover API token (from [hardcover.app/account/api](https://hardcover.app/account/api)) for the currently-reading book widget |
+
+The Letterboxd widget uses the public RSS feed and needs no key.
+
 ## Scripts
 
 | Command | Description |

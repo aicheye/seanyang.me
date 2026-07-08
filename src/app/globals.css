@@ -437,13 +437,22 @@ footer a {
   z-index: 1;
 }
 
-/* Now Playing */
+/* Media shelf — vinyl (Last.fm), poster (Letterboxd), book (Hardcover) */
 
-.now-playing {
+.media-shelf {
   position: fixed;
   top: 20px;
   left: 24px;
   z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.now-playing,
+.recent-film,
+.current-read {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -457,7 +466,11 @@ footer a {
 }
 
 .site .now-playing:hover,
-.site .now-playing:focus {
+.site .now-playing:focus,
+.site .recent-film:hover,
+.site .recent-film:focus,
+.site .current-read:hover,
+.site .current-read:focus {
   text-decoration: none;
 }
 
@@ -665,6 +678,12 @@ footer a {
     animation: none;
     transform: scaleY(0.5);
   }
+
+  .lb-peel,
+  .hc-float,
+  .hc-shadow {
+    animation: none;
+  }
 }
 
 .np-artist {
@@ -673,6 +692,284 @@ footer a {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+/* Recent film (Letterboxd) */
+
+.lb-poster {
+  position: relative;
+  width: 92px;
+  height: 138px;
+  flex-shrink: 0;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--badge-bg);
+  border-radius: 3px;
+  box-shadow:
+    3px 3px 10px rgba(0, 0, 0, 0.25),
+    inset 0 0 3px 1px rgba(0, 0, 0, 0.08);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.recent-film:hover .lb-poster {
+  transform: rotate(-2deg) translateY(-3px);
+  box-shadow:
+    5px 9px 18px rgba(0, 0, 0, 0.3),
+    inset 0 0 3px 1px rgba(0, 0, 0, 0.08);
+}
+
+/* Peeling corner: one square over the bottom-right corner. Along the 315°
+   axis the first half is the page "behind" the poster (with the flap's cast
+   shadow just before the fold), the second half is the flap — the poster's
+   paper back, bright at the crease and curling darker toward the tip. */
+.lb-peel {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 26px;
+  height: 26px;
+  background: linear-gradient(315deg,
+      var(--bg) 40%,
+      #ded5ba 46%,
+      #a99c7e 49.5%,
+      #fdf8e8 50.5%,
+      #f4ecd6 62%,
+      #d9cfb2 84%,
+      #bfb392 100%);
+  border-bottom-right-radius: 3px;
+  transition: width 0.3s ease, height 0.3s ease;
+  animation: lb-peel-breathe 3.5s ease-in-out infinite;
+}
+
+.recent-film:hover .lb-peel {
+  animation: none;
+  width: 46px;
+  height: 46px;
+}
+
+@keyframes lb-peel-breathe {
+
+  0%,
+  100% {
+    width: 26px;
+    height: 26px;
+  }
+
+  50% {
+    width: 31px;
+    height: 31px;
+  }
+}
+
+.lb-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  max-width: 160px;
+}
+
+.lb-title {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-h);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.lb-meta {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-size: 11px;
+  color: var(--text);
+}
+
+.lb-stars {
+  color: var(--secondary);
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+
+/* Current read (Hardcover) */
+
+.hc-scene {
+  position: relative;
+  width: 116px;
+  height: 152px;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  perspective: 600px;
+}
+
+.hc-float {
+  padding-top: 4px;
+  transform-style: preserve-3d;
+  animation: hc-bob 4.5s ease-in-out infinite;
+}
+
+.hc-book {
+  position: relative;
+  width: 84px;
+  height: 124px;
+  transform-style: preserve-3d;
+  transform: rotateY(-28deg);
+  transition: transform 0.45s ease;
+}
+
+.current-read:hover .hc-book {
+  transform: rotateY(-14deg);
+}
+
+/* Front cover, pushed forward by half the book's 16px depth; the inset
+   shadow along the left edge reads as the hinge groove by the spine. */
+.hc-cover {
+  position: absolute;
+  inset: 0;
+  transform: translateZ(8px);
+  background-size: cover;
+  background-position: center;
+  background-color: var(--badge-bg);
+  border-radius: 2px 4px 4px 2px;
+  box-shadow: inset 5px 0 8px -5px rgba(0, 0, 0, 0.4);
+}
+
+/* Page block on the right edge: rotate the strip onto the x-plane at the
+   book's outer edge, striped along its width (= the book's depth). */
+.hc-pages {
+  position: absolute;
+  top: 3px;
+  right: 0;
+  width: 16px;
+  height: calc(100% - 6px);
+  transform: translateX(8px) rotateY(90deg);
+  background: linear-gradient(90deg,
+      #e6ddc4, #fbf5e2 14%, #e8e0c8 27%, #fbf5e2 42%,
+      #e8e0c8 58%, #fbf5e2 73%, #e6ddc4 88%, #d9d0b6);
+}
+
+.hc-spine {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 16px;
+  height: 100%;
+  transform: translateX(-8px) rotateY(-90deg);
+  background: linear-gradient(90deg, #57432f, #6b5545 30%, #57432f);
+  border-radius: 2px;
+}
+
+.hc-back {
+  position: absolute;
+  inset: 0;
+  transform: translateZ(-8px);
+  background: #57432f;
+  border-radius: 2px 4px 4px 2px;
+}
+
+.hc-shadow {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 72px;
+  height: 12px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(59, 32, 16, 0.3), transparent 65%);
+  animation: hc-shadow 4.5s ease-in-out infinite;
+}
+
+@keyframes hc-bob {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes hc-shadow {
+
+  0%,
+  100% {
+    transform: translateX(-50%) scale(1);
+    opacity: 0.9;
+  }
+
+  50% {
+    transform: translateX(-50%) scale(0.8);
+    opacity: 0.55;
+  }
+}
+
+.hc-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  width: 140px;
+  max-width: 160px;
+}
+
+.hc-title {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-h);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.hc-author {
+  font-size: 11px;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.hc-progress {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.hc-track {
+  flex: 1;
+  height: 6px;
+  background: var(--border);
+  overflow: hidden;
+}
+
+.hc-fill {
+  display: block;
+  height: 100%;
+  background: var(--secondary);
+}
+
+.hc-pct {
+  font-size: 10px;
+  color: var(--text);
+  font-family: var(--font-mono), monospace;
+}
+
+/* Keep the whole fixed shelf on screen when the viewport is short */
+@media (max-height: 800px) and (min-width: 1001px) {
+  .media-shelf {
+    gap: 0;
+  }
+}
+
+@media (max-height: 720px) and (min-width: 1001px) {
+  .current-read {
+    display: none;
+  }
 }
 
 /* Game of Life controls */
@@ -817,15 +1114,21 @@ footer a {
     grid-template-columns: 1fr 1fr;
   }
 
-  .now-playing {
+  .media-shelf {
     position: static;
+    margin-top: 10px;
+    gap: 20px;
+  }
+
+  .now-playing,
+  .recent-film,
+  .current-read {
     flex-direction: row;
     align-items: center;
     gap: 12px;
     background: none;
     box-shadow: none;
     padding: 0;
-    margin-top: 10px;
   }
 
   .now-playing.np-playing {
