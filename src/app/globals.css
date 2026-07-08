@@ -460,6 +460,10 @@ footer a {
 .site .now-playing:hover,
 .site .now-playing:focus {
   text-decoration: none;
+}
+
+.site .now-playing:hover,
+.site .now-playing:focus-visible {
   transform: translateY(-3px);
 }
 
