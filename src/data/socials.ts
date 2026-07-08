@@ -1,7 +1,6 @@
 import data from '@public/data/socials.json'
 
 export interface Social {
-  name: string;
   label: string;
   url: string;
   handle: string;
