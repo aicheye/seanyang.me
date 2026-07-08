@@ -454,11 +454,13 @@ footer a {
   cursor: pointer;
   text-decoration: none;
   color: inherit;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .site .now-playing:hover,
 .site .now-playing:focus {
   text-decoration: none;
+  transform: translateY(-3px);
 }
 
 .np-album {
@@ -467,6 +469,15 @@ footer a {
   height: 100px;
   flex-shrink: 0;
   perspective: 600px;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.now-playing:hover .np-album {
+  transform: rotate(-4deg);
+}
+
+.now-playing:hover .np-vinyl:not(.np-vinyl-out) {
+  transform: translateX(8px);
 }
 
 /* Adapted directly from CodePen #vinyl */
@@ -485,7 +496,7 @@ footer a {
   border-radius: 50%;
   animation: np-spin 5s linear infinite;
   animation-play-state: paused;
-  transition: left 1s ease-out;
+  transition: left 1s ease-out, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .np-vinyl-out {
@@ -664,6 +675,12 @@ footer a {
   .np-eq span {
     animation: none;
     transform: scaleY(0.5);
+  }
+
+  .now-playing,
+  .np-album,
+  .np-vinyl {
+    transition: none;
   }
 }
 
