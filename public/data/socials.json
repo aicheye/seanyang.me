@@ -35,10 +35,22 @@
       "handle": "seanyang_esports_gaming"
     },
     {
+      "name": "Spotify",
+      "label": "Spotify",
+      "url": "https://open.spotify.com/user/apexblu",
+      "handle": "aicheye"
+    },
+    {
       "name": "Letterboxd",
       "label": "Letterboxd",
       "url": "https://letterboxd.com/aicheye",
       "handle": "aicheye"
-    }
+    },
+    {
+      "name": "Hardcover",
+      "label": "Hardcover",
+      "url": "https://hardcover.app/@aicheye",
+      "handle": "aicheye"
+    },
   ]
 }
