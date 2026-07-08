@@ -35,6 +35,7 @@ export function CurrentRead() {
       target="_blank"
       rel="noopener noreferrer"
     >
+      <span className="shelf-label">reading</span>
       <div className="hc-scene">
         <div className="hc-float">
           <div className="hc-book">

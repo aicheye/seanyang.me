@@ -40,8 +40,12 @@ export function RecentFilm() {
       target="_blank"
       rel="noopener noreferrer"
     >
-      <div className="lb-poster" style={posterStyle}>
-        <div className="lb-peel" />
+      <span className="shelf-label">watched</span>
+      <div className="lb-paper">
+        <div className="lb-poster" style={posterStyle} />
+        <span className="lb-curl" />
+        <span className="lb-tape lb-tape-l" />
+        <span className="lb-tape lb-tape-r" />
       </div>
       <div className="lb-info">
         <span className="lb-title">{film.title}</span>

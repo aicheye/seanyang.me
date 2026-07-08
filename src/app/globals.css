@@ -9,6 +9,7 @@
   --badge-bg: #eee8d5;
   --surface: rgba(253, 246, 227, 0.83);
   --surface-shadow: rgba(253, 246, 227, 0.96);
+  --art-shadow: 3px 4px 12px rgba(59, 32, 16, 0.22);
   --display: var(--font-unbounded), system-ui, sans-serif;
 
   font: 16px/1.7 var(--font-geist), system-ui, sans-serif;
@@ -457,12 +458,22 @@ footer a {
   flex-direction: column;
   align-items: flex-start;
   gap: 10px;
+  width: 150px;
   background: var(--surface);
   box-shadow: 0 0 20px 8px var(--surface-shadow);
   padding: 10px 12px;
   cursor: pointer;
   text-decoration: none;
   color: inherit;
+}
+
+.shelf-label {
+  font-family: var(--display);
+  font-size: 9px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+  color: var(--secondary);
 }
 
 .site .now-playing:hover,
@@ -502,6 +513,12 @@ footer a {
 }
 
 .np-vinyl-out {
+  left: 50%;
+  animation-play-state: running;
+}
+
+/* Hovering the card pulls the record out and spins it, even when stopped */
+.now-playing:hover .np-vinyl {
   left: 50%;
   animation-play-state: running;
 }
@@ -548,7 +565,7 @@ footer a {
   background-size: 100% 100%;
   background-color: var(--badge-bg);
   box-shadow:
-    3px 0 10px 0 rgba(0, 0, 0, 0.2),
+    var(--art-shadow),
     inset 0 0 6px 2px rgba(255, 255, 255, 0.1),
     inset 0 0 3px 1px rgba(0, 0, 0, 0.1);
   border-radius: 4px;
@@ -602,12 +619,14 @@ footer a {
   }
 }
 
-.np-info {
+.np-info,
+.lb-info,
+.hc-info {
   display: flex;
   flex-direction: column;
   gap: 2px;
   min-width: 0;
-  max-width: 160px;
+  width: 150px;
   background: var(--surface);
   box-shadow: 0 0 16px 8px var(--surface-shadow);
   padding: 4px 0;
@@ -679,7 +698,7 @@ footer a {
     transform: scaleY(0.5);
   }
 
-  .lb-peel,
+  .lb-paper,
   .hc-float,
   .hc-shadow {
     animation: none;
@@ -694,79 +713,132 @@ footer a {
   text-overflow: ellipsis;
 }
 
-/* Recent film (Letterboxd) */
+/* Recent film (Letterboxd) — a poster taped to the wall by its top corners,
+   bottom-right corner curling up off the surface */
 
-.lb-poster {
+/* --curl is the size of the curled corner. Registering it lets the mask cut
+   and the flap animate together, smoothly, from one value. */
+@property --curl {
+  syntax: '<length>';
+  inherits: true;
+  initial-value: 24px;
+}
+
+.lb-paper {
+  --curl: 24px;
   position: relative;
-  width: 92px;
-  height: 138px;
+  width: 100px;
+  height: 150px;
   flex-shrink: 0;
-  background-size: cover;
-  background-position: center;
-  background-color: var(--badge-bg);
-  border-radius: 3px;
-  box-shadow:
-    3px 3px 10px rgba(0, 0, 0, 0.25),
-    inset 0 0 3px 1px rgba(0, 0, 0, 0.08);
-  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  transform-origin: top center;
+  box-shadow: var(--art-shadow);
+  transition: transform 0.45s ease, --curl 0.45s ease;
+  animation: lb-curl-breathe 4.5s ease-in-out infinite;
 }
 
-.recent-film:hover .lb-poster {
-  transform: rotate(-2deg) translateY(-3px);
-  box-shadow:
-    5px 9px 18px rgba(0, 0, 0, 0.3),
-    inset 0 0 3px 1px rgba(0, 0, 0, 0.08);
-}
-
-/* Peeling corner: one square over the bottom-right corner. Along the 315°
-   axis the first half is the page "behind" the poster (with the flap's cast
-   shadow just before the fold), the second half is the flap — the poster's
-   paper back, bright at the crease and curling darker toward the tip. */
-.lb-peel {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 26px;
-  height: 26px;
-  background: linear-gradient(315deg,
-      var(--bg) 40%,
-      #ded5ba 46%,
-      #a99c7e 49.5%,
-      #fdf8e8 50.5%,
-      #f4ecd6 62%,
-      #d9cfb2 84%,
-      #bfb392 100%);
-  border-bottom-right-radius: 3px;
-  transition: width 0.3s ease, height 0.3s ease;
-  animation: lb-peel-breathe 3.5s ease-in-out infinite;
-}
-
-.recent-film:hover .lb-peel {
+/* Paper lifts off the wall from the bottom (the tape holds the top) while
+   the corner curls further */
+.recent-film:hover .lb-paper {
+  --curl: 56px;
   animation: none;
-  width: 46px;
-  height: 46px;
+  transform: perspective(700px) rotateX(-7deg);
 }
 
-@keyframes lb-peel-breathe {
+@keyframes lb-curl-breathe {
 
   0%,
   100% {
-    width: 26px;
-    height: 26px;
+    --curl: 24px;
   }
 
   50% {
-    width: 31px;
-    height: 31px;
+    --curl: 31px;
   }
 }
 
-.lb-info {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  min-width: 0;
-  max-width: 160px;
+/* The poster art, with its bottom-right corner genuinely cut away by a mask.
+   Along the 315° axis the fold line sits at --curl / √2 from the corner. */
+.lb-poster {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--badge-bg);
+  border-radius: 2px;
+  -webkit-mask-image: linear-gradient(315deg, transparent calc(var(--curl) * 0.707), #000 calc(var(--curl) * 0.707 + 0.5px));
+  mask-image: linear-gradient(315deg, transparent calc(var(--curl) * 0.707), #000 calc(var(--curl) * 0.707 + 0.5px));
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
+
+/* Same paper grain as the vinyl sleeve, so the two read as one material */
+.lb-poster::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('/assets/vinyl/cover-tex.jpg');
+  background-size: 100% 100%;
+  border-radius: 2px;
+  mix-blend-mode: overlay;
+  opacity: 0.45;
+}
+
+.lb-poster::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('/assets/vinyl/cover-tex2.jpg');
+  background-size: 100% 100%;
+  border-radius: 2px;
+  mix-blend-mode: screen;
+  opacity: 0.08;
+}
+
+/* The curled-up flap: the back of the poster's paper. Clipped to a triangle
+   on the pseudo-element so the drop-shadow (on the parent) can fall outside
+   the clip, onto the exposed wall behind the cut corner. */
+.lb-curl {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: var(--curl);
+  height: var(--curl);
+  filter: drop-shadow(2px 3px 3px rgba(59, 32, 16, 0.35));
+}
+
+.lb-curl::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  clip-path: polygon(0 0, 100% 0, 0 100%);
+  /* fold crease at the hypotenuse (50% along this axis), bright paper back,
+     darkening toward the curled tip */
+  background: linear-gradient(315deg,
+      rgba(59, 32, 16, 0.32) 49%,
+      #fdf9ec 57%,
+      #f6efd8 72%,
+      #e3d8ba 88%,
+      #cfc3a2 100%);
+}
+
+/* Aged translucent tape holding the top corners to the wall */
+.lb-tape {
+  position: absolute;
+  top: -5px;
+  width: 38px;
+  height: 13px;
+  background: linear-gradient(rgba(253, 250, 235, 0.65), rgba(233, 226, 200, 0.5));
+  clip-path: polygon(1% 8%, 50% 0, 99% 6%, 100% 92%, 52% 100%, 0 94%);
+}
+
+.lb-tape-l {
+  left: -11px;
+  transform: rotate(-45deg);
+}
+
+.lb-tape-r {
+  right: -11px;
+  transform: rotate(45deg);
 }
 
 .lb-title {
@@ -796,11 +868,13 @@ footer a {
 
 .hc-scene {
   position: relative;
-  width: 116px;
-  height: 152px;
+  width: 150px;
+  height: 150px;
   flex-shrink: 0;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
+  padding-left: 6px;
+  box-sizing: border-box;
   perspective: 600px;
 }
 
@@ -834,6 +908,18 @@ footer a {
   background-color: var(--badge-bg);
   border-radius: 2px 4px 4px 2px;
   box-shadow: inset 5px 0 8px -5px rgba(0, 0, 0, 0.4);
+}
+
+/* Same paper grain as the sleeve and poster */
+.hc-cover::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('/assets/vinyl/cover-tex.jpg');
+  background-size: 100% 100%;
+  border-radius: 2px 4px 4px 2px;
+  mix-blend-mode: overlay;
+  opacity: 0.4;
 }
 
 /* Page block on the right edge: rotate the strip onto the x-plane at the
@@ -872,7 +958,7 @@ footer a {
 .hc-shadow {
   position: absolute;
   bottom: 0;
-  left: 50%;
+  left: 48px;
   width: 72px;
   height: 12px;
   transform: translateX(-50%);
@@ -905,15 +991,6 @@ footer a {
     transform: translateX(-50%) scale(0.8);
     opacity: 0.55;
   }
-}
-
-.hc-info {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  min-width: 0;
-  width: 140px;
-  max-width: 160px;
 }
 
 .hc-title {
@@ -960,13 +1037,13 @@ footer a {
 }
 
 /* Keep the whole fixed shelf on screen when the viewport is short */
-@media (max-height: 800px) and (min-width: 1001px) {
+@media (max-height: 860px) and (min-width: 1001px) {
   .media-shelf {
     gap: 0;
   }
 }
 
-@media (max-height: 720px) and (min-width: 1001px) {
+@media (max-height: 780px) and (min-width: 1001px) {
   .current-read {
     display: none;
   }
@@ -1126,9 +1203,14 @@ footer a {
     flex-direction: row;
     align-items: center;
     gap: 12px;
+    width: auto;
     background: none;
     box-shadow: none;
     padding: 0;
+  }
+
+  .shelf-label {
+    display: none;
   }
 
   .now-playing.np-playing {
@@ -1140,10 +1222,14 @@ footer a {
     height: 84px;
   }
 
-  .np-info {
+  .np-info,
+  .lb-info,
+  .hc-info {
     background: none;
     box-shadow: none;
     padding: 0;
+    width: auto;
+    flex: 1;
   }
 
   .gol-controls {

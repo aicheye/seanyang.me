@@ -6,6 +6,7 @@ interface Track {
   isPlaying: boolean
   title: string
   artist: string
+  url: string | null
   albumArt: string | null
 }
 
@@ -227,10 +228,11 @@ export function NowPlaying() {
   return (
     <a
       className={`now-playing${isPlaying ? ' np-playing' : ''}`}
-      href="https://open.spotify.com/user/apexblu"
+      href={track.url ?? 'https://www.last.fm/user/aicheyeaaa'}
       target="_blank"
       rel="noopener noreferrer"
     >
+      <span className="shelf-label">listening</span>
       <div className="np-album">
         <div className={`np-vinyl${recordOut ? ' np-vinyl-out' : ''}${flipHide ? ' np-vinyl-hidden' : ''}`}>
           <div className="np-print" style={{ background: labelColor }} />

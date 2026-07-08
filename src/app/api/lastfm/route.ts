@@ -27,6 +27,7 @@ export async function GET() {
     title: track.name ?? '',
     artist: track.artist?.['#text'] ?? track.artist ?? '',
     timestamp,
+    url: track.url ?? null,
     albumArt: pick('extralarge', 'large', 'medium'),
   })
 }
