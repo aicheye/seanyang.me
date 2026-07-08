@@ -628,7 +628,7 @@ footer a {
 .np-eq span {
   width: 2px;
   height: 100%;
-  background: var(--text-h);
+  background: var(--secondary);
   transform-origin: bottom;
   animation: np-eq-bounce ease-in-out infinite;
 }

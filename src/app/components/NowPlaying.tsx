@@ -7,7 +7,6 @@ interface Track {
   title: string
   artist: string
   albumArt: string | null
-  spotifyUrl: string
 }
 
 const FALLBACK_COLOR = '#8a5c42'
@@ -228,7 +227,7 @@ export function NowPlaying() {
   return (
     <a
       className={`now-playing${isPlaying ? ' np-playing' : ''}`}
-      href={track.spotifyUrl}
+      href={`/api/spotify?title=${encodeURIComponent(title)}&artist=${encodeURIComponent(artist)}`}
       target="_blank"
       rel="noopener noreferrer"
     >

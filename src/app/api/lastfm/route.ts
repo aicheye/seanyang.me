@@ -1,47 +1,6 @@
 const LASTFM_BASE = 'https://ws.audioscrobbler.com/2.0'
 const USERNAME = 'aicheyeaaa'
 
-let cachedToken: { token: string; expiresAt: number } | null = null
-
-async function getSpotifyToken(): Promise<string | null> {
-  const clientId = process.env.SPOTIFY_CLIENT_ID
-  const clientSecret = process.env.SPOTIFY_CLIENT_SECRET
-  if (!clientId || !clientSecret) return null
-  if (cachedToken && cachedToken.expiresAt > Date.now()) return cachedToken.token
-
-  const res = await fetch('https://accounts.spotify.com/api/token', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
-      Authorization: `Basic ${Buffer.from(`${clientId}:${clientSecret}`).toString('base64')}`,
-    },
-    body: 'grant_type=client_credentials',
-  })
-  if (!res.ok) return null
-
-  const json = await res.json()
-  cachedToken = { token: json.access_token, expiresAt: Date.now() + (json.expires_in - 60) * 1000 }
-  return cachedToken.token
-}
-
-async function findSpotifyTrackUrl(title: string, artist: string): Promise<string | null> {
-  try {
-    const token = await getSpotifyToken()
-    if (!token) return null
-
-    const q = `track:${title} artist:${artist}`
-    const res = await fetch(`https://api.spotify.com/v1/search?q=${encodeURIComponent(q)}&type=track&limit=1`, {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-    if (!res.ok) return null
-
-    const json = await res.json()
-    return json.tracks?.items?.[0]?.external_urls?.spotify ?? null
-  } catch {
-    return null
-  }
-}
-
 export async function GET() {
   const apiKey = process.env.LASTFM_API_KEY
   if (!apiKey) return Response.json({ error: 'no api key' }, { status: 500 })
@@ -63,20 +22,11 @@ export async function GET() {
   const bySize = new Map(images.map(i => [i.size, i['#text']]))
   const pick = (...names: string[]) => names.map(n => bySize.get(n)).find(Boolean) || null
 
-  const title = track.name ?? ''
-  const artist = track.artist?.['#text'] ?? track.artist ?? ''
-
-  const spotifyUrl = title
-    ? (await findSpotifyTrackUrl(title, artist)) ??
-      `https://open.spotify.com/search/${encodeURIComponent(`${title} ${artist}`)}`
-    : 'https://open.spotify.com/user/apexblu'
-
   return Response.json({
     isPlaying,
-    title,
-    artist,
+    title: track.name ?? '',
+    artist: track.artist?.['#text'] ?? track.artist ?? '',
     timestamp,
     albumArt: pick('extralarge', 'large', 'medium'),
-    spotifyUrl,
   })
 }
