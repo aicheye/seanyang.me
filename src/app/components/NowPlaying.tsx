@@ -227,7 +227,7 @@ export function NowPlaying() {
   return (
     <a
       className={`now-playing${isPlaying ? ' np-playing' : ''}`}
-      href="https://open.spotify.com/user/apexblu"
+      href={`/api/spotify?title=${encodeURIComponent(title)}&artist=${encodeURIComponent(artist)}`}
       target="_blank"
       rel="noopener noreferrer"
     >
