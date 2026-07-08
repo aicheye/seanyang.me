@@ -698,11 +698,6 @@ footer a {
     transform: scaleY(0.5);
   }
 
-  .lb-paper,
-  .hc-float,
-  .hc-shadow {
-    animation: none;
-  }
 }
 
 .np-artist {
@@ -713,51 +708,24 @@ footer a {
   text-overflow: ellipsis;
 }
 
-/* Recent film (Letterboxd) — a poster taped to the wall by its top corners,
-   bottom-right corner curling up off the surface */
-
-/* --curl is the size of the curled corner. Registering it lets the mask cut
-   and the flap animate together, smoothly, from one value. */
-@property --curl {
-  syntax: '<length>';
-  inherits: true;
-  initial-value: 24px;
-}
+/* Recent film (Letterboxd) — a poster with a curled bottom-right corner,
+   drawn as a small flap layered over the art rather than cut into it, so
+   there's no seam or gap to line up. Static at rest; the hover state just
+   lifts the flap a little further, like nudging it with a finger. */
 
 .lb-paper {
-  --curl: 24px;
   position: relative;
   width: 100px;
   height: 150px;
   flex-shrink: 0;
-  transform-origin: top center;
   box-shadow: var(--art-shadow);
-  transition: transform 0.45s ease, --curl 0.45s ease;
-  animation: lb-curl-breathe 4.5s ease-in-out infinite;
+  transition: transform 0.3s ease;
 }
 
-/* Paper lifts off the wall from the bottom (the tape holds the top) while
-   the corner curls further */
 .recent-film:hover .lb-paper {
-  --curl: 56px;
-  animation: none;
-  transform: perspective(700px) rotateX(-7deg);
+  transform: translateY(-2px);
 }
 
-@keyframes lb-curl-breathe {
-
-  0%,
-  100% {
-    --curl: 24px;
-  }
-
-  50% {
-    --curl: 31px;
-  }
-}
-
-/* The poster art, with its bottom-right corner genuinely cut away by a mask.
-   Along the 315° axis the fold line sits at --curl / √2 from the corner. */
 .lb-poster {
   position: absolute;
   inset: 0;
@@ -765,10 +733,6 @@ footer a {
   background-position: center;
   background-color: var(--badge-bg);
   border-radius: 2px;
-  -webkit-mask-image: linear-gradient(315deg, transparent calc(var(--curl) * 0.707), #000 calc(var(--curl) * 0.707 + 0.5px));
-  mask-image: linear-gradient(315deg, transparent calc(var(--curl) * 0.707), #000 calc(var(--curl) * 0.707 + 0.5px));
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
 }
 
 /* Same paper grain as the vinyl sleeve, so the two read as one material */
@@ -794,51 +758,27 @@ footer a {
   opacity: 0.08;
 }
 
-/* The curled-up flap: the back of the poster's paper. Clipped to a triangle
-   on the pseudo-element so the drop-shadow (on the parent) can fall outside
-   the clip, onto the exposed wall behind the cut corner. */
-.lb-curl {
+/* The curl itself: a small triangle sitting over the corner, folded along
+   the anti-diagonal. Lit like the underside of paper — bright at the
+   crease, shading toward the lifted tip — with a drop-shadow (not a plain
+   box-shadow) so only the triangle casts a shadow onto the poster below,
+   not its invisible bounding box. */
+.lb-peel {
   position: absolute;
   bottom: 0;
   right: 0;
-  width: var(--curl);
-  height: var(--curl);
-  filter: drop-shadow(2px 3px 3px rgba(59, 32, 16, 0.35));
+  width: 20px;
+  height: 20px;
+  clip-path: polygon(100% 0, 100% 100%, 0 100%);
+  background: linear-gradient(135deg, #fdf9ec 0%, #f4ecd6 38%, #ddd2b2 72%, #b9ac8a 100%);
+  border-bottom-right-radius: 2px;
+  filter: drop-shadow(-1px -1px 2px rgba(59, 32, 16, 0.3));
+  transition: width 0.3s ease, height 0.3s ease;
 }
 
-.lb-curl::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  clip-path: polygon(0 0, 100% 0, 0 100%);
-  /* fold crease at the hypotenuse (50% along this axis), bright paper back,
-     darkening toward the curled tip */
-  background: linear-gradient(315deg,
-      rgba(59, 32, 16, 0.32) 49%,
-      #fdf9ec 57%,
-      #f6efd8 72%,
-      #e3d8ba 88%,
-      #cfc3a2 100%);
-}
-
-/* Aged translucent tape holding the top corners to the wall */
-.lb-tape {
-  position: absolute;
-  top: -5px;
-  width: 38px;
-  height: 13px;
-  background: linear-gradient(rgba(253, 250, 235, 0.65), rgba(233, 226, 200, 0.5));
-  clip-path: polygon(1% 8%, 50% 0, 99% 6%, 100% 92%, 52% 100%, 0 94%);
-}
-
-.lb-tape-l {
-  left: -11px;
-  transform: rotate(-45deg);
-}
-
-.lb-tape-r {
-  right: -11px;
-  transform: rotate(45deg);
+.recent-film:hover .lb-peel {
+  width: 30px;
+  height: 30px;
 }
 
 .lb-title {
@@ -881,7 +821,11 @@ footer a {
 .hc-float {
   padding-top: 4px;
   transform-style: preserve-3d;
-  animation: hc-bob 4.5s ease-in-out infinite;
+  transition: transform 0.35s ease;
+}
+
+.current-read:hover .hc-float {
+  transform: translateY(-3px);
 }
 
 .hc-book {
@@ -890,11 +834,11 @@ footer a {
   height: 124px;
   transform-style: preserve-3d;
   transform: rotateY(-28deg);
-  transition: transform 0.45s ease;
+  transition: transform 0.35s ease;
 }
 
 .current-read:hover .hc-book {
-  transform: rotateY(-14deg);
+  transform: rotateY(-16deg);
 }
 
 /* Front cover, pushed forward by half the book's 16px depth; the inset
@@ -957,40 +901,13 @@ footer a {
 
 .hc-shadow {
   position: absolute;
-  bottom: 0;
+  bottom: 2px;
   left: 48px;
-  width: 72px;
-  height: 12px;
+  width: 68px;
+  height: 10px;
   transform: translateX(-50%);
   border-radius: 50%;
-  background: radial-gradient(ellipse at center, rgba(59, 32, 16, 0.3), transparent 65%);
-  animation: hc-shadow 4.5s ease-in-out infinite;
-}
-
-@keyframes hc-bob {
-
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(-6px);
-  }
-}
-
-@keyframes hc-shadow {
-
-  0%,
-  100% {
-    transform: translateX(-50%) scale(1);
-    opacity: 0.9;
-  }
-
-  50% {
-    transform: translateX(-50%) scale(0.8);
-    opacity: 0.55;
-  }
+  background: radial-gradient(ellipse at center, rgba(59, 32, 16, 0.28), transparent 65%);
 }
 
 .hc-title {
