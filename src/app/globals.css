@@ -337,11 +337,6 @@ h2 span {
   margin-left: 1px;
 }
 
-.demo-play:hover {
-  border-color: var(--accent);
-  color: var(--text-h);
-}
-
 .demo-play:focus-visible,
 .demo-close:focus-visible {
   outline: 2px solid var(--accent);
@@ -398,11 +393,6 @@ h2 span {
   color: var(--text);
   padding: 0;
   cursor: pointer;
-}
-
-.demo-close:hover {
-  border-color: var(--accent);
-  color: var(--text-h);
 }
 
 .demo-modal img {
