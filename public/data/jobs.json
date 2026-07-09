@@ -4,10 +4,18 @@
     "company": "moss",
     "description": "autonomy, cv pipelines, and firmware for agbots",
     "website": "https://moss.ag",
-    "logo": "/assets/jobs/moss.jpg",
+    "logo": "/assets/logos/moss.jpg",
     "location": "San Francisco, CA",
-    "technologies": ["ROS 2", "Rust", "C++", "Linux"],
-    "dates": ["2026.5", "present"],
+    "technologies": [
+      "ROS 2",
+      "Rust",
+      "C++",
+      "Linux"
+    ],
+    "dates": [
+      "2026.5",
+      "present"
+    ],
     "current": true
   },
   {
@@ -15,10 +23,18 @@
     "company": "WATonomous",
     "description": "prediction pipelines for autonomous vehicles",
     "website": "https://watonomous.ca/projects/eve",
-    "logo": "/assets/jobs/watonomous.jpg",
+    "logo": "/assets/logos/watonomous.jpg",
     "location": "Waterloo, ON",
-    "technologies": ["C++", "ROS 2", "Docker", "Foxglove"],
-    "dates": ["2025.9", "2026.4"],
+    "technologies": [
+      "C++",
+      "ROS 2",
+      "Docker",
+      "Foxglove"
+    ],
+    "dates": [
+      "2025.9",
+      "2026.4"
+    ],
     "current": false
   }
 ]

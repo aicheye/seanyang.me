@@ -309,6 +309,136 @@ h2 span {
   font-size: 14px;
 }
 
+.project-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Project demos */
+
+.demo-play {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: none;
+  color: var(--text);
+  padding: 0;
+  cursor: pointer;
+}
+
+.demo-play svg {
+  /* optically center the triangle */
+  margin-left: 1px;
+}
+
+.demo-play:hover {
+  border-color: var(--accent);
+  color: var(--text-h);
+}
+
+.demo-play:focus-visible,
+.demo-close:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.demo-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(59, 32, 16, 0.45);
+  animation: demo-fade 0.15s ease-out;
+}
+
+.demo-modal {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  padding: 10px 12px 12px;
+  max-width: min(720px, 100%);
+  animation: demo-pop 0.15s ease-out;
+}
+
+.demo-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 8px;
+}
+
+.demo-title {
+  font-family: var(--display);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: var(--secondary);
+}
+
+.demo-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: none;
+  color: var(--text);
+  padding: 0;
+  cursor: pointer;
+}
+
+.demo-close:hover {
+  border-color: var(--accent);
+  color: var(--text-h);
+}
+
+.demo-modal img {
+  display: block;
+  max-width: 100%;
+  max-height: 70vh;
+}
+
+.demo-loading {
+  font-size: 12px;
+  color: var(--text);
+  padding: 32px 48px;
+  text-align: center;
+}
+
+@keyframes demo-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes demo-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .demo-overlay,
+  .demo-modal {
+    animation: none;
+  }
+}
+
 /* Badges */
 
 .badges {
