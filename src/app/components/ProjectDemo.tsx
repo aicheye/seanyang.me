@@ -43,7 +43,7 @@ function gifDurationMs(buf: ArrayBuffer): number | null {
   return frames > 1 && total > 0 ? total : null
 }
 
-export function ProjectDemo({ title, gif }: { title: string; gif: string }) {
+export function ProjectDemo({ title, media }: { title: string; media: string }) {
   const [open, setOpen] = useState(false)
   const [src, setSrc] = useState<string | null>(null)
   const [failed, setFailed] = useState(false)
@@ -63,7 +63,7 @@ export function ProjectDemo({ title, gif }: { title: string; gif: string }) {
     if (!open) return
     const controller = new AbortController()
     let url: string | null = null
-    fetch(gif, { signal: controller.signal })
+    fetch(media, { signal: controller.signal })
       .then((r) => {
         if (!r.ok) throw new Error(`${r.status}`)
         return r.arrayBuffer()
@@ -85,7 +85,7 @@ export function ProjectDemo({ title, gif }: { title: string; gif: string }) {
       setSrc(null)
       setFailed(false)
     }
-  }, [open, gif])
+  }, [open, media])
 
   useEffect(() => {
     if (!open) return
