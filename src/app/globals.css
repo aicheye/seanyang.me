@@ -804,6 +804,51 @@ footer a {
   text-overflow: ellipsis;
 }
 
+/* Loading skeleton — reserves the card's footprint while the track loads, so
+   the header doesn't jump on mobile where the card sits in the page flow. The
+   bare .np-cover already reads as an empty sleeve (badge bg + grain), so only
+   the text lines need placeholder bars. */
+.now-playing.np-loading {
+  cursor: default;
+  pointer-events: none;
+}
+
+.np-skel {
+  display: inline-block;
+  vertical-align: middle;
+  height: 0.65em;
+  border-radius: 2px;
+  background: var(--border);
+  animation: np-skel-pulse 1.8s ease-in-out infinite;
+}
+
+.np-skel-title {
+  width: 110px;
+}
+
+.np-skel-artist {
+  width: 72px;
+}
+
+@keyframes np-skel-pulse {
+
+  0%,
+  100% {
+    opacity: 0.7;
+  }
+
+  50% {
+    opacity: 0.35;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .np-skel {
+    animation: none;
+    opacity: 0.55;
+  }
+}
+
 /* Game of Life controls */
 
 .gol-controls {

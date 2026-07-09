@@ -96,6 +96,7 @@ async function extractDominantColor(artUrl: string): Promise<string> {
 
 export function NowPlaying() {
   const [track, setTrack] = useState<Track | null>(null)
+  const [awaitingFirst, setAwaitingFirst] = useState(true)
   const [labelColor, setLabelColor] = useState(FALLBACK_COLOR)
   const [recordOut, setRecordOut] = useState(false)
   const [flipHide, setFlipHide] = useState(false)
@@ -115,6 +116,8 @@ export function NowPlaying() {
         if (res.ok) setTrack(await res.json())
       } catch {
         /* ignore transient fetch errors; the next poll retries */
+      } finally {
+        setAwaitingFirst(false)
       }
     }
     load()
@@ -211,7 +214,25 @@ export function NowPlaying() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [trackKey, isPlaying, albumArt])
 
-  if (!track || !track.title) return null
+  if (!track || !track.title) {
+    // Nothing to show after the first response — give the space back.
+    if (!awaitingFirst) return null
+    // Same footprint as the loaded card (the card is in the page flow on
+    // mobile, so appearing from nothing shifts everything below it).
+    return (
+      <div className="now-playing np-loading" aria-hidden="true">
+        <div className="np-album">
+          <div className="np-cover" />
+        </div>
+        <div className="np-info">
+          <span className="np-title">
+            <span className="np-title-text"><span className="np-skel np-skel-title" /></span>
+          </span>
+          <span className="np-artist"><span className="np-skel np-skel-artist" /></span>
+        </div>
+      </div>
+    )
+  }
 
   const { title, artist } = track
   const frontFill = frontArt ?? albumArt
