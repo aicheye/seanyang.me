@@ -481,7 +481,6 @@ footer a {
   background-image: url('/assets/vinyl/record.png');
   background-size: 106% 106%;
   background-position: center;
-  box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.25);
   border-radius: 50%;
   animation: np-spin 5s linear infinite;
   animation-play-state: paused;
