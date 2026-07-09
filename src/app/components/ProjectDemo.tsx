@@ -4,51 +4,10 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { FiPlay, FiX } from 'react-icons/fi'
 
-/* GIFs never fire an "ended" event, so sum the frame delays from the file's
-   graphic control extensions to know when one playthrough finishes.
-   Returns null for static or unparseable files (modal then stays open). */
-function gifDurationMs(buf: ArrayBuffer): number | null {
-  const b = new Uint8Array(buf)
-  if (b.length < 13 || b[0] !== 0x47 || b[1] !== 0x49 || b[2] !== 0x46) return null
-  let p = 6
-  const packed = b[p + 4]
-  p += 7
-  if (packed & 0x80) p += 3 * (1 << ((packed & 0x07) + 1))
-  let total = 0
-  let frames = 0
-  while (p < b.length) {
-    const block = b[p++]
-    if (block === 0x3b) break
-    if (block === 0x21) {
-      const label = b[p++]
-      if (label === 0xf9) {
-        const delay = b[p + 2] | (b[p + 3] << 8)
-        // browsers clamp near-zero delays to 100ms
-        total += (delay < 2 ? 10 : delay) * 10
-        frames++
-      }
-      while (p < b.length && b[p] !== 0) p += b[p] + 1
-      p++
-    } else if (block === 0x2c) {
-      const localPacked = b[p + 8]
-      p += 9
-      if (localPacked & 0x80) p += 3 * (1 << ((localPacked & 0x07) + 1))
-      p++
-      while (p < b.length && b[p] !== 0) p += b[p] + 1
-      p++
-    } else {
-      break
-    }
-  }
-  return frames > 1 && total > 0 ? total : null
-}
-
 export function ProjectDemo({ title, media }: { title: string; media: string }) {
   const [open, setOpen] = useState(false)
   const [src, setSrc] = useState<string | null>(null)
   const [failed, setFailed] = useState(false)
-  const duration = useRef<number | null>(null)
-  const timer = useRef<ReturnType<typeof setTimeout> | null>(null)
   const trigger = useRef<HTMLButtonElement>(null)
   const closeBtn = useRef<HTMLButtonElement>(null)
 
@@ -66,11 +25,10 @@ export function ProjectDemo({ title, media }: { title: string; media: string }) 
     fetch(media, { signal: controller.signal })
       .then((r) => {
         if (!r.ok) throw new Error(`${r.status}`)
-        return r.arrayBuffer()
+        return r.blob()
       })
-      .then((buf) => {
-        duration.current = gifDurationMs(buf)
-        url = URL.createObjectURL(new Blob([buf], { type: 'image/gif' }))
+      .then((blob) => {
+        url = URL.createObjectURL(blob)
         setSrc(url)
       })
       .catch(() => {
@@ -79,9 +37,6 @@ export function ProjectDemo({ title, media }: { title: string; media: string }) 
     return () => {
       controller.abort()
       if (url) URL.revokeObjectURL(url)
-      if (timer.current) clearTimeout(timer.current)
-      timer.current = null
-      duration.current = null
       setSrc(null)
       setFailed(false)
     }
@@ -101,13 +56,6 @@ export function ProjectDemo({ title, media }: { title: string; media: string }) 
       document.body.style.overflow = prevOverflow
     }
   }, [open, close])
-
-  function onGifLoad() {
-    if (duration.current) {
-      // small grace period so the last frame registers before closing
-      timer.current = setTimeout(close, duration.current + 150)
-    }
-  }
 
   return (
     <>
@@ -138,7 +86,7 @@ export function ProjectDemo({ title, media }: { title: string; media: string }) 
               </div>
               {src ? (
                 // eslint-disable-next-line @next/next/no-img-element -- blob URL, next/image can't optimize it
-                <img src={src} alt={`${title} demo`} onLoad={onGifLoad} />
+                <img src={src} alt={`${title} demo`} />
               ) : (
                 <div className="demo-loading">{failed ? 'demo unavailable' : 'loading…'}</div>
               )}
