@@ -296,17 +296,109 @@ h2 span {
   gap: 20px 28px;
 }
 
+.project-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .project a {
   color: var(--text-h);
   font-weight: 500;
   text-decoration: none;
 }
 
+.project-play {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  padding: 0 0 0 1px;
+  flex-shrink: 0;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: var(--badge-bg);
+  color: var(--text);
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease, transform 0.15s ease;
+}
 
+.project-play:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: scale(1.08);
+}
 
 .project p {
   margin: 3px 0 0;
   font-size: 14px;
+}
+
+/* Project demo modal */
+
+.project-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(30, 20, 12, 0.6);
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+  animation: modal-fade 0.15s ease;
+}
+
+@keyframes modal-fade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.project-modal-inner {
+  position: relative;
+  max-width: 90vw;
+  max-height: 85vh;
+  padding: 8px;
+  background: var(--bg);
+  border-radius: 8px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+.project-modal-media {
+  display: block;
+  max-width: 100%;
+  max-height: calc(85vh - 16px);
+  border-radius: 4px;
+}
+
+.project-modal-close {
+  position: absolute;
+  top: -14px;
+  right: -14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: var(--bg);
+  color: var(--text-h);
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.project-modal-close:hover {
+  border-color: var(--accent);
+  color: var(--accent);
 }
 
 /* Badges */
