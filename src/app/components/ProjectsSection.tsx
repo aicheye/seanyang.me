@@ -1,3 +1,4 @@
+import { ProjectDemo } from '@/app/components/ProjectDemo'
 import projects from '@/data/projects'
 
 export function ProjectsSection() {
@@ -7,7 +8,10 @@ export function ProjectsSection() {
       <div className="projects">
         {projects.map((p) => (
           <div key={p.title} className="project">
-            <strong><a href={p.github} target="_blank" rel="noopener noreferrer">{p.title}</a></strong>
+            <div className="project-title">
+              <strong><a href={p.github} target="_blank" rel="noopener noreferrer">{p.title}</a></strong>
+              {p.gif && <ProjectDemo title={p.title} gif={p.gif} />}
+            </div>
             <p>{p.description}</p>
             <div className="badges">
               {p.technologies.map((t: string) => <span key={t} className="badge">{t}</span>)}

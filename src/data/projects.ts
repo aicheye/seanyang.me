@@ -5,6 +5,7 @@ export interface Project {
   description: string;
   github: string;
   technologies: string[];
+  gif?: string;
 }
 
 export default projects as Project[]
