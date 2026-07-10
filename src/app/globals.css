@@ -988,7 +988,10 @@ footer a {
   }
 
   .links {
+    grid-auto-flow: row;
+    grid-template-rows: none;
     grid-template-columns: 1fr 1fr;
+    gap: 6px 16px;
   }
 
   .now-playing {
