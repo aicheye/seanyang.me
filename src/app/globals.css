@@ -510,7 +510,7 @@ footer a {
 }
 
 
-.webrings-wrapper {
+.webring-wrapper {
   display: flex;
   align-items: center;
   gap: 24px;
@@ -526,6 +526,10 @@ footer a {
   height: 22px;
   display: block;
   filter: invert(35%) sepia(20%) saturate(300%) hue-rotate(345deg);
+}
+
+.webring img:hover {
+  filter: invert(53%) sepia(26%) saturate(3066%) hue-rotate(180deg) brightness(90%) contrast(87%);
 }
 
 .webring-arrow {
