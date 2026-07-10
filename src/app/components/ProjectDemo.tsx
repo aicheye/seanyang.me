@@ -63,7 +63,6 @@ export function ProjectDemo({ title, media, github }: { title: string; media: st
         ref={trigger}
         className="demo-play"
         aria-label={`Play ${title} demo`}
-        title="play demo"
         onClick={() => setOpen(true)}
       >
         <FiPlay size={9} />
@@ -91,7 +90,6 @@ export function ProjectDemo({ title, media, github }: { title: string; media: st
                   rel="noopener noreferrer"
                   className="demo-media-link"
                   aria-label={`View ${title} on GitHub`}
-                  title="view on GitHub"
                 >
                   {/* eslint-disable-next-line @next/next/no-img-element -- blob URL, next/image can't optimize it */}
                   <img src={src} alt={`${title} demo`} />
