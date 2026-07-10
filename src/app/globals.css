@@ -405,6 +405,10 @@ h2 span {
   color: var(--text-h);
 }
 
+.demo-media-link {
+  display: block;
+}
+
 .demo-modal img {
   display: block;
   max-width: 100%;

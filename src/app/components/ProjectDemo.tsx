@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { FiPlay, FiX } from 'react-icons/fi'
 
-export function ProjectDemo({ title, media }: { title: string; media: string }) {
+export function ProjectDemo({ title, media, github }: { title: string; media: string; github: string }) {
   const [open, setOpen] = useState(false)
   const [src, setSrc] = useState<string | null>(null)
   const [failed, setFailed] = useState(false)
@@ -85,8 +85,17 @@ export function ProjectDemo({ title, media }: { title: string; media: string }) 
                 </button>
               </div>
               {src ? (
-                // eslint-disable-next-line @next/next/no-img-element -- blob URL, next/image can't optimize it
-                <img src={src} alt={`${title} demo`} />
+                <a
+                  href={github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="demo-media-link"
+                  aria-label={`View ${title} on GitHub`}
+                  title="view on GitHub"
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element -- blob URL, next/image can't optimize it */}
+                  <img src={src} alt={`${title} demo`} />
+                </a>
               ) : (
                 <div className="demo-loading">{failed ? 'demo unavailable' : 'loading…'}</div>
               )}
