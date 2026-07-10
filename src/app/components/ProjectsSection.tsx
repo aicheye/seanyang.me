@@ -10,7 +10,7 @@ export function ProjectsSection() {
           <div key={p.title} className="project">
             <div className="project-title">
               <strong><a href={p.github} target="_blank" rel="noopener noreferrer">{p.title}</a></strong>
-              {p.media && <ProjectDemo title={p.title} media={p.media} />}
+              {p.media && <ProjectDemo title={p.title} media={p.media} github={p.github} />}
             </div>
             <p>{p.description}</p>
             <div className="badges">
