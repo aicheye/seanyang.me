@@ -4,7 +4,7 @@ Personal website built with Next.js, React, and TypeScript. Deployed on Vercel.
 
 ## Tech Stack
 
-- [Next.js 15](https://nextjs.org/) (App Router)
+- [Next.js 15](https://nextjs.org/)
 - [React 19](https://react.dev/)
 - TypeScript
 - Vercel Analytics & Speed Insights
