@@ -4,6 +4,71 @@ import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from '
 
 const CELL = 14
 const TICK = 80
+const SIM_STEPS = 300      // generations to look ahead when scoring a seed
+const SEED_BUDGET_MS = 500 // max time spent searching for a lively seed
+const METHUSELAH_CHANCE = 0.5
+
+// Long-running starter patterns ("methuselahs"), as [row, col] offsets.
+const METHUSELAHS: [number, number][][] = [
+  // R-pentomino (~1,100 generations)
+  [[0, 1], [0, 2], [1, 0], [1, 1], [2, 1]],
+  // Acorn (~5,200 generations)
+  [[0, 1], [1, 3], [2, 0], [2, 1], [2, 4], [2, 5], [2, 6]],
+  // Rabbits (~17,300 generations)
+  [[0, 0], [0, 4], [0, 5], [0, 6], [1, 0], [1, 1], [1, 2], [1, 5], [2, 1]],
+]
+
+function step(g: Uint8Array, C: number, R: number): Uint8Array {
+  const next = new Uint8Array(C * R)
+  for (let r = 0; r < R; r++) {
+    for (let c = 0; c < C; c++) {
+      let n = 0
+      for (let dr = -1; dr <= 1; dr++)
+        for (let dc = -1; dc <= 1; dc++)
+          if (dr || dc) n += g[((r + dr + R) % R) * C + ((c + dc + C) % C)]
+      const alive = g[r * C + c]
+      next[r * C + c] = alive ? (n === 2 || n === 3 ? 1 : 0) : (n === 3 ? 1 : 0)
+    }
+  }
+  return next
+}
+
+function diffCount(a: Uint8Array, b: Uint8Array): number {
+  let d = 0
+  for (let i = 0; i < a.length; i++) if (a[i] !== b[i]) d++
+  return d
+}
+
+// Cells still changing at generation SIM_STEPS. Compared two generations apart
+// so still lifes and period-2 oscillators score 0; bails early once settled.
+function activityScore(start: Uint8Array, C: number, R: number): number {
+  let a = start
+  let b = step(a, C, R)
+  let cur = step(b, C, R)
+  for (let s = 2; s < SIM_STEPS; s++) {
+    if (diffCount(cur, a) === 0) return 0
+    a = b
+    b = cur
+    cur = step(cur, C, R)
+  }
+  return diffCount(cur, a)
+}
+
+function stampMethuselah(g: Uint8Array, C: number, R: number) {
+  const pattern = METHUSELAHS[Math.floor(Math.random() * METHUSELAHS.length)]
+  const t = Math.floor(Math.random() * 8)  // one of the 8 grid symmetries
+  const r0 = Math.floor(Math.random() * R)
+  const c0 = Math.floor(Math.random() * C)
+  for (const [pr, pc] of pattern) {
+    const [r, c] = [
+      [pr, pc], [pr, -pc], [-pr, pc], [-pr, -pc],
+      [pc, pr], [pc, -pr], [-pc, pr], [-pc, -pr],
+    ][t]
+    const rr = (((r0 + r) % R) + R) % R
+    const cc = (((c0 + c) % C) + C) % C
+    g[rr * C + cc] = 1
+  }
+}
 
 export function GameOfLife() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -37,21 +102,7 @@ export function GameOfLife() {
   }, [])
 
   const tick = useCallback(() => {
-    const g = grid.current
-    const C = cols.current
-    const R = rows.current
-    const next = new Uint8Array(C * R)
-    for (let r = 0; r < R; r++) {
-      for (let c = 0; c < C; c++) {
-        let n = 0
-        for (let dr = -1; dr <= 1; dr++)
-          for (let dc = -1; dc <= 1; dc++)
-            if (dr || dc) n += g[((r + dr + R) % R) * C + ((c + dc + C) % C)]
-        const alive = g[r * C + c]
-        next[r * C + c] = alive ? (n === 2 || n === 3 ? 1 : 0) : (n === 3 ? 1 : 0)
-      }
-    }
-    grid.current = next
+    grid.current = step(grid.current, cols.current, rows.current)
     render()
   }, [render])
 
@@ -69,9 +120,7 @@ export function GameOfLife() {
     }
   }, [render])
 
-  const seed = useCallback(() => {
-    const C = cols.current
-    const R = rows.current
+  const buildCandidate = useCallback((C: number, R: number): Uint8Array => {
     const g = new Uint8Array(C * R)
     // sparsity 1–10 → divisor 200–5000 (log scale), halved on mobile for more clusters
     const mobile = window.innerWidth <= 1000
@@ -94,9 +143,30 @@ export function GameOfLife() {
         }
       }
     }
-    grid.current = g
+    // At most one methuselah per board so boards don't feel same-y
+    if (Math.random() < METHUSELAH_CHANCE) stampMethuselah(g, C, R)
+    return g
+  }, [])
+
+  const seed = useCallback(() => {
+    const C = cols.current
+    const R = rows.current
+    // Enough ongoing change to read as "alive" — roughly two gliders' worth on desktop
+    const threshold = Math.max(15, Math.floor(C * R * 0.002))
+    const deadline = performance.now() + SEED_BUDGET_MS
+    let best = buildCandidate(C, R)
+    let bestScore = activityScore(best, C, R)
+    while (bestScore < threshold && performance.now() < deadline) {
+      const candidate = buildCandidate(C, R)
+      const score = activityScore(candidate, C, R)
+      if (score > bestScore) {
+        best = candidate
+        bestScore = score
+      }
+    }
+    grid.current = best
     render()
-  }, [render])
+  }, [buildCandidate, render])
 
   const clear = useCallback(() => {
     grid.current = new Uint8Array(cols.current * rows.current)
