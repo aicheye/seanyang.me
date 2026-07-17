@@ -732,8 +732,6 @@ footer a {
   gap: 2px;
   min-width: 0;
   max-width: 160px;
-  background: var(--surface);
-  box-shadow: 0 0 16px 8px var(--surface-shadow);
   padding: 4px 0;
 }
 
